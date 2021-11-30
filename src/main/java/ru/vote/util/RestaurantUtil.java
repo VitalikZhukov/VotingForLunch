@@ -1,11 +1,16 @@
 package ru.vote.util;
 
+import org.slf4j.Logger;
 import ru.vote.model.Restaurant;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static org.slf4j.LoggerFactory.getLogger;
+
 public class RestaurantUtil {
+    private static final Logger log = getLogger(RestaurantUtil.class);
+
     private static List<Restaurant> restaurants = Arrays.asList(
             new Restaurant("Лидбир", Map.of("Первое", 5.80, "Второе", 12.50, "Компот", 3.00), 10),
             new Restaurant("Друзья", Map.of("Первое", 6.30, "Второе", 15.80, "Компот", 2.85), 8),
@@ -19,12 +24,14 @@ public class RestaurantUtil {
     }
 
     public static List<Restaurant> sortedByName() {
+        log.info("--Sorted by name.--");
         return restaurants.stream()
                 .sorted(Comparator.comparing(Restaurant::getName))
                 .collect(Collectors.toList());
     }
 
     public static List<Restaurant> sortedByVoteCount() {
+        log.info("--Sorted by vote count.--");
         return restaurants.stream()
                 .sorted(Comparator.comparing(Restaurant::getVoteCount).reversed())
                 .collect(Collectors.toList());

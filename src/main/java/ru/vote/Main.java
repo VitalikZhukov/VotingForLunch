@@ -10,11 +10,11 @@ public class Main {
             System.out.println(rest.getName() + " " + rest.getVoteCount());
         }
 
-        for (Restaurant rest : RestaurantUtil.sortedByName()) {
+        for (Restaurant rest : RestaurantUtil.getSortedByNameList()) {
             System.out.println(rest.getName());
         }
 
-        for (Restaurant rest : RestaurantUtil.sortedByVoteCount()) {
+        for (Restaurant rest : RestaurantUtil.getSortedByVoteCountList()) {
             System.out.println(rest.getVoteCount());
         }
     }

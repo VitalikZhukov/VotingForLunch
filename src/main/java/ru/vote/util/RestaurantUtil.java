@@ -23,14 +23,14 @@ public class RestaurantUtil {
         return restaurants;
     }
 
-    public static List<Restaurant> sortedByName() {
+    public static List<Restaurant> getSortedByNameList() {
         log.info("--Sorted by name.--");
         return restaurants.stream()
                 .sorted(Comparator.comparing(Restaurant::getName))
                 .collect(Collectors.toList());
     }
 
-    public static List<Restaurant> sortedByVoteCount() {
+    public static List<Restaurant> getSortedByVoteCountList() {
         log.info("--Sorted by vote count.--");
         return restaurants.stream()
                 .sorted(Comparator.comparing(Restaurant::getVoteCount).reversed())

@@ -20,4 +20,9 @@ public class Restaurant {
     public int getVoteCount() {
         return voteCount;
     }
+
+    public Map<String, Double> getMenu() {
+        return menu;
+    }
+
 }

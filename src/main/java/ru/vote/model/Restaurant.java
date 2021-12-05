@@ -15,6 +15,13 @@ public class Restaurant extends AbstractModel{
         this.voteCount = voteCount;
     }
 
+    public Restaurant(String name, Map<String, Double> menu, int voteCount) {
+        super(null);
+        this.name = name;
+        this.menu = menu;
+        this.voteCount = voteCount;
+    }
+
     public String getName() {
         return name;
     }

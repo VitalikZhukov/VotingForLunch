@@ -17,12 +17,12 @@
         <th>Name</th>
         <th>Num(vote)</th>
         <th>Menu</th>
-        <th>Price</th>
+        <th style="background-color: darkseagreen">Price</th>
     </tr>
     </thead>
-    <colgroup style="background-color: #ddd;">
+    <colgroup style="background-color: darkseagreen;">
         <col>
-        <col style="background-color: #ddd;">
+        <col style="background-color: darkseagreen;">
         <col>
     </colgroup>
     <tbody>
@@ -32,7 +32,7 @@
 
         <jsp:useBean id="rest" type="ru.vote.model.Restaurant"/>
 
-        <tr style="color: green" align="center">
+        <tr style="color: red" align="center">
             <td rowspan="${rest.menu.size() + 1}">${rest.name}</td>
 
             <td rowspan="${rest.menu.size() + 1}">${rest.voteCount}</td>
@@ -40,7 +40,7 @@
             <c:forEach var="entry" items="${rest.menu}">
                 <tr style="color: brown" align="center">
                 <td>${entry.key}</td>
-                <td>${entry.value}</td>
+                <td style="background-color: darkseagreen">${entry.value}</td>
                 </tr>
             </c:forEach>
 

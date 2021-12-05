@@ -9,6 +9,9 @@
 
     <name>Voting for lunch</name>
 
+
+
+
     <properties>
                         <!--Java version-->
         <maven.compiler.source>17</maven.compiler.source>
@@ -19,6 +22,11 @@
         <slf4j.version>2.0.0-alpha5</slf4j.version>
         <logback.version>1.3.0-alpha10</logback.version>
     </properties>
+
+
+
+
+
 
                         <!--maven-compiler-plugin-->
     <build>
@@ -36,6 +44,11 @@
             </plugin>
         </plugins>
     </build>
+
+
+
+
+
 
     <dependencies>
 

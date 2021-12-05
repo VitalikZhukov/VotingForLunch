@@ -25,4 +25,12 @@ public class Restaurant {
         return menu;
     }
 
+    @Override
+    public String toString() {
+        return "Restaurant{" +
+                "name='" + name + '\'' +
+                ", menu=" + menu +
+                ", voteCount=" + voteCount +
+                '}';
+    }
 }

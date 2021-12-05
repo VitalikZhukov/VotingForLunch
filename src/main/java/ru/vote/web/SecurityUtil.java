@@ -1,7 +1,7 @@
 package ru.vote.web;
 
-// заглушка, пока не внедрю Spring Security
-// возвращает 1 в качестве проверки ID пользователя
+// stub until I deploy Spring Security
+// returns 1 as validation for user ID
 
 public class SecurityUtil {
 

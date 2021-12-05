@@ -3,6 +3,7 @@ package ru.vote.model;
 import java.util.Map;
 
 public class Restaurant {
+    private Integer id;
     private String name;
     private Map<String, Double> menu;  //no more than 10
     private int voteCount;
@@ -12,6 +13,15 @@ public class Restaurant {
         this.menu = menu;
         this.voteCount = voteCount;
     }
+
+    public boolean isNew() {
+        return this.id == null;
+    }
+
+
+
+
+
 
     public String getName() {
         return name;
@@ -23,6 +33,26 @@ public class Restaurant {
 
     public Map<String, Double> getMenu() {
         return menu;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setMenu(Map<String, Double> menu) {
+        this.menu = menu;
+    }
+
+    public void setVoteCount(int voteCount) {
+        this.voteCount = voteCount;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @Override

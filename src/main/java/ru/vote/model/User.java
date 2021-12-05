@@ -2,6 +2,7 @@ package ru.vote.model;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.EnumSet;
 import java.util.Set;
 
 public class User extends AbstractModel{
@@ -15,6 +16,17 @@ public class User extends AbstractModel{
     private Restaurant choose;
     private LocalDateTime checkTimeVote;
 
+    public User(Integer id, String login, String email, String password, Date registered, Restaurant restaurant, LocalDateTime checkTimeVote, Role role, Role... roles) {
+        super(id);
+        this.login = login;
+        this.email = email;
+        this.password = password;
+        this.registered = registered;
+        this.choose = restaurant;
+        this.checkTimeVote = checkTimeVote;
+        this.roles = EnumSet.of(role, roles);
+        this.enabled = true;
+    }
 
     public String getLogin() {
         return login;
@@ -70,6 +82,14 @@ public class User extends AbstractModel{
 
     public void setCheckTimeVote(LocalDateTime checkTimeVote) {
         this.checkTimeVote = checkTimeVote;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

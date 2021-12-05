@@ -2,6 +2,7 @@ package ru.vote.repository.inmemory;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 import ru.vote.model.Restaurant;
 import ru.vote.repository.RestaurantRepository;
 
@@ -12,6 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
+@Repository
 public class InMemoryRestaurantRepository implements RestaurantRepository {
     private static final Logger log = LoggerFactory.getLogger(InMemoryRestaurantRepository.class);
 

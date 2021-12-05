@@ -8,7 +8,8 @@ public class Restaurant extends AbstractModel{
     private Map<String, Double> menu;  //no more than 10
     private int voteCount;
 
-    public Restaurant(String name, Map<String, Double> menu, int voteCount) {
+    public Restaurant(Integer id, String name, Map<String, Double> menu, int voteCount) {
+        super(id);
         this.name = name;
         this.menu = menu;
         this.voteCount = voteCount;

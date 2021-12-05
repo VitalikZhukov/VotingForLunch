@@ -2,6 +2,7 @@ package ru.vote.web.user;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import ru.vote.model.User;
 import ru.vote.repository.UserRepository;
 
@@ -16,6 +17,7 @@ import static ru.vote.util.ValidationUtil.assureIdConsistent;
 public abstract class AbstractUserController {
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
+    @Autowired
     private final UserRepository userRepository;
 
     protected AbstractUserController(UserRepository userRepository) {

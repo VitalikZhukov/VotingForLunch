@@ -2,8 +2,8 @@ package ru.vote.model;
 
 import java.util.Map;
 
-public class Restaurant {
-    private Integer id;
+public class Restaurant extends AbstractModel{
+
     private String name;
     private Map<String, Double> menu;  //no more than 10
     private int voteCount;
@@ -13,15 +13,6 @@ public class Restaurant {
         this.menu = menu;
         this.voteCount = voteCount;
     }
-
-    public boolean isNew() {
-        return this.id == null;
-    }
-
-
-
-
-
 
     public String getName() {
         return name;
@@ -47,17 +38,10 @@ public class Restaurant {
         this.voteCount = voteCount;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     @Override
     public String toString() {
         return "Restaurant{" +
+                "id" + super.getId() +
                 "name='" + name + '\'' +
                 ", menu=" + menu +
                 ", voteCount=" + voteCount +

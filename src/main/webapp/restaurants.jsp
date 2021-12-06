@@ -6,49 +6,50 @@
     <title>Restaurants</title>
 </head>
 <body>
+<section>
 <h3><a href="index.html">Home</a></h3>
 <hr>
 <h2>Restaurants</h2>
+<a href="restaurants?action=create">Add restaurant</a>
+<br><br>
 
-<table border="2">
+<table border="1" cellpadding="8" cellspacing="0">
     <caption>Restaurant list.</caption>
     <thead>
-    <tr>
+    <tr style="background-color: darkseagreen">
+        <th>Update</th>
+        <th>Delete</th>
         <th>Name</th>
         <th>Num(vote)</th>
         <th>Menu</th>
-        <th style="background-color: darkseagreen">Price</th>
+        <th>Price</th>
     </tr>
     </thead>
-    <colgroup style="background-color: darkseagreen;">
-        <col>
-        <col style="background-color: darkseagreen;">
-        <col>
-    </colgroup>
     <tbody>
-    <jsp:useBean id="restaurantList" scope="request" type="java.util.List"/>
 
-    <c:forEach var="rest" items="${restaurantList}">
+    <c:forEach var="rest" items="${restaurants}">
 
         <jsp:useBean id="rest" type="ru.vote.model.Restaurant"/>
 
-        <tr style="color: red" align="center">
-            <td rowspan="${rest.menu.size() + 1}">${rest.name}</td>
+        <tr style="color: brown" align="center">
+            <td rowspan="${rest.menuMap.size() + 1}"><a href="restaurants?action=update&id=${rest.id}">Update</a></td>
+            <td rowspan="${rest.menuMap.size() + 1}"><a href="restaurants?action=delete&id=${rest.id}">Delete</a></td>
 
-            <td rowspan="${rest.menu.size() + 1}">${rest.voteCount}</td>
+        <td rowspan="${rest.menuMap.size() + 1}">${rest.name}</td>
 
-            <c:forEach var="entry" items="${rest.menu}">
+            <td rowspan="${rest.menuMap.size() + 1}">${rest.voteCount}</td>
+
+            <c:forEach var="entry" items="${rest.menuMap}">
                 <tr style="color: brown" align="center">
                 <td>${entry.key}</td>
-                <td style="background-color: darkseagreen">${entry.value}</td>
+                <td>${entry.value}</td>
                 </tr>
             </c:forEach>
-
         </tr>
     </c:forEach>
     </tbody>
 
 </table>
-
+</section>
 </body>
 </html>

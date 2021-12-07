@@ -3,7 +3,6 @@ package ru.vote.web;
 import ru.vote.model.Restaurant;
 import ru.vote.repository.RestaurantRepository;
 import ru.vote.repository.inmemory.InMemoryRestaurantRepository;
-import ru.vote.util.RestaurantUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -63,8 +62,16 @@ public class RestaurantServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
-        String id = req.getParameter("id");
 
+        //user's choose vote
+        String chooseRest = req.getParameter("vote");
+        if (chooseRest != null) {
+            log.info("Choose restaurant for User {}", chooseRest);
+            resp.sendRedirect("restaurants");
+            return;
+        }
+
+        String id = req.getParameter("id");
         String[] menu = req.getParameter("menu").split(", ");
         String[] price = req.getParameter("price").split(", ");
         Map<String, Double> mapMenu = new LinkedHashMap<>();

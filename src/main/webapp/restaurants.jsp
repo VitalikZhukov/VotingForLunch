@@ -12,8 +12,10 @@
 <h2>Restaurants</h2>
 <a href="restaurants?action=create">Add restaurant</a>
 <br><br>
-    <h4>Your choose: </h4>
+
+    <h4>Your choose: Display currant choose</h4>
     <br>
+    <form method="post" action="restaurants">
 
 <table border="1" cellpadding="8" cellspacing="0">
     <caption>Restaurant list.</caption>
@@ -40,7 +42,7 @@
 
             <td rowspan="${rest.menuMap.size() + 1}">
                 <label>
-                    <input type="radio" name="vote"/>
+                    <input type="radio" name="vote" value="${rest.name}"/>
                 </label>
             </td>
 
@@ -58,9 +60,10 @@
     </c:forEach>
     </tbody>
 
-</table>
+    </table>
     <br>
     <button type="submit">Vote</button>
+    </form>
 </section>
 </body>
 </html>

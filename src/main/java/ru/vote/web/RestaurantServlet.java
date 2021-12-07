@@ -52,7 +52,7 @@ public class RestaurantServlet extends HttpServlet {
             case "all":
             default:
                 log.info("getAll");
-                req.setAttribute("restaurants", RestaurantUtil.getSortedByVoteCountList());
+                req.setAttribute("restaurants", repository.getAll());
                 req.getRequestDispatcher("/restaurants.jsp").forward(req, resp);
                 break;
         }

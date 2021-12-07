@@ -12,6 +12,8 @@
 <h2>Restaurants</h2>
 <a href="restaurants?action=create">Add restaurant</a>
 <br><br>
+    <h4>Your choose: </h4>
+    <br>
 
 <table border="1" cellpadding="8" cellspacing="0">
     <caption>Restaurant list.</caption>
@@ -19,6 +21,7 @@
     <tr style="background-color: darkseagreen">
         <th>Update</th>
         <th>Delete</th>
+        <th>Vote</th>
         <th>Name</th>
         <th>Num(vote)</th>
         <th>Menu</th>
@@ -35,7 +38,13 @@
             <td rowspan="${rest.menuMap.size() + 1}"><a href="restaurants?action=update&id=${rest.id}">Update</a></td>
             <td rowspan="${rest.menuMap.size() + 1}"><a href="restaurants?action=delete&id=${rest.id}">Delete</a></td>
 
-        <td rowspan="${rest.menuMap.size() + 1}">${rest.name}</td>
+            <td rowspan="${rest.menuMap.size() + 1}">
+                <label>
+                    <input type="radio" name="vote"/>
+                </label>
+            </td>
+
+            <td rowspan="${rest.menuMap.size() + 1}">${rest.name}</td>
 
             <td rowspan="${rest.menuMap.size() + 1}">${rest.voteCount}</td>
 
@@ -50,6 +59,8 @@
     </tbody>
 
 </table>
+    <br>
+    <button type="submit">Vote</button>
 </section>
 </body>
 </html>

@@ -52,7 +52,7 @@ public class InMemoryRestaurantRepository implements RestaurantRepository {
     public List<Restaurant> getAll() {
         log.info("getAll");
         return inMemoryRestaurantDB.values().stream()
-                .sorted(Comparator.comparing(Restaurant::getVoteCount).thenComparing(Restaurant::getName).reversed())
+                .sorted(Comparator.comparing(Restaurant::getVoteCount).reversed().thenComparing(Restaurant::getName))
                 .collect(Collectors.toList());
     }
 }

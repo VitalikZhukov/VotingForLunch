@@ -24,6 +24,8 @@
         <servlet-api.version>4.0.1</servlet-api.version>
         <jstl.version>1.2</jstl.version>
         <spring.version>5.3.13</spring.version>
+        <junit.version>4.13.2</junit.version>
+        <assertj.version>3.21.0</assertj.version>
     </properties>
 
 
@@ -31,11 +33,12 @@
 
 
 
-                        <!--maven-compiler-plugin-->
+                        <!--plugins-->
     <build>
         <finalName>vote</finalName>
         <defaultGoal>install</defaultGoal>
         <plugins>
+                        <!--maven-compiler-plugin-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -45,6 +48,18 @@
                     <target>${java.version}</target>
                 </configuration>
             </plugin>
+
+                        <!--maven-surefire-plugin-->
+                        <!--for start all tests-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
+                <configuration>
+                    <argLine>-Dfile.encoding=UTF-8</argLine>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 
@@ -90,6 +105,29 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>${spring.version}</version>
+        </dependency>
+
+
+                            <!--Test-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.version}</version>
+            <scope>test</scope>
         </dependency>
 
 

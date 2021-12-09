@@ -26,6 +26,7 @@
         <spring.version>5.3.13</spring.version>
         <junit.version>4.13.2</junit.version>
         <assertj.version>3.21.0</assertj.version>
+        <postgresql.version>42.3.1</postgresql.version>
     </properties>
 
 
@@ -128,6 +129,14 @@
             <artifactId>assertj-core</artifactId>
             <version>${assertj.version}</version>
             <scope>test</scope>
+        </dependency>
+
+
+                        <!--PostgreSQL-->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgresql.version}</version>
         </dependency>
 
 

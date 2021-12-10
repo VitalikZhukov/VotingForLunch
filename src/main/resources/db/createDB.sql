@@ -28,17 +28,15 @@ CREATE TABLE user_roles
 
 CREATE TABLE restaurants
 (
-    restaurant_id   INTEGER                             PRIMARY KEY,
+    restaurant_id   SERIAL                              PRIMARY KEY,
     name            VARCHAR                             NOT NULL,
-    menu_id         INTEGER                             NOT NULL,
     vote_counter    INTEGER                 DEFAULT 0   NOT NULL
 );
 
 CREATE TABLE menu
 (
-    menu_id         INTEGER                             PRIMARY KEY,
     restaurant_id   INTEGER                             NOT NULL,
     dish            VARCHAR                             NOT NULL,
     price           REAL                                NOT NULL,
-    FOREIGN KEY (menu_id) REFERENCES restaurants (restaurant_id) ON DELETE CASCADE
+    FOREIGN KEY (restaurant_id) REFERENCES restaurants (restaurant_id) ON DELETE CASCADE
 )

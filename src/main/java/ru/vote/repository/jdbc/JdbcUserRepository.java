@@ -1,4 +1,4 @@
-package ru.vote.repository.inmemory;
+package ru.vote.repository.jdbc;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DataAccessUtils;

@@ -15,7 +15,7 @@ import static ru.vote.util.ValidationUtil.assureIdConsistent;
 
 @Controller
 public class RestaurantRestController {
-    private final Logger log = LoggerFactory.getLogger(getClass());
+    private final Logger log = LoggerFactory.getLogger(RestaurantRestController.class);
 
     private final RestaurantRepository restaurantRepository;
 

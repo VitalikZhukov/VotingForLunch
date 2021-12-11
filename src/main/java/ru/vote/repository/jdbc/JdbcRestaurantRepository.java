@@ -34,7 +34,7 @@ public class JdbcRestaurantRepository implements RestaurantRepository {
     public JdbcRestaurantRepository(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate jdbcNamed) {
         this.jdbcInsert = new SimpleJdbcInsert(jdbcTemplate)
                 .withTableName("restaurants")
-                .usingGeneratedKeyColumns("restaurant_id");
+                .usingGeneratedKeyColumns("id");
         this.jdbcTemplate = jdbcTemplate;
         this.jdbcNamed = jdbcNamed;
     }
@@ -52,7 +52,7 @@ public class JdbcRestaurantRepository implements RestaurantRepository {
             restaurant.setId(id.intValue());
             restaurant.setVoteCount(0);
         } else if (jdbcNamed.update(
-                "UPDATE users SET name=:name, vote_counter=:voteCounter WHERE id=:id", map) == 0) {
+                "UPDATE restaurants SET name=:name, vote_counter=:voteCounter WHERE id=:id", map) == 0) {
             return null;
         }
         return restaurant;

@@ -37,20 +37,35 @@
             <dt>Name:</dt>
             <dd><input type="text" value="${restaurant.name}" name="name" required></dd>
         </dl>
+        <br>
         <dl>
-            <dt>Number of vote:</dt>
-            <dd><input type="number" value="${restaurant.voteCount}" name="voteCount" required></dd>
+            <dt>Dish #1:</dt>
+            <dd><input type="text" value="${restaurant.menu}" name="dish1" required></dd>
         </dl>
         <dl>
-            <dt>Menu:</dt>
-            <dd><input type="text" value="${restaurant.menu}" name="menu" required></dd>
+            <dt>Price #1:</dt>
+            <dd><input type="text" value="${restaurant.price}" name="price1" required></dd>
         </dl>
         <dl>
-            <dt>Price:</dt>
-            <dd><input type="text" value="${restaurant.price}" name="price" required></dd>
+            <dt>Dish #2:</dt>
+            <dd><input type="text" value="${restaurant.menu}" name="dish2"></dd>
         </dl>
+        <dl>
+            <dt>Price #2:</dt>
+            <dd><input type="text" value="${restaurant.price}" name="price2"></dd>
+        </dl>
+        <dl>
+            <dt>Dish #3:</dt>
+            <dd><input type="text" value="${restaurant.menu}" name="dish3"></dd>
+        </dl>
+        <dl>
+            <dt>Price #3:</dt>
+            <dd><input type="text" value="${restaurant.price}" name="price3"></dd>
+        </dl>
+        <dl>
         <button type="submit">Save</button>
         <button onclick="window.history.back()" type="button">Cancel</button>
+        </dl>
     </form>
 </section>
 </body>

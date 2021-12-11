@@ -5,6 +5,10 @@ public class Menu {
     private String dish;
     private double price;
 
+    public Menu(int restaurantId) {
+        this.restaurantId = restaurantId;
+    }
+
     public int getRestaurantId() {
         return restaurantId;
     }

@@ -5,25 +5,22 @@ import java.util.Map;
 public class Restaurant extends AbstractModel{
 
     private String name;
-    private Map<String, Double> menuMap;  //no more than 10
     private int voteCount;
     private String menu;
     private String price;
 
     public Restaurant() {}
 
-    public Restaurant(Integer id, String name, Map<String, Double> menuMap, int voteCount) {
+    public Restaurant(Integer id, String name) {
         super(id);
         this.name = name;
-        this.menuMap = menuMap;
-        this.voteCount = voteCount;
+        this.voteCount = 0;
     }
 
-    public Restaurant(String name, Map<String, Double> menuMap, int voteCount) {
+    public Restaurant(String name) {
         super(null);
         this.name = name;
-        this.menuMap = menuMap;
-        this.voteCount = voteCount;
+        this.voteCount = 0;
     }
 
     public String getName() {
@@ -34,16 +31,8 @@ public class Restaurant extends AbstractModel{
         return voteCount;
     }
 
-    public Map<String, Double> getMenuMap() {
-        return menuMap;
-    }
-
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setMenuMap(Map<String, Double> menuMap) {
-        this.menuMap = menuMap;
     }
 
     public void setVoteCount(int voteCount) {
@@ -71,7 +60,6 @@ public class Restaurant extends AbstractModel{
         return "Restaurant{" +
                 "id" + super.getId() +
                 "name='" + name + '\'' +
-                ", menu=" + menuMap +
                 ", voteCount=" + voteCount +
                 '}';
     }

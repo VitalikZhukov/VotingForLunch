@@ -21,8 +21,7 @@ import java.util.Map;
 public class JdbcRestaurantRepository implements RestaurantRepository {
     //logging in the controller
 
-    private static final BeanPropertyRowMapper<Restaurant> ROW_MAPPER_REST = BeanPropertyRowMapper.newInstance(Restaurant.class);
-    private static final BeanPropertyRowMapper<Menu> ROW_MAPPER_MENU = BeanPropertyRowMapper.newInstance(Menu.class);
+    private static final BeanPropertyRowMapper<Restaurant> ROW_MAPPER = BeanPropertyRowMapper.newInstance(Restaurant.class);
 
     private final JdbcTemplate jdbcTemplate;
 
@@ -65,34 +64,12 @@ public class JdbcRestaurantRepository implements RestaurantRepository {
 
     @Override
     public Restaurant get(int id) {
-        List<Restaurant> restaurants = jdbcTemplate.query("SELECT * FROM restaurants WHERE id=?", ROW_MAPPER_REST, id);
+        List<Restaurant> restaurants = jdbcTemplate.query("SELECT * FROM restaurants WHERE id=?", ROW_MAPPER, id);
         return DataAccessUtils.singleResult(restaurants);
     }
 
     @Override
     public List<Restaurant> getAll() {
-        List<Menu> menuList = jdbcTemplate.query("SELECT * FROM menu ORDER BY restaurant_id", ROW_MAPPER_MENU);
-        List<Restaurant> restaurants = jdbcTemplate.query("SELECT * FROM restaurants ORDER BY id", ROW_MAPPER_REST);
-
-        return addMenu(restaurants, menuList);
-    }
-
-
-    private List<Restaurant> addMenu(List<Restaurant> restaurants, List<Menu> menuList) {
-        Map<String, Double> menuMap = new LinkedHashMap<>();
-        int n = 0;
-
-        for (Restaurant restaurant : restaurants) {
-            for (int j = n; j < menuList.size(); j++, n++) {
-                if (restaurant.getId() == menuList.get(j).getRestaurantId()) {
-                    menuMap.put(menuList.get(j).getDish(), menuList.get(j).getPrice());
-                } else {
-                    break;
-                }
-            }
-            restaurant.setMenuMap(menuMap);
-            menuMap = new LinkedHashMap<>();
-        }
-        return restaurants;
+        return jdbcTemplate.query("SELECT * FROM restaurants ORDER BY id", ROW_MAPPER);
     }
 }

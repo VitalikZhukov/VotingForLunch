@@ -2,18 +2,17 @@ package ru.vote.web;
 
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import ru.vote.model.Menu;
 import ru.vote.model.Restaurant;
-import ru.vote.repository.RestaurantRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Objects;
 
+import ru.vote.web.menu.MenuRestController;
 import ru.vote.web.restaurant.RestaurantRestController;
 
 public class RestaurantServlet extends HttpServlet {
@@ -21,11 +20,13 @@ public class RestaurantServlet extends HttpServlet {
 
     private ConfigurableApplicationContext springContext;
     private RestaurantRestController restaurantController;
+    private MenuRestController menuController;
 
     @Override
     public void init() {
         springContext = new ClassPathXmlApplicationContext("spring/spring.xml", "spring/springDB.xml");
         restaurantController = springContext.getBean(RestaurantRestController.class);
+        menuController = springContext.getBean(MenuRestController.class);
     }
 
     @Override
@@ -47,10 +48,12 @@ public class RestaurantServlet extends HttpServlet {
 
             case "create":
             case "update":
-                final Restaurant rest = "create".equals(action) ?
-                        new Restaurant("", Map.of("", 0.00), 0) :
+                final Restaurant restaurant = "create".equals(action) ?
+                        new Restaurant("") :
                         restaurantController.get(getId(req));
-                req.setAttribute("restaurant", rest);
+
+
+                req.setAttribute("restaurant", restaurant);
                 req.getRequestDispatcher("/restaurantForm.jsp").forward(req, resp);
                 break;
 
@@ -76,19 +79,12 @@ public class RestaurantServlet extends HttpServlet {
         }
 
         String id = req.getParameter("id");
-        String[] menu = req.getParameter("menu").split(", ");
-        String[] price = req.getParameter("price").split(", ");
-        Map<String, Double> mapMenu = new LinkedHashMap<>();
-        for (int i = 0; i < menu.length; i++) {
-            mapMenu.put(menu[i], Double.valueOf(price[i]));
-        }
 
-        Restaurant restaurant = new Restaurant(id.isEmpty() ? null : Integer.valueOf(id),
-                req.getParameter("name"),
-                mapMenu,
-                Integer.parseInt(req.getParameter("voteCount")));
+        Restaurant restaurant = new Restaurant(
+                id.isEmpty() ? null : Integer.valueOf(id),
+                req.getParameter("name"));
 
-        if (id != null && !id.isEmpty()) {
+        if (!id.isEmpty()) {
             restaurantController.update(restaurant, getId(req));
         } else {
             restaurantController.create(restaurant);

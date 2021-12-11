@@ -30,7 +30,7 @@ public class JdbcRestaurantRepository implements RestaurantRepository {
     public JdbcRestaurantRepository(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate jdbcNamed) {
         this.jdbcInsert = new SimpleJdbcInsert(jdbcTemplate)
                 .withTableName("restaurants")
-                .usingGeneratedKeyColumns("id");
+                .usingGeneratedKeyColumns("restaurant_id");
         this.jdbcTemplate = jdbcTemplate;
         this.jdbcNamed = jdbcNamed;
     }

@@ -5,6 +5,8 @@ public abstract class AbstractModel {
 
     private Integer id;
 
+    public AbstractModel() {}
+
     public AbstractModel(Integer id) {
         this.id = id;
     }

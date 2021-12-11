@@ -1,8 +1,9 @@
 package ru.vote.web;
 
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.vote.model.Restaurant;
 import ru.vote.repository.RestaurantRepository;
-import ru.vote.repository.inmemory.InMemoryRestaurantRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,17 +14,24 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import org.slf4j.Logger;
-import static org.slf4j.LoggerFactory.getLogger;
+import ru.vote.web.restaurant.RestaurantRestController;
 
 public class RestaurantServlet extends HttpServlet {
-    private static final Logger log = getLogger(RestaurantServlet.class);
+    //logging in the controller
 
-    private RestaurantRepository repository;
+    private ConfigurableApplicationContext springContext;
+    private RestaurantRestController restaurantController;
 
     @Override
     public void init() {
-        repository = new InMemoryRestaurantRepository();
+        springContext = new ClassPathXmlApplicationContext("spring/spring.xml", "spring/springDB.xml");
+        restaurantController = springContext.getBean(RestaurantRestController.class);
+    }
+
+    @Override
+    public void destroy() {
+        springContext.close();
+        super.destroy();
     }
 
     @Override
@@ -33,25 +41,22 @@ public class RestaurantServlet extends HttpServlet {
         switch (action == null ? "all" : action) {
             case "delete":
                 int id = getId(req);
-                log.info("delete {}", id);
-                repository.delete(id);
+                restaurantController.delete(id);
                 resp.sendRedirect("restaurants");
                 break;
 
             case "create":
             case "update":
-                log.info("update");
                 final Restaurant rest = "create".equals(action) ?
                         new Restaurant("", Map.of("", 0.00), 0) :
-                        repository.get(getId(req));
+                        restaurantController.get(getId(req));
                 req.setAttribute("restaurant", rest);
                 req.getRequestDispatcher("/restaurantForm.jsp").forward(req, resp);
                 break;
 
             case "all":
             default:
-                log.info("getAll");
-                req.setAttribute("restaurants", repository.getAll());
+                req.setAttribute("restaurants", restaurantController.getAll());
                 req.getRequestDispatcher("/restaurants.jsp").forward(req, resp);
                 break;
         }
@@ -66,7 +71,6 @@ public class RestaurantServlet extends HttpServlet {
         //user's choose vote
         String chooseRest = req.getParameter("vote");
         if (chooseRest != null) {
-            log.info("Choose restaurant for User {}", chooseRest);
             resp.sendRedirect("restaurants");
             return;
         }
@@ -79,12 +83,16 @@ public class RestaurantServlet extends HttpServlet {
             mapMenu.put(menu[i], Double.valueOf(price[i]));
         }
 
-        Restaurant rest = new Restaurant(id.isEmpty() ? null : Integer.valueOf(id),
+        Restaurant restaurant = new Restaurant(id.isEmpty() ? null : Integer.valueOf(id),
                 req.getParameter("name"),
                 mapMenu,
                 Integer.parseInt(req.getParameter("voteCount")));
-        log.info(rest.isNew() ? "create {}" : "update {}" , rest);
-        repository.save(rest);
+
+        if (id != null && !id.isEmpty()) {
+            restaurantController.update(restaurant, getId(req));
+        } else {
+            restaurantController.create(restaurant);
+        }
         resp.sendRedirect("restaurants");
     }
 

@@ -16,6 +16,8 @@ public class User extends AbstractModel{
     private Restaurant choose;
     private LocalDateTime checkTimeVote;
 
+    public User() {}
+
     public User(Integer id, String login, String email, String password, Date registered, Restaurant restaurant, LocalDateTime checkTimeVote, Role role, Role... roles) {
         super(id);
         this.login = login;

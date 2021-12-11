@@ -10,6 +10,8 @@ public class Restaurant extends AbstractModel{
     private String menu;
     private String price;
 
+    public Restaurant() {}
+
     public Restaurant(Integer id, String name, Map<String, Double> menuMap, int voteCount) {
         super(id);
         this.name = name;

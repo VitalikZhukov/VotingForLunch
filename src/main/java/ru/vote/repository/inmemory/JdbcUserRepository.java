@@ -1,5 +1,6 @@
 package ru.vote.repository.inmemory;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -24,6 +25,7 @@ public class JdbcUserRepository implements UserRepository {
 
     private final NamedParameterJdbcTemplate jdbcNamed;
 
+    @Autowired
     public JdbcUserRepository(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate jdbcNamed) {
         this.jdbcInsert = new SimpleJdbcInsert(jdbcTemplate)
                 .withTableName("users")

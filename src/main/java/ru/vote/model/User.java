@@ -1,6 +1,9 @@
 package ru.vote.model;
 
+import org.springframework.util.CollectionUtils;
+
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.Set;
@@ -13,21 +16,30 @@ public class User extends AbstractModel{
     private boolean enabled = true;
     private Date registered = new Date();
     private Set<Role> roles;
-    private Restaurant choose;
+    private Integer restaurantId;
     private LocalDateTime checkTimeVote;
 
     public User() {}
 
-    public User(Integer id, String login, String email, String password, Date registered, Restaurant restaurant, LocalDateTime checkTimeVote, Role role, Role... roles) {
+    //copy constructor
+    public User(User u) {
+        this(u.restaurantId, u.login, u.email, u.password, u.registered, u.restaurantId, u.checkTimeVote, u.enabled, u.roles);
+    }
+
+    public User(Integer id, String login, String email, String password, Integer restaurantId, Role role, Role... roles) {
+        this(id, login, email, password, new Date(), restaurantId, LocalDateTime.now(), true, EnumSet.of(role, roles));
+    }
+
+    public User(Integer id, String login, String email, String password, Date registered, Integer restaurantId, LocalDateTime checkTimeVote, boolean enabled, Collection<Role> roles) {
         super(id);
         this.login = login;
         this.email = email;
         this.password = password;
         this.registered = registered;
-        this.choose = restaurant;
+        this.restaurantId = restaurantId;
         this.checkTimeVote = checkTimeVote;
-        this.roles = EnumSet.of(role, roles);
-        this.enabled = true;
+        this.enabled = enabled;
+        setRoles(roles);
     }
 
     public String getLogin() {
@@ -66,16 +78,16 @@ public class User extends AbstractModel{
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRoles(Collection<Role> roles) {
+        this.roles = CollectionUtils.isEmpty(roles) ? EnumSet.noneOf(Role.class) : EnumSet.copyOf(roles);
     }
 
-    public Restaurant getChoose() {
-        return choose;
+    public Integer getChoose() {
+        return restaurantId;
     }
 
-    public void setChoose(Restaurant choose) {
-        this.choose = choose;
+    public void setChoose(Integer restaurantId) {
+        this.restaurantId = restaurantId;
     }
 
     public LocalDateTime getCheckTimeVote() {
@@ -103,7 +115,7 @@ public class User extends AbstractModel{
                 ", enabled=" + enabled +
                 ", registered=" + registered +
                 ", roles=" + roles +
-                ", choose=" + choose +
+                ", choose=" + restaurantId +
                 ", checkTimeVote=" + checkTimeVote +
                 '}';
     }

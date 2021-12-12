@@ -22,5 +22,7 @@ VALUES ('Brovar', 8),
 INSERT INTO menu (restaurant_id, dish, price)
 VALUES (1, 'First', 12.5),
        (1, 'Second', 14.8),
+       (1, 'Third', 2.98),
        (2, 'First', 4.5),
-       (2, 'Second', 8.8);
+       (2, 'Second', 8.8),
+       (2, 'Third', 2.85);

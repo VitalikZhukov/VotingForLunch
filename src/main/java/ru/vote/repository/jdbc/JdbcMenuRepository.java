@@ -22,7 +22,7 @@ public class JdbcMenuRepository implements MenuRepository {
 
     @Override
     public boolean create(Menu menu) {
-        return jdbcTemplate.update("UPDATE menu SET restaurant_id=?, dish=?, price=?",
+        return jdbcTemplate.update("INSERT INTO menu(restaurant_id, dish, price) VALUES (?, ?, ?)",
                 menu.getRestaurantId(), menu.getDish(), menu.getPrice()) != 0;
     }
 

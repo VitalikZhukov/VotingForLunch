@@ -37,18 +37,18 @@
                 <jsp:useBean id="restaurant" type="ru.vote.model.Restaurant"/>
 
                 <tr style="color: brown" align="center">
-                <td rowspan="3"><a href="restaurants?action=update&id=${restaurant.id}">Update</a></td>
-                <td rowspan="3"><a href="restaurants?action=delete&id=${restaurant.id}">Delete</a></td>
+                <td rowspan="4"><a href="restaurants?action=update&id=${restaurant.id}">Update</a></td>
+                <td rowspan="4"><a href="restaurants?action=delete&id=${restaurant.id}">Delete</a></td>
 
-                <td rowspan="3">
+                <td rowspan="4">
                     <label>
                         <input type="radio" name="vote" value="${restaurant.id}"/>
                     </label>
                 </td>
 
-                <td rowspan="3">${restaurant.name}</td>
+                <td rowspan="4">${restaurant.name}</td>
 
-                <td rowspan="3">${restaurant.voteCounter}</td>
+                <td rowspan="4">${restaurant.voteCounter}</td>
 
                 <c:forEach var="menu" items="${menu}">
                     <jsp:useBean id="menu" type="ru.vote.model.Menu"/>

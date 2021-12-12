@@ -48,19 +48,19 @@
         </dl>
         <dl>
             <dt>Dish #2:</dt>
-            <dd><input type="text" value="${restaurant.menu}" name="dish2"></dd>
+            <dd><input type="text" value="${restaurant.menu}" name="dish2" required></dd>
         </dl>
         <dl>
             <dt>Price #2:</dt>
-            <dd><input type="text" value="${restaurant.price}" name="price2"></dd>
+            <dd><input type="text" value="${restaurant.price}" name="price2" required></dd>
         </dl>
         <dl>
             <dt>Dish #3:</dt>
-            <dd><input type="text" value="${restaurant.menu}" name="dish3"></dd>
+            <dd><input type="text" value="${restaurant.menu}" name="dish3" required></dd>
         </dl>
         <dl>
             <dt>Price #3:</dt>
-            <dd><input type="text" value="${restaurant.price}" name="price3"></dd>
+            <dd><input type="text" value="${restaurant.price}" name="price3" required></dd>
         </dl>
         <dl>
         <button type="submit">Save</button>

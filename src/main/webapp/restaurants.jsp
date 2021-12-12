@@ -48,7 +48,7 @@
 
                 <td rowspan="3">${restaurant.name}</td>
 
-                <td rowspan="3">${restaurant.voteCount}</td>
+                <td rowspan="3">${restaurant.voteCounter}</td>
 
                 <c:forEach var="menu" items="${menu}">
                     <jsp:useBean id="menu" type="ru.vote.model.Menu"/>

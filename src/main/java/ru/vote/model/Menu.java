@@ -11,6 +11,12 @@ public class Menu {
         this.restaurantId = restaurantId;
     }
 
+    public Menu(int restaurantId, String dish, double price) {
+        this.restaurantId = restaurantId;
+        this.dish = dish;
+        this.price = price;
+    }
+
     public int getRestaurantId() {
         return restaurantId;
     }

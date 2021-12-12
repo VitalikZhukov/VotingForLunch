@@ -54,4 +54,9 @@ public class RestaurantRestController {
         log.info("incrementVoteCounter id = {}, counter of vote = {}", id, countVote);
         return restaurantRepository.incrementVoteCounter(id, countVote);
     }
+
+    public int getVoteCounter(int id) {
+        log.info("getVoteCounter {}", id);
+        return restaurantRepository.getVoteCounter(id);
+    }
 }

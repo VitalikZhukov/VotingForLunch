@@ -3,7 +3,7 @@ package ru.vote.model;
 public class Restaurant extends AbstractModel{
 
     private String name;
-    private int voteCount;
+    private Integer voteCounter;
     private String menu;
     private String price;
 
@@ -12,25 +12,29 @@ public class Restaurant extends AbstractModel{
     public Restaurant(Integer id, String name) {
         super(id);
         this.name = name;
-        this.voteCount = 0;
+        this.voteCounter = 0;
     }
 
     public Restaurant(String name) {
         super(null);
         this.name = name;
-        this.voteCount = 0;
+        this.voteCounter = 0;
     }
 
     public String getName() {
         return name;
     }
 
-    public int getVoteCount() {
-        return voteCount;
+    public int getVoteCounter() {
+        return voteCounter;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setVoteCounter(Integer voteCounter) {
+        this.voteCounter = voteCounter;
     }
 
     public String getMenu() {
@@ -54,7 +58,7 @@ public class Restaurant extends AbstractModel{
         return "Restaurant{" +
                 "id" + super.getId() +
                 "name='" + name + '\'' +
-                ", voteCount=" + voteCount +
+                ", voteCount=" + voteCounter +
                 '}';
     }
 }

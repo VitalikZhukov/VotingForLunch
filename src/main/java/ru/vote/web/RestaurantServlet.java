@@ -2,6 +2,8 @@ package ru.vote.web;
 
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.util.StringUtils;
+import ru.vote.model.Menu;
 import ru.vote.model.Restaurant;
 
 import javax.servlet.ServletException;
@@ -9,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 
 import ru.vote.web.menu.MenuRestController;
@@ -39,7 +43,6 @@ public class RestaurantServlet extends HttpServlet {
         String action = req.getParameter("action");
 
         //user's choose vote
-        String chooseRestaurant = req.getParameter("vote");
         Integer chooseID = null;
         if (req.getParameter("vote") != null) {
             chooseID = Integer.valueOf(req.getParameter("vote"));
@@ -68,7 +71,7 @@ public class RestaurantServlet extends HttpServlet {
             default:
                 if(chooseID != null) {
                     req.setAttribute("choose", restaurantController.get(chooseID).getName());
-                    restaurantController.incrementVoteCounter(chooseID, restaurantController.get(chooseID).getVoteCount());
+                    restaurantController.incrementVoteCounter(chooseID, restaurantController.getVoteCounter(chooseID));
                 }
                 req.setAttribute("restaurants", restaurantController.getAll());
                 req.setAttribute("menu", menuController.getAll());
@@ -89,10 +92,16 @@ public class RestaurantServlet extends HttpServlet {
                 id.isEmpty() ? null : Integer.valueOf(id),
                 req.getParameter("name"));
 
-        if (!id.isEmpty()) {
+        if (StringUtils.hasLength(id)) {
             restaurantController.update(restaurant, getId(req));
+            for (Menu menu : getMenuList(req, restaurant.getId())) {
+                menuController.update(menu);
+            }
         } else {
             restaurantController.create(restaurant);
+            for (Menu menu : getMenuList(req, restaurant.getId())) {
+                menuController.create(menu);
+            }
         }
         resp.sendRedirect("restaurants");
     }
@@ -100,5 +109,17 @@ public class RestaurantServlet extends HttpServlet {
     private int getId(HttpServletRequest req) {
         String id = Objects.requireNonNull(req.getParameter("id"));
         return Integer.parseInt(id);
+    }
+
+    private List<Menu> getMenuList(HttpServletRequest req, int id) {
+        List<Menu> menuList = new LinkedList<>();
+        int i = 1;
+        while (StringUtils.hasLength(req.getParameter("dish" + i))) {
+            String dish = req.getParameter("dish" + i);
+            double price = Double.parseDouble(req.getParameter("price" + i));
+            menuList.add(new Menu(id, dish, price));
+            i++;
+        }
+        return menuList;
     }
 }

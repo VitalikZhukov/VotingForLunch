@@ -41,7 +41,7 @@ public class JdbcRestaurantRepository implements RestaurantRepository {
         MapSqlParameterSource map = new MapSqlParameterSource()
                 .addValue("id", restaurant.getId())
                 .addValue("name", restaurant.getName())
-                .addValue("voteCounter", restaurant.getVoteCount());
+                .addValue("voteCounter", restaurant.getVoteCounter());
 
         if (restaurant.isNew()) {
             Number id = jdbcInsert.executeAndReturnKey(map);
@@ -66,6 +66,8 @@ public class JdbcRestaurantRepository implements RestaurantRepository {
 
     @Override
     public List<Restaurant> getAll() {
+        List<Restaurant> list = jdbcTemplate.query("SELECT * FROM restaurants ORDER BY id", ROW_MAPPER);
+
         return jdbcTemplate.query("SELECT * FROM restaurants ORDER BY id", ROW_MAPPER);
     }
 
@@ -73,5 +75,10 @@ public class JdbcRestaurantRepository implements RestaurantRepository {
     public boolean incrementVoteCounter(int id, int countVote) {
         countVote++;
         return jdbcTemplate.update("UPDATE restaurants SET vote_counter=? WHERE id=?", countVote, id) != 0;
+    }
+
+    @Override
+    public int getVoteCounter(int id) {
+        return get(id).getVoteCounter();
     }
 }

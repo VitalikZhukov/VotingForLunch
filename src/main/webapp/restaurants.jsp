@@ -13,9 +13,9 @@
     <a href="restaurants?action=create">Add restaurant</a>
     <br><br>
 
-    <h4>Your choose: Display currant choose</h4>
+    <h4>Your choose: ${choose}</h4>
     <br>
-    <form method="post" action="restaurants">
+    <form method="get" action="restaurants">
 
         <table border="1" cellpadding="8" cellspacing="0">
             <caption>Restaurant list.</caption>
@@ -32,29 +32,32 @@
             </thead>
             <tbody>
 
-            <c:forEach var="rest" items="${restaurants}">
+            <c:forEach var="restaurant" items="${restaurants}">
 
-                <jsp:useBean id="rest" type="ru.vote.model.Restaurant"/>
+                <jsp:useBean id="restaurant" type="ru.vote.model.Restaurant"/>
 
                 <tr style="color: brown" align="center">
-                <td rowspan="${rest.menuMap.size() + 1}"><a href="restaurants?action=update&id=${rest.id}">Update</a></td>
-                <td rowspan="${rest.menuMap.size() + 1}"><a href="restaurants?action=delete&id=${rest.id}">Delete</a></td>
+                <td rowspan="3"><a href="restaurants?action=update&id=${restaurant.id}">Update</a></td>
+                <td rowspan="3"><a href="restaurants?action=delete&id=${restaurant.id}">Delete</a></td>
 
-                <td rowspan="${rest.menuMap.size() + 1}">
+                <td rowspan="3">
                     <label>
-                        <input type="radio" name="vote" value="${rest.name}"/>
+                        <input type="radio" name="vote" value="${restaurant.id}"/>
                     </label>
                 </td>
 
-                <td rowspan="${rest.menuMap.size() + 1}">${rest.name}</td>
+                <td rowspan="3">${restaurant.name}</td>
 
-                <td rowspan="${rest.menuMap.size() + 1}">${rest.voteCount}</td>
+                <td rowspan="3">${restaurant.voteCount}</td>
 
-                <c:forEach var="entry" items="${rest.menuMap}">
+                <c:forEach var="menu" items="${menu}">
+                    <jsp:useBean id="menu" type="ru.vote.model.Menu"/>
+                    <c:if test="${menu.restaurantId == restaurant.id}">
                     <tr style="color: brown" align="center">
-                        <td>${entry.key}</td>
-                        <td>${entry.value}</td>
+                        <td>${menu.dish}</td>
+                        <td>${menu.price}</td>
                     </tr>
+                    </c:if>
                 </c:forEach>
                 </tr>
             </c:forEach>

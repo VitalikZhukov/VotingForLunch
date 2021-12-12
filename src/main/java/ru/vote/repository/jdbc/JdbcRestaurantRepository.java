@@ -8,13 +8,10 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
-import ru.vote.model.Menu;
 import ru.vote.model.Restaurant;
 import ru.vote.repository.RestaurantRepository;
 
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 
 @Repository
@@ -49,7 +46,6 @@ public class JdbcRestaurantRepository implements RestaurantRepository {
         if (restaurant.isNew()) {
             Number id = jdbcInsert.executeAndReturnKey(map);
             restaurant.setId(id.intValue());
-            restaurant.setVoteCount(0);
         } else if (jdbcNamed.update(
                 "UPDATE restaurants SET name=:name, vote_counter=:voteCounter WHERE id=:id", map) == 0) {
             return null;
@@ -71,5 +67,11 @@ public class JdbcRestaurantRepository implements RestaurantRepository {
     @Override
     public List<Restaurant> getAll() {
         return jdbcTemplate.query("SELECT * FROM restaurants ORDER BY id", ROW_MAPPER);
+    }
+
+    @Override
+    public boolean incrementVoteCounter(int id, int countVote) {
+        countVote++;
+        return jdbcTemplate.update("UPDATE restaurants SET vote_counter=? WHERE id=?", countVote, id) != 0;
     }
 }

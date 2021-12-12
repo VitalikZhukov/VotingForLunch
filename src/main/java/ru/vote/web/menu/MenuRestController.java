@@ -32,15 +32,18 @@ public class MenuRestController {
         return menuRepository.update(menu);
     }
 
-    List<Menu> getListByRestaurantId(int restaurantId) {
+    public List<Menu> getListByRestaurantId(int restaurantId) {
+        log.info("getListByRestaurantId {}", restaurantId);
         return checkNotFound(menuRepository.getListByRestaurantId(restaurantId));
     }
 
-    List<Menu> getAll() {
+    public List<Menu> getAll() {
+        log.info("getAll");
         return checkNotFound(menuRepository.getAll());
     }
 
-    boolean delete(int restaurantId) {
+    public boolean delete(int restaurantId) {
+        log.info("delete {}", restaurantId);
         return menuRepository.delete(restaurantId);
     }
 

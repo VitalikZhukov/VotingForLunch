@@ -49,4 +49,9 @@ public class RestaurantRestController {
         log.info("delete {}", id);
         checkNotFoundWithId(restaurantRepository.delete(id), id);
     }
+
+    public boolean incrementVoteCounter(int id, int countVote) {
+        log.info("incrementVoteCounter id = {}, counter of vote = {}", id, countVote);
+        return restaurantRepository.incrementVoteCounter(id, countVote);
+    }
 }

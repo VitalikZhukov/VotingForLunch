@@ -1,7 +1,5 @@
 package ru.vote.model;
 
-import java.util.Map;
-
 public class Restaurant extends AbstractModel{
 
     private String name;
@@ -33,10 +31,6 @@ public class Restaurant extends AbstractModel{
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setVoteCount(int voteCount) {
-        this.voteCount = voteCount;
     }
 
     public String getMenu() {

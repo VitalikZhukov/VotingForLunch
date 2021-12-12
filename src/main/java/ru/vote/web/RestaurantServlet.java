@@ -2,7 +2,6 @@ package ru.vote.web;
 
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ru.vote.model.Menu;
 import ru.vote.model.Restaurant;
 
 import javax.servlet.ServletException;
@@ -39,6 +38,14 @@ public class RestaurantServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
 
+        //user's choose vote
+        String chooseRestaurant = req.getParameter("vote");
+        Integer chooseID = null;
+        if (req.getParameter("vote") != null) {
+            chooseID = Integer.valueOf(req.getParameter("vote"));
+        }
+
+
         switch (action == null ? "all" : action) {
             case "delete":
                 int id = getId(req);
@@ -59,7 +66,12 @@ public class RestaurantServlet extends HttpServlet {
 
             case "all":
             default:
+                if(chooseID != null) {
+                    req.setAttribute("choose", restaurantController.get(chooseID).getName());
+                    restaurantController.incrementVoteCounter(chooseID, restaurantController.get(chooseID).getVoteCount());
+                }
                 req.setAttribute("restaurants", restaurantController.getAll());
+                req.setAttribute("menu", menuController.getAll());
                 req.getRequestDispatcher("/restaurants.jsp").forward(req, resp);
                 break;
         }
@@ -70,13 +82,6 @@ public class RestaurantServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
-
-        //user's choose vote
-        String chooseRest = req.getParameter("vote");
-        if (chooseRest != null) {
-            resp.sendRedirect("restaurants");
-            return;
-        }
 
         String id = req.getParameter("id");
 

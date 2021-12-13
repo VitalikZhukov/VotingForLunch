@@ -82,11 +82,11 @@ public class User extends AbstractModel{
         this.roles = CollectionUtils.isEmpty(roles) ? EnumSet.noneOf(Role.class) : EnumSet.copyOf(roles);
     }
 
-    public Integer getChoose() {
+    public Integer getRestaurantId() {
         return restaurantId;
     }
 
-    public void setChoose(Integer restaurantId) {
+    public void setRestaurantId(Integer restaurantId) {
         this.restaurantId = restaurantId;
     }
 

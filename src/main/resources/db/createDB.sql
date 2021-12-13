@@ -12,7 +12,7 @@ CREATE TABLE users
     login            VARCHAR                           NOT NULL,
     password         VARCHAR                           NOT NULL,
     email            VARCHAR                           NOT NULL,
-    registered       TIMESTAMP           DEFAULT now() NOT NULL,
+    registered       TIMESTAMP(0)        DEFAULT now() NOT NULL,
     enabled          BOOL                DEFAULT TRUE  NOT NULL,
     restaurant_id    INTEGER
 );

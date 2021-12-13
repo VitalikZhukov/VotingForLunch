@@ -43,14 +43,14 @@ public class JdbcUserRepository implements UserRepository {
                 .addValue("email", user.getEmail())
                 .addValue("registered", user.getRegistered())
                 .addValue("enabled", user.isEnabled())
-                .addValue("restaurant_id", user.getChoose());
+                .addValue("restaurant_id", user.getRestaurantId());
 
         if (user.isNew()) {
             Number id = jdbcInsert.executeAndReturnKey(map);
             user.setId(id.intValue());
         } else if (jdbcNamed.update(
                 "UPDATE users SET login=:login, password=:password, email=:email, " +
-                        "registered=:registered, enabled=:enabled, restaurant=:restaurant_id WHERE id=:id", map) == 0) {
+                        "registered=:registered, enabled=:enabled, restaurant_id=:restaurant_id WHERE id=:id", map) == 0) {
             return null;
         }
         return user;

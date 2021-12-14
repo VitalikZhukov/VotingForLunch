@@ -12,6 +12,12 @@ public class ValidationUtil {
         return object;
     }
 
+    public static void checkNotFoundWithId(boolean found, int id) {
+        if (!found) {
+            throw new NotFoundException("Not found entity with id = " + id);
+        }
+    }
+
     public static <T> T checkNotFound(T object) {
         if(object == null) {
             throw new NotFoundException("Not found entity");

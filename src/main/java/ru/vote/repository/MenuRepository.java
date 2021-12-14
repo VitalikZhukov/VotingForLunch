@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface MenuRepository {
 
-    boolean create(Menu menu);
+    Menu save(Menu menu);
 
-    boolean update(Menu menu);
+    Menu get(int id);
 
     List<Menu> getListByRestaurantId(int restaurantId);
 

@@ -8,7 +8,7 @@ import ru.vote.repository.MenuRepository;
 
 import java.util.List;
 
-import static ru.vote.util.ValidationUtil.checkNotFound;
+import static ru.vote.util.ValidationUtil.*;
 
 @Controller
 public class MenuRestController {
@@ -20,21 +20,15 @@ public class MenuRestController {
         this.menuRepository = menuRepository;
     }
 
-    public boolean create(Menu menu) {
+    public Menu create(Menu menu) {
         log.info("create{}", menu);
-        checkNotFound(menu);
-        return menuRepository.create(menu);
+        checkNew(menu);
+        return menuRepository.save(menu);
     }
 
-    public boolean update(Menu menu) {
-        log.info("update{}", menu);
-        checkNotFound(menu);
-        return menuRepository.update(menu);
-    }
-
-    public List<Menu> getListByRestaurantId(int restaurantId) {
-        log.info("getListByRestaurantId {}", restaurantId);
-        return checkNotFound(menuRepository.getListByRestaurantId(restaurantId));
+    public Menu get(int id) {
+        log.info("get {}", id);
+        return checkNotFoundWithId(menuRepository.get(id), id);
     }
 
     public List<Menu> getAll() {
@@ -42,9 +36,20 @@ public class MenuRestController {
         return checkNotFound(menuRepository.getAll());
     }
 
-    public boolean delete(int restaurantId) {
+    public void update(Menu menu, int id) {
+        log.info("update{} id = {}", menu, id);
+        assureIdConsistent(menu, id);
+        menuRepository.save(menu);
+    }
+
+    public void delete(int restaurantId) {
         log.info("delete {}", restaurantId);
-        return menuRepository.delete(restaurantId);
+        menuRepository.delete(restaurantId);
+    }
+
+    public List<Menu> getListByRestaurantId(int restaurantId) {
+        log.info("getListByRestaurantId {}", restaurantId);
+        return checkNotFound(menuRepository.getListByRestaurantId(restaurantId));
     }
 
 }

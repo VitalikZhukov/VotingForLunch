@@ -4,6 +4,7 @@ DELETE FROM menu;
 DELETE FROM restaurants;
 ALTER SEQUENCE global_seq RESTART WITH 10000;
 ALTER SEQUENCE restaurants_id_seq RESTART WITH 1;
+ALTER SEQUENCE menu_id_seq RESTART WITH 1;
 
 INSERT INTO users (login, password, email, restaurant_id)
 VALUES ('User1', 'Password1', '1@tut.by', 1),

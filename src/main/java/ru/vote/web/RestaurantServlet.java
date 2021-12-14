@@ -95,7 +95,7 @@ public class RestaurantServlet extends HttpServlet {
         if (StringUtils.hasLength(id)) {
             restaurantController.update(restaurant, getId(req));
             for (Menu menu : getMenuList(req, restaurant.getId())) {
-                menuController.update(menu);
+                menuController.update(menu, menu.getId());
             }
         } else {
             restaurantController.create(restaurant);

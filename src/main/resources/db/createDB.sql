@@ -35,6 +35,7 @@ CREATE TABLE restaurants
 
 CREATE TABLE menu
 (
+    id              SERIAL                              PRIMARY KEY,
     restaurant_id   INTEGER                             NOT NULL,
     dish            VARCHAR                             NOT NULL,
     price           REAL                                NOT NULL,

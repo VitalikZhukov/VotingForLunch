@@ -1,8 +1,12 @@
 package ru.vote.repository.jdbc;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 import ru.vote.model.Menu;
 import ru.vote.repository.MenuRepository;
@@ -15,26 +19,46 @@ public class JdbcMenuRepository implements MenuRepository {
 
     private final JdbcTemplate jdbcTemplate;
 
+    private final SimpleJdbcInsert jdbcInsert;
+
+    private final NamedParameterJdbcTemplate jdbcNamed;
+
     @Autowired
-    public JdbcMenuRepository(JdbcTemplate jdbcTemplate) {
+    public JdbcMenuRepository(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate jdbcNamed) {
+        this.jdbcInsert = new SimpleJdbcInsert(jdbcTemplate)
+                .withTableName("menu")
+                .usingGeneratedKeyColumns("id");
         this.jdbcTemplate = jdbcTemplate;
+        this.jdbcNamed = jdbcNamed;
     }
 
     @Override
-    public boolean create(Menu menu) {
-        return jdbcTemplate.update("INSERT INTO menu(restaurant_id, dish, price) VALUES (?, ?, ?)",
-                menu.getRestaurantId(), menu.getDish(), menu.getPrice()) != 0;
+    public Menu save(Menu menu) {
+        MapSqlParameterSource map = new MapSqlParameterSource()
+                .addValue("id", menu.getId())
+                .addValue("restaurantId", menu.getRestaurantId())
+                .addValue("dish", menu.getDish())
+                .addValue("price", menu.getPrice());
+
+        if (menu.isNew()) {
+            Number id = jdbcInsert.executeAndReturnKey(map);
+            menu.setId(id.intValue());
+        } else if (jdbcNamed.update(
+                "UPDATE menu SET restaurant_id=:restaurantId, dish=:dish, price:=price WHERE id=:id", map) == 0) {
+            return null;
+        }
+        return menu;
     }
 
     @Override
-    public boolean update(Menu menu) {
-        return jdbcTemplate.update("UPDATE menu SET dish=?, price=? WHERE restaurant_id=?",
-                menu.getDish(), menu.getPrice(), menu.getRestaurantId()) != 0;
+    public Menu get(int id) {
+        List<Menu> menus = jdbcTemplate.query("SELECT * FROM restaurants WHERE id=?", ROW_MAPPER_MENU, id);
+        return DataAccessUtils.singleResult(menus);
     }
 
     @Override
     public List<Menu> getListByRestaurantId(int restaurantId) {
-        return jdbcTemplate.query("SELECT * FROM menu WHERE id=?", ROW_MAPPER_MENU, restaurantId);
+        return jdbcTemplate.query("SELECT * FROM menu WHERE restaurant_id=?", ROW_MAPPER_MENU, restaurantId);
     }
 
     @Override

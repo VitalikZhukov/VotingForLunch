@@ -1,17 +1,13 @@
-package ru.vote.repository.jdbc;
+package ru.vote.web.restaurant;
 
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class JdbcRestaurantRepositoryTest {
+public class RestaurantRestControllerTest {
 
     @Test
-    public void save() {
-    }
-
-    @Test
-    public void delete() {
+    public void create() {
     }
 
     @Test
@@ -20,6 +16,14 @@ public class JdbcRestaurantRepositoryTest {
 
     @Test
     public void getAll() {
+    }
+
+    @Test
+    public void update() {
+    }
+
+    @Test
+    public void delete() {
     }
 
     @Test

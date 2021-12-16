@@ -67,9 +67,13 @@ public class JdbcMenuRepository implements MenuRepository {
     }
 
     @Override
-    public boolean delete(int restaurantId) {
-        return jdbcTemplate.update("DELETE FROM menu WHERE restaurant_id=?", restaurantId) != 0;
+    public boolean delete(int id) {
+        return jdbcTemplate.update("DELETE FROM menu WHERE id=?", id) != 0;
+    }
 
+    @Override
+    public boolean deleteAllByRestaurantId(int restaurantId) {
+        return jdbcTemplate.update("DELETE FROM menu WHERE restaurant_id=?", restaurantId) != 0;
     }
 
 }

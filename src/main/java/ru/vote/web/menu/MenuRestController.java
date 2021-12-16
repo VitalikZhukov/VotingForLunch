@@ -31,6 +31,11 @@ public class MenuRestController {
         return checkNotFoundWithId(menuRepository.get(id), id);
     }
 
+    public List<Menu> getListByRestaurantId(int restaurantId) {
+        log.info("getListByRestaurantId {}", restaurantId);
+        return checkNotFound(menuRepository.getListByRestaurantId(restaurantId));
+    }
+
     public List<Menu> getAll() {
         log.info("getAll");
         return checkNotFound(menuRepository.getAll());
@@ -42,14 +47,14 @@ public class MenuRestController {
         menuRepository.save(menu);
     }
 
-    public void delete(int restaurantId) {
-        log.info("delete {}", restaurantId);
-        menuRepository.delete(restaurantId);
+    public void delete(int id) {
+        log.info("delete {}", id);
+        checkNotFoundWithId(menuRepository.delete(id), id);
     }
 
-    public List<Menu> getListByRestaurantId(int restaurantId) {
-        log.info("getListByRestaurantId {}", restaurantId);
-        return checkNotFound(menuRepository.getListByRestaurantId(restaurantId));
+    public void deleteAllByRestaurantId (int restaurant_id) {
+        log.info("deleteAllByRestaurantId {}", restaurant_id);
+        checkNotFoundWithId(menuRepository.deleteAllByRestaurantId(restaurant_id), restaurant_id);
     }
 
 }

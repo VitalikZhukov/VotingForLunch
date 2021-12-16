@@ -8,6 +8,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MenuTestData {
     public static final int MENU_ID = 1;
+    public static final int RESTAURANT_ID = 1;
+    public static final int NOT_FOUND = 10;
 
     public static final Menu menu = new Menu(MENU_ID, "Dish1", 99.99);
 

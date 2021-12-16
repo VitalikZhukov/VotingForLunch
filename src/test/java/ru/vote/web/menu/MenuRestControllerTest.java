@@ -14,7 +14,6 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 import static ru.vote.MenuTestData.*;
-import static ru.vote.UserTestData.NOT_FOUND;
 
 
 @ContextConfiguration({
@@ -46,6 +45,12 @@ public class MenuRestControllerTest {
     }
 
     @Test
+    public void get() {
+        Menu menu = controller.get(MENU_ID);
+        assertMatch(menu, menu1);
+    }
+
+    @Test
     public void getListByRestaurantId() {
         List<Menu> menuList = controller.getListByRestaurantId(1);
         assertMatch(menuList, menu1, menu2, menu3);
@@ -64,7 +69,21 @@ public class MenuRestControllerTest {
     }
 
     @Test
+    public void deleteAllByRestaurantId () {
+        controller.deleteAllByRestaurantId(RESTAURANT_ID);
+        assertThrows(NotFoundException.class, () -> controller.get(MENU_ID));
+        assertThrows(NotFoundException.class, () -> controller.get(MENU_ID + 1));
+        assertThrows(NotFoundException.class, () -> controller.get(MENU_ID + 2));
+    }
+
+    @Test
     public void getNotFound() {
         assertThrows(NotFoundException.class, () -> controller.get(NOT_FOUND));
+    }
+
+    @Test
+    public void deletedNotFound() {
+        assertThrows(NotFoundException.class, () -> controller.delete(NOT_FOUND));
+
     }
 }

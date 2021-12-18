@@ -33,33 +33,33 @@ public class MenuRestControllerTest {
         Integer newId = created.getId();
         Menu newMenu = getNew();
         newMenu.setId(newId);
-        assertMatch(created, newMenu);
-        assertMatch(controller.get(newId), newMenu);
+        MENU_MATCHER.assertMatch(created, newMenu);
+        MENU_MATCHER.assertMatch(controller.get(newId), newMenu);
     }
 
     @Test
     public void update() {
         Menu updated = getUpdated();
         controller.update(updated, updated.getId());
-        assertMatch(controller.get(MENU_ID), getUpdated());
+        MENU_MATCHER.assertMatch(controller.get(MENU_ID), getUpdated());
     }
 
     @Test
     public void get() {
         Menu menu = controller.get(MENU_ID);
-        assertMatch(menu, menu1);
+        MENU_MATCHER.assertMatch(menu, menu1);
     }
 
     @Test
     public void getListByRestaurantId() {
         List<Menu> menuList = controller.getListByRestaurantId(1);
-        assertMatch(menuList, menu1, menu2, menu3);
+        MENU_MATCHER.assertMatch(menuList, menu1, menu2, menu3);
     }
 
     @Test
     public void getAll() {
         List<Menu> menuList = controller.getAll();
-        assertMatch(menuList, menu1, menu2, menu3, menu4, menu5, menu6);
+        MENU_MATCHER.assertMatch(menuList, menu1, menu2, menu3, menu4, menu5, menu6);
     }
 
     @Test

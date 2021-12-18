@@ -2,11 +2,9 @@ package ru.vote;
 
 import ru.vote.model.Menu;
 
-import java.util.Arrays;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
 public class MenuTestData {
+    public static final MatcherFactory.Matcher<Menu> MENU_MATCHER = MatcherFactory.usingIgnoringFieldsComparator("");
+
     public static final int MENU_ID = 1;
     public static final int RESTAURANT_ID = 1;
     public static final int NOT_FOUND = 10;
@@ -33,17 +31,4 @@ public class MenuTestData {
         updated.setPrice(10000);
         return updated;
     }
-
-    public static void assertMatch(Menu actual, Menu expected) {
-        assertThat(actual).usingRecursiveComparison().isEqualTo(expected);
-    }
-
-    public static void assertMatch(Iterable<Menu> actual, Menu... expected) {
-        assertMatch(actual, Arrays.asList(expected));
-    }
-
-    public static void assertMatch(Iterable<Menu> actual, Iterable<Menu> expected) {
-        assertThat(actual).usingRecursiveFieldByFieldElementComparatorIgnoringFields().isEqualTo(expected);
-    }
-
 }

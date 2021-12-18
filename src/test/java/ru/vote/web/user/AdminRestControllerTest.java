@@ -34,15 +34,15 @@ public class AdminRestControllerTest {
         Integer newId = created.getId();
         User newUser = getNew();
         newUser.setId(newId);
-        assertMatch(created, newUser);
-        assertMatch(controller.get(newId), newUser);
+        USER_MATCHER.assertMatch(created, newUser);
+        USER_MATCHER.assertMatch(controller.get(newId), newUser);
     }
 
     @Test
     public void update() {
         User updated = getUpdated();
         controller.update(updated, updated.getId());
-        assertMatch(controller.get(USER_ID), getUpdated());
+        USER_MATCHER.assertMatch(controller.get(USER_ID), getUpdated());
     }
 
     @Test
@@ -54,19 +54,19 @@ public class AdminRestControllerTest {
     @Test
     public void get() {
         User user = controller.get(USER_ID);
-        assertMatch(user, UserTestData.user);
+        USER_MATCHER.assertMatch(user, UserTestData.user);
     }
 
     @Test
     public void getByEmail() {
         User user = controller.getByEmail("admin@tut.by");
-        assertMatch(user, admin);
+        USER_MATCHER.assertMatch(user, admin);
     }
 
     @Test
     public void getAll() {
         List<User> all = controller.getAll();
-        assertMatch(all, admin, user, user2);
+        USER_MATCHER.assertMatch(all, admin, user, user2);
     }
 
     @Test

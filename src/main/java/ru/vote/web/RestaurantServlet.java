@@ -71,7 +71,7 @@ public class RestaurantServlet extends HttpServlet {
             default:
                 if(chooseID != null) {
                     req.setAttribute("choose", restaurantController.get(chooseID).getName());
-                    restaurantController.incrementVoteCounter(chooseID, restaurantController.getVoteCounter(chooseID));
+                    restaurantController.incrementVoteCounter(chooseID);
                 }
                 req.setAttribute("restaurants", restaurantController.getAll());
                 req.setAttribute("menu", menuController.getAll());

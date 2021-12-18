@@ -9,16 +9,32 @@ public class Restaurant extends AbstractModel{
 
     public Restaurant() {}
 
-    public Restaurant(Integer id, String name) {
-        super(id);
-        this.name = name;
-        this.voteCounter = 0;
+    //copy constructor
+    public Restaurant(Restaurant r) {
+        this(r.name, r.voteCounter);
     }
 
     public Restaurant(String name) {
         super(null);
         this.name = name;
         this.voteCounter = 0;
+    }
+
+    public Restaurant(Integer id, String name) {
+        super(id);
+        this.name = name;
+        this.voteCounter = 0;
+    }
+
+    public Restaurant(String name, Integer voteCounter) {
+        this.name = name;
+        this.voteCounter = voteCounter;
+    }
+
+    public Restaurant(Integer id, String name, Integer voteCounter) {
+        super(id);
+        this.name = name;
+        this.voteCounter = voteCounter;
     }
 
     public String getName() {

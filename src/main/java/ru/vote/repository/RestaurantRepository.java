@@ -16,7 +16,7 @@ public interface RestaurantRepository {
 
     List<Restaurant> getAll();
 
-    boolean incrementVoteCounter(int id, int countVote);
+    boolean incrementVoteCounter(int id);
 
     int getVoteCounter(int id);
 }

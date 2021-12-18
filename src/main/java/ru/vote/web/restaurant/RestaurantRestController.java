@@ -50,13 +50,13 @@ public class RestaurantRestController {
         checkNotFoundWithId(restaurantRepository.delete(id), id);
     }
 
-    public boolean incrementVoteCounter(int id, int countVote) {
-        log.info("incrementVoteCounter id = {}, counter of vote = {}", id, countVote);
-        return restaurantRepository.incrementVoteCounter(id, countVote);
+    public void incrementVoteCounter(int id) {
+        log.info("incrementVoteCounter id = {}", id);
+        checkNotFoundWithId(restaurantRepository.incrementVoteCounter(id), id);
     }
 
     public int getVoteCounter(int id) {
         log.info("getVoteCounter {}", id);
-        return restaurantRepository.getVoteCounter(id);
+        return checkNotFoundWithId(restaurantRepository.getVoteCounter(id), id);
     }
 }

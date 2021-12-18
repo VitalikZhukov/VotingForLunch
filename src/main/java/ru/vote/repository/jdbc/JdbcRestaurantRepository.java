@@ -72,9 +72,10 @@ public class JdbcRestaurantRepository implements RestaurantRepository {
     }
 
     @Override
-    public boolean incrementVoteCounter(int id, int countVote) {
-        countVote++;
-        return jdbcTemplate.update("UPDATE restaurants SET vote_counter=? WHERE id=?", countVote, id) != 0;
+    public boolean incrementVoteCounter(int id) {
+        int voteCounter = get(id).getVoteCounter();
+        voteCounter++;
+        return jdbcTemplate.update("UPDATE restaurants SET vote_counter=? WHERE id=?", voteCounter, id) != 0;
     }
 
     @Override

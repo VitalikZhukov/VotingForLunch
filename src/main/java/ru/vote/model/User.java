@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.EnumSet;
 import java.util.Set;
 
-public class User extends AbstractModel{
+public class User extends AbstractUser{
 
     private String email;
     private String login;

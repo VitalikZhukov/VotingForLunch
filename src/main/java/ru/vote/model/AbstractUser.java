@@ -1,15 +1,13 @@
 package ru.vote.model;
 
-import javax.persistence.*;
-
-
-public abstract class AbstractModel {
+public abstract class AbstractUser {
+    public static final int START_SEQ = 10000;
 
     private Integer id;
 
-    public AbstractModel() {}
+    public AbstractUser() {}
 
-    public AbstractModel(Integer id) {
+    public AbstractUser(Integer id) {
         this.id = id;
     }
 
@@ -40,7 +38,7 @@ public abstract class AbstractModel {
             return false;
         }
 
-        AbstractModel model = (AbstractModel) obj;
+        AbstractUser model = (AbstractUser) obj;
         return id != null && id.equals(model.id);
     }
 }

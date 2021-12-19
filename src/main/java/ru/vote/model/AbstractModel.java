@@ -1,10 +1,14 @@
 package ru.vote.model;
 
+import org.springframework.util.Assert;
+
 import javax.persistence.*;
 
-
+@MappedSuperclass
+@Access(AccessType.FIELD)
 public abstract class AbstractModel {
 
+    @Id
     private Integer id;
 
     public AbstractModel() {}
@@ -23,6 +27,11 @@ public abstract class AbstractModel {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public int id() {
+        Assert.notNull(id, "Entity must have id");
+        return id;
     }
 
     @Override

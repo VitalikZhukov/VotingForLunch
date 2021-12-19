@@ -1,10 +1,27 @@
 package ru.vote.model;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "restaurants")
 public class Restaurant extends AbstractModel{
 
+    @Column(name = "name", nullable = false)
+    @NotBlank
+    @Size(max = 100)
     private String name;
+
+    @Column(name = "vote_counter", nullable = false)
+    @NotBlank
     private Integer voteCounter;
+
+    @Transient
     private String menu;
+
+    @Transient
     private String price;
 
     public Restaurant() {}

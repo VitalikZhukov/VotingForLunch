@@ -9,6 +9,7 @@ import javax.persistence.*;
 public abstract class AbstractModel {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     public AbstractModel() {}

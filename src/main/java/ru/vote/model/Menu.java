@@ -5,9 +5,20 @@ import jakarta.validation.constraints.Size;
 
 import javax.persistence.*;
 
+@NamedQueries({
+        @NamedQuery(name = Menu.DELETE, query = "DELETE FROM Menu m WHERE m.id=:id"),
+        @NamedQuery(name = Menu.ALL_SORTED, query = "SELECT m FROM Menu m ORDER BY m.restaurantId"),
+        @NamedQuery(name = Menu.GET_LIST_BY_RESTAURANT_ID, query = "SELECT m FROM Menu m WHERE m.restaurantId=:restaurantId"),
+        @NamedQuery(name = Menu.DELETE_ALL_BY_RESTAURANT_ID, query = "DELETE FROM Menu m WHERE m.restaurantId=:restaurantId")
+})
 @Entity
 @Table(name = "menu")
 public class Menu extends AbstractModel{
+
+    public static final String DELETE = "Menu.delete";
+    public static final String ALL_SORTED = "Menu.getAllSorted";
+    public static final String GET_LIST_BY_RESTAURANT_ID = "Menu.getListByRestaurantId";
+    public static final String DELETE_ALL_BY_RESTAURANT_ID = "Menu.deleteAllByRestaurantId";
 
     @Column(name = "restaurant_id", nullable = false)
     @NotBlank

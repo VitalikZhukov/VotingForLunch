@@ -5,8 +5,8 @@ DELETE FROM restaurants;
 ALTER SEQUENCE global_seq RESTART WITH 10000;
 
 INSERT INTO users (login, password, email, restaurant_id)
-VALUES ('User1', 'Password1', '1@tut.by', 1),
-       ('User2', 'Password2', '2@tut.by', 2),
+VALUES ('User1', 'Password1', '1@tut.by', 10000),
+       ('User2', 'Password2', '2@tut.by', 10001),
        ('Admin', 'Password', 'admin@tut.by', null);
 
 INSERT INTO user_roles (user_id, role)
@@ -19,9 +19,9 @@ VALUES ('Brovar', 8),
        ('Lidbeer', 15);
 
 INSERT INTO menu (restaurant_id, dish, price)
-VALUES (10000, 'First', 12.5),
-       (10000, 'Second', 14.8),
-       (10000, 'Third', 2.98),
-       (10001, 'First', 4.5),
-       (10001, 'Second', 8.8),
-       (10001, 'Third', 2.85);
+VALUES (10003, 'First', 12.5),
+       (10003, 'Second', 14.8),
+       (10003, 'Third', 2.98),
+       (10004, 'First', 4.5),
+       (10004, 'Second', 8.8),
+       (10004, 'Third', 2.85);

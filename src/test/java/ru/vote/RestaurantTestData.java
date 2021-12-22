@@ -2,10 +2,12 @@ package ru.vote;
 
 import ru.vote.model.Restaurant;
 
+import static ru.vote.model.AbstractModel.START_SEQ;
+
 public class RestaurantTestData {
     public static final MatcherFactory.Matcher<Restaurant> RESTAURANT_MATCHER = MatcherFactory.usingIgnoringFieldsComparator("menu", "price");
 
-    public static final int RESTAURANT_ID = 1;
+    public static final int RESTAURANT_ID = START_SEQ;
     public static final int VOTE_COUNTER = 8;
     public static final int NOT_FOUND = 10;
 

@@ -20,7 +20,7 @@ import java.util.Set;
 })
 @Entity
 @Table(name = "users")
-public class User extends AbstractUser{
+public class User extends AbstractModel {
 
     public static final String DELETE = "User.delete";
     public static final String BY_EMAIL = "User.getByEmail";

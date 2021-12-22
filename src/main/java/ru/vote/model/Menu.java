@@ -13,7 +13,7 @@ import javax.persistence.*;
 })
 @Entity
 @Table(name = "menu")
-public class Menu extends AbstractModel{
+public class Menu extends AbstractModel {
 
     public static final String DELETE = "Menu.delete";
     public static final String ALL_SORTED = "Menu.getAllSorted";

@@ -3,8 +3,6 @@ DELETE FROM users;
 DELETE FROM menu;
 DELETE FROM restaurants;
 ALTER SEQUENCE global_seq RESTART WITH 10000;
-ALTER SEQUENCE restaurants_id_seq RESTART WITH 1;
-ALTER SEQUENCE menu_id_seq RESTART WITH 1;
 
 INSERT INTO users (login, password, email, restaurant_id)
 VALUES ('User1', 'Password1', '1@tut.by', 1),
@@ -21,9 +19,9 @@ VALUES ('Brovar', 8),
        ('Lidbeer', 15);
 
 INSERT INTO menu (restaurant_id, dish, price)
-VALUES (1, 'First', 12.5),
-       (1, 'Second', 14.8),
-       (1, 'Third', 2.98),
-       (2, 'First', 4.5),
-       (2, 'Second', 8.8),
-       (2, 'Third', 2.85);
+VALUES (10000, 'First', 12.5),
+       (10000, 'Second', 14.8),
+       (10000, 'Third', 2.98),
+       (10001, 'First', 4.5),
+       (10001, 'Second', 8.8),
+       (10001, 'Third', 2.85);

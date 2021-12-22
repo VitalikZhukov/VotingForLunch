@@ -5,7 +5,7 @@ import ru.vote.model.User;
 
 import java.util.Collections;
 
-import static ru.vote.model.AbstractUser.START_SEQ;
+import static ru.vote.model.AbstractModel.START_SEQ;
 
 public class UserTestData {
     public static final MatcherFactory.Matcher<User> USER_MATCHER = MatcherFactory.usingIgnoringFieldsComparator("registered", "roles", "checkTimeVote");

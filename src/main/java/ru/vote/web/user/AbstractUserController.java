@@ -8,10 +8,7 @@ import ru.vote.repository.UserRepository;
 
 import java.util.List;
 
-import static ru.vote.util.ValidationUtil.checkNotFoundWithId;
-import static ru.vote.util.ValidationUtil.checkNotFound;
-import static ru.vote.util.ValidationUtil.checkNew;
-import static ru.vote.util.ValidationUtil.assureIdConsistent;
+import static ru.vote.util.ValidationUtil.*;
 
 
 public abstract class AbstractUserController {

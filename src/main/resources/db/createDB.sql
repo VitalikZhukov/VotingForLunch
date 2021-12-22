@@ -28,14 +28,14 @@ CREATE TABLE user_roles
 
 CREATE TABLE restaurants
 (
-    id              SERIAL                              PRIMARY KEY,
+    id              INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
     name            VARCHAR                             NOT NULL,
     vote_counter    INTEGER                 DEFAULT 0   NOT NULL
 );
 
 CREATE TABLE menu
 (
-    id              SERIAL                              PRIMARY KEY,
+    id              INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
     restaurant_id   INTEGER                             NOT NULL,
     dish            VARCHAR                             NOT NULL,
     price           REAL                                NOT NULL,

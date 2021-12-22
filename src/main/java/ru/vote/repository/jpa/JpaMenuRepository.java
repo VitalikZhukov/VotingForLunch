@@ -1,6 +1,7 @@
 package ru.vote.repository.jpa;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.vote.model.Menu;
 import ru.vote.repository.MenuRepository;
 
@@ -9,12 +10,14 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
+@Transactional(readOnly = true)
 public class JpaMenuRepository implements MenuRepository {
 
     @PersistenceContext
     private EntityManager manager;
 
     @Override
+    @Transactional
     public Menu save(Menu menu) {
         if (menu.isNew()) {
             manager.persist(menu);
@@ -41,6 +44,7 @@ public class JpaMenuRepository implements MenuRepository {
     }
 
     @Override
+    @Transactional
     public boolean delete(int id) {
         return manager.createNamedQuery(Menu.DELETE)
                 .setParameter("id", id)

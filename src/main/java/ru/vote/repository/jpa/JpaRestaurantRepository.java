@@ -1,6 +1,7 @@
 package ru.vote.repository.jpa;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.vote.model.Restaurant;
 import ru.vote.repository.RestaurantRepository;
 
@@ -9,12 +10,14 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
+@Transactional(readOnly = true)
 public class JpaRestaurantRepository implements RestaurantRepository {
 
     @PersistenceContext
     private EntityManager manager;
 
     @Override
+    @Transactional
     public Restaurant save(Restaurant restaurant) {
         if (restaurant.isNew()) {
             manager.persist(restaurant);
@@ -24,6 +27,7 @@ public class JpaRestaurantRepository implements RestaurantRepository {
     }
 
     @Override
+    @Transactional
     public boolean delete(int id) {
         return manager.createNamedQuery(Restaurant.DELETE)
                 .setParameter("id", id)

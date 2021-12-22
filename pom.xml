@@ -14,8 +14,6 @@
 
     <properties>
                         <!--Java version-->
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
         <java.version>17</java.version>
 
                         <!--Library versions-->
@@ -36,7 +34,7 @@
         <hsqldb.version>2.6.1</hsqldb.version>
         <!-- Hibernate -->
         <hibernate.version>5.6.2.Final</hibernate.version>
-        <hibernate-validator.version>7.0.1.Final</hibernate-validator.version>
+        <hibernate-validator.version>6.2.0.Final</hibernate-validator.version>
         <javax-el.version>3.0.1-b12</javax-el.version>
     </properties>
 

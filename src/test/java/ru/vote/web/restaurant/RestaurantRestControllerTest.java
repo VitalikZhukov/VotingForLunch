@@ -70,7 +70,7 @@ public class RestaurantRestControllerTest {
 
     @Test
     public void getVoteCounter() {
-        int gotVoteCounter = controller.get(RESTAURANT_ID).getVoteCounter();
+        int gotVoteCounter = controller.getVoteCounter(RESTAURANT_ID);
         assertEquals(gotVoteCounter, VOTE_COUNTER);
     }
 

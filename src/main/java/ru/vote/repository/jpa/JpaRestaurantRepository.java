@@ -45,8 +45,10 @@ public class JpaRestaurantRepository implements RestaurantRepository {
     }
 
     @Override
+    @Transactional
     public boolean incrementVoteCounter(int id) {
         int counter = getVoteCounter(id);
+        counter++;
         return manager.createNamedQuery(Restaurant.INCREMENT_VOTE_COUNTER)
                 .setParameter("id", id)
                 .setParameter("counter", counter)
@@ -55,8 +57,8 @@ public class JpaRestaurantRepository implements RestaurantRepository {
 
     @Override
     public int getVoteCounter(int id) {
-        return manager.createNamedQuery(Restaurant.GET_VOTE_COUNTER,Restaurant.class)
+        return (int) manager.createNamedQuery(Restaurant.GET_VOTE_COUNTER)
                 .setParameter("id", id)
-                .getSingleResult().getVoteCounter();
+                .getSingleResult();
     }
 }

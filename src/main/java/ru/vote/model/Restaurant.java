@@ -3,11 +3,12 @@ package ru.vote.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @NamedQueries({
         @NamedQuery(name = Restaurant.DELETE, query = "DELETE FROM Restaurant r WHERE r.id=:id"),
-        @NamedQuery(name = Restaurant.ALL_SORTED, query = "SELECT r FROM Restaurant r ORDER BY r.voteCounter DESC"),
+        @NamedQuery(name = Restaurant.ALL_SORTED, query = "SELECT r FROM Restaurant r"),
         @NamedQuery(name = Restaurant.GET_VOTE_COUNTER, query = "SELECT r.voteCounter FROM Restaurant r WHERE r.id=:id"),
         @NamedQuery(name = Restaurant.INCREMENT_VOTE_COUNTER, query = "UPDATE Restaurant r SET r.voteCounter=:counter WHERE r.id=:id")
 })
@@ -26,7 +27,7 @@ public class Restaurant extends AbstractModel {
     private String name;
 
     @Column(name = "vote_counter", nullable = false)
-    @NotBlank
+    @NotNull
     private Integer voteCounter;
 
     @Transient

@@ -52,7 +52,7 @@ public class MenuRestControllerTest {
 
     @Test
     public void getListByRestaurantId() {
-        List<Menu> menuList = controller.getListByRestaurantId(1);
+        List<Menu> menuList = controller.getListByRestaurantId(RESTAURANT_ID);
         MENU_MATCHER.assertMatch(menuList, menu1, menu2, menu3);
     }
 

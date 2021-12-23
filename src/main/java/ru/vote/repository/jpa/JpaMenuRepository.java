@@ -52,6 +52,7 @@ public class JpaMenuRepository implements MenuRepository {
     }
 
     @Override
+    @Transactional
     public boolean deleteAllByRestaurantId(int restaurantId) {
         return manager.createNamedQuery(Menu.DELETE_ALL_BY_RESTAURANT_ID)
                 .setParameter("restaurantId", restaurantId)

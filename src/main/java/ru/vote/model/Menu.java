@@ -3,6 +3,7 @@ package ru.vote.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @NamedQueries({
@@ -21,7 +22,7 @@ public class Menu extends AbstractModel {
     public static final String DELETE_ALL_BY_RESTAURANT_ID = "Menu.deleteAllByRestaurantId";
 
     @Column(name = "restaurant_id", nullable = false)
-    @NotBlank
+    @NotNull
     private int restaurantId;
 
     @Column(name = "dish", nullable = false)
@@ -30,7 +31,7 @@ public class Menu extends AbstractModel {
     private String dish;
 
     @Column(name = "price", nullable = false)
-    @NotBlank
+    @NotNull
     private double price;
 
     public Menu() {}

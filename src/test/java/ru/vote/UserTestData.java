@@ -15,8 +15,8 @@ public class UserTestData {
     public static final int ADMIN_ID = START_SEQ + 2;
     public static final int NOT_FOUND = 10;
 
-    public static final User user = new User(USER_ID, "User1", "1@tut.by", "Password1", 1, Role.USER);
-    public static final User user2 = new User(USER_ID_SECOND, "User2", "2@tut.by", "Password2", 2, Role.USER);
+    public static final User user = new User(USER_ID, "User1", "1@tut.by", "Password1", 10000, Role.USER);
+    public static final User user2 = new User(USER_ID_SECOND, "User2", "2@tut.by", "Password2", 10001, Role.USER);
     public static final User admin = new User(ADMIN_ID, "Admin", "admin@tut.by", "Password", null, Role.ADMIN);
 
     public static User getNew() {

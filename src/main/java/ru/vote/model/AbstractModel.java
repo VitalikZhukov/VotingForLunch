@@ -1,5 +1,6 @@
 package ru.vote.model;
 
+import org.springframework.data.domain.Persistable;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
@@ -7,7 +8,7 @@ import javax.persistence.*;
 @MappedSuperclass
 // http://stackoverflow.com/questions/594597/hibernate-annotations-which-is-better-field-or-property-access
 @Access(AccessType.FIELD)
-public abstract class AbstractModel {
+public abstract class AbstractModel implements Persistable<Integer> {
     public static final int START_SEQ = 10000;
 
     @Id
@@ -21,10 +22,12 @@ public abstract class AbstractModel {
         this.id = id;
     }
 
+    @Override
     public boolean isNew() {
         return this.id == null;
     }
 
+    @Override
     public Integer getId() {
         return id;
     }

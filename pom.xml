@@ -27,6 +27,7 @@
         <jstl.version>1.2</jstl.version>
         <!--    Spring  -->
         <spring.version>5.3.13</spring.version>
+        <spring-data-jpa.version>2.5.6</spring-data-jpa.version>
         <!--    Tests  -->
         <junit.version>4.13.2</junit.version>
         <assertj.version>3.21.0</assertj.version>
@@ -119,9 +120,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-orm</artifactId>
-            <version>${spring.version}</version>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>${spring-data-jpa.version}</version>
         </dependency>
 
                         <!--- Hibernate -->
@@ -155,7 +156,6 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
-            <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -206,5 +206,17 @@
             </activation>
         </profile>
     </profiles>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId>
+                <version>${spring.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>

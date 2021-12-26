@@ -1,4 +1,4 @@
-package ru.vote.web.menu;
+package ru.vote.web.abstractTest;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import ru.vote.ActiveDbProfileResolver;
 import ru.vote.model.Menu;
 import ru.vote.util.exeption.NotFoundException;
+import ru.vote.web.menu.MenuRestController;
 
 import java.util.List;
 
@@ -27,7 +28,7 @@ import static ru.vote.MenuTestData.*;
 @RunWith(SpringRunner.class)
 @Sql(scripts = "classpath:db/initDB.sql", config = @SqlConfig(encoding = "UTF-8"))
 @ActiveProfiles(resolver = ActiveDbProfileResolver.class)
-public class MenuRestControllerTest {
+public abstract class AbstractMenuRestControllerTest {
 
     @Autowired
     private MenuRestController controller;

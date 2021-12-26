@@ -1,5 +1,7 @@
 package ru.vote.service;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import ru.vote.model.Menu;
 import ru.vote.repository.MenuRepository;
@@ -17,6 +19,7 @@ public class MenuService {
         this.repository = repository;
     }
 
+    @CacheEvict(value = "menuCache", allEntries = true)
     public Menu create(Menu menu) {
         checkNew(menu);
         return repository.save(menu);
@@ -30,15 +33,18 @@ public class MenuService {
         return checkNotFound(repository.getListByRestaurantId(restaurantId));
     }
 
+    @Cacheable("menuCache")
     public List<Menu> getAll() {
         return checkNotFound(repository.getAll());
     }
 
+    @CacheEvict(value = "menuCache", allEntries = true)
     public void update(Menu menu, int id) {
         assureIdConsistent(menu, id);
         repository.save(menu);
     }
 
+    @CacheEvict(value = "menuCache", allEntries = true)
     public void delete(int id) {
         checkNotFoundWithId(repository.delete(id), id);
     }

@@ -1,8 +1,10 @@
 package ru.vote.web.user;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.CacheManager;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
@@ -30,6 +32,14 @@ public class AdminRestControllerTest {
 
     @Autowired
     private AdminRestController controller;
+
+    @Autowired
+    private CacheManager cacheManager;
+
+    @Before
+    public void setup() {
+        cacheManager.getCache("usersCache").clear();
+    }
 
     @Test
     public void create() {

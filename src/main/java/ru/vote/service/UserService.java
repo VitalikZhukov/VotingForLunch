@@ -1,5 +1,7 @@
 package ru.vote.service;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import ru.vote.model.User;
 import ru.vote.repository.UserRepository;
@@ -16,6 +18,7 @@ public class UserService {
         this.repository = repository;
     }
 
+    @CacheEvict(value = "usersCache", allEntries = true)
     public User create(User user) {
         checkNew(user);
         return repository.save(user);
@@ -29,15 +32,18 @@ public class UserService {
         return checkNotFound(repository.getByEmail(email));
     }
 
+    @Cacheable("usersCache")
     public List<User> getAll() {
         return checkNotFound(repository.getAll());
     }
 
+    @CacheEvict(value = "usersCache", allEntries = true)
     public void update(User user, int id) {
         assureIdConsistent(user, id);
         repository.save(user);
     }
 
+    @CacheEvict(value = "usersCache", allEntries = true)
     public void delete(int id) {
         checkNotFoundWithId(repository.delete(id), id);
     }

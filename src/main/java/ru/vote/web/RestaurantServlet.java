@@ -3,6 +3,7 @@ package ru.vote.web;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.util.StringUtils;
+import ru.vote.Profiles;
 import ru.vote.model.Menu;
 import ru.vote.model.Restaurant;
 
@@ -27,7 +28,9 @@ public class RestaurantServlet extends HttpServlet {
 
     @Override
     public void init() {
-        springContext = new ClassPathXmlApplicationContext("spring/spring.xml", "spring/springDB.xml");
+        springContext = new ClassPathXmlApplicationContext(new String[]{"spring/spring.xml", "spring/springDB.xml"}, false);
+        springContext.getEnvironment().setActiveProfiles(Profiles.getActiveDbProfile(), Profiles.REPOSITORY_IMPLEMENTATION);
+        springContext.refresh();
         restaurantController = springContext.getBean(RestaurantRestController.class);
         menuController = springContext.getBean(MenuRestController.class);
     }

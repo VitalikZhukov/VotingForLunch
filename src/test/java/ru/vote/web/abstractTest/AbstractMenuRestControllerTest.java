@@ -1,5 +1,6 @@
 package ru.vote.web.abstractTest;
 
+import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,6 +90,7 @@ public abstract class AbstractMenuRestControllerTest extends AbstractRestControl
 
     @Test
     public void createWithException() throws Exception {
+        Assume.assumeTrue("Validation not supported (JPA only)", isJpaBased());
         validateRootCause(ConstraintViolationException.class, () -> controller.create(new Menu(null, null, "Menu", 50.5)));
         validateRootCause(ConstraintViolationException.class, () -> controller.create(new Menu(null, 10000, " ", 50.5)));
         validateRootCause(ConstraintViolationException.class, () -> controller.create(new Menu(null, 10000, "Menu", null)));

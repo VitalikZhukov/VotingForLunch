@@ -1,5 +1,6 @@
 package ru.vote.web.abstractTest;
 
+import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,6 +86,7 @@ public abstract class AbstractAdminRestControllerTest extends AbstractRestContro
 
     @Test
     public void createWithException() throws Exception {
+        Assume.assumeTrue("Validation not supported (JPA only)", isJpaBased());
         validateRootCause(ConstraintViolationException.class, () -> controller.create(new User(null, " ", "mail@tut.by", "password", 10000, Role.USER)));
         validateRootCause(ConstraintViolationException.class, () -> controller.create(new User(null, "User", " ", "password", 10000, Role.USER)));
         validateRootCause(ConstraintViolationException.class, () -> controller.create(new User(null, "User", "mail@tut.by", " ", 10000, Role.USER)));

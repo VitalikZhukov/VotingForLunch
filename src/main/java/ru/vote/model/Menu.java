@@ -23,7 +23,7 @@ public class Menu extends AbstractModel {
 
     @Column(name = "restaurant_id", nullable = false)
     @NotNull
-    private int restaurantId;
+    private Integer restaurantId;
 
     @Column(name = "dish", nullable = false)
     @NotBlank
@@ -32,7 +32,7 @@ public class Menu extends AbstractModel {
 
     @Column(name = "price", nullable = false)
     @NotNull
-    private double price;
+    private Double price;
 
     public Menu() {}
 
@@ -41,17 +41,17 @@ public class Menu extends AbstractModel {
         this(m.restaurantId, m.dish, m.price);
     }
 
-    public Menu(int restaurantId) {
+    public Menu(Integer restaurantId) {
         this.restaurantId = restaurantId;
     }
 
-    public Menu(int restaurantId, String dish, double price) {
+    public Menu(Integer restaurantId, String dish, Double price) {
         this.restaurantId = restaurantId;
         this.dish = dish;
         this.price = price;
     }
 
-    public Menu(Integer id, int restaurantId, String dish, double price) {
+    public Menu(Integer id, Integer restaurantId, String dish, Double price) {
         super(id);
         this.restaurantId = restaurantId;
         this.dish = dish;

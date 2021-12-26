@@ -2,33 +2,20 @@ package ru.vote.web.abstractTest;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.context.jdbc.SqlConfig;
-import org.springframework.test.context.junit4.SpringRunner;
-import ru.vote.ActiveDbProfileResolver;
 import ru.vote.model.Menu;
 import ru.vote.util.exeption.NotFoundException;
 import ru.vote.web.menu.MenuRestController;
 
+import javax.validation.ConstraintViolationException;
 import java.util.List;
 
 import static org.junit.Assert.*;
 import static ru.vote.MenuTestData.*;
 
 
-@ContextConfiguration({
-        "classpath:spring/spring.xml",
-        "classpath:spring/springDB.xml"
-})
-@RunWith(SpringRunner.class)
-@Sql(scripts = "classpath:db/initDB.sql", config = @SqlConfig(encoding = "UTF-8"))
-@ActiveProfiles(resolver = ActiveDbProfileResolver.class)
-public abstract class AbstractMenuRestControllerTest {
+public abstract class AbstractMenuRestControllerTest extends AbstractRestControllerTest {
 
     @Autowired
     private MenuRestController controller;
@@ -98,6 +85,13 @@ public abstract class AbstractMenuRestControllerTest {
     @Test
     public void deletedNotFound() {
         assertThrows(NotFoundException.class, () -> controller.delete(NOT_FOUND));
+    }
+
+    @Test
+    public void createWithException() throws Exception {
+        validateRootCause(ConstraintViolationException.class, () -> controller.create(new Menu(null, null, "Menu", 50.5)));
+        validateRootCause(ConstraintViolationException.class, () -> controller.create(new Menu(null, 10000, " ", 50.5)));
+        validateRootCause(ConstraintViolationException.class, () -> controller.create(new Menu(null, 10000, "Menu", null)));
 
     }
 }

@@ -1,5 +1,7 @@
 package ru.vote.util;
 
+import org.springframework.core.NestedExceptionUtils;
+import org.springframework.lang.NonNull;
 import ru.vote.model.AbstractModel;
 import ru.vote.util.exeption.NotFoundException;
 
@@ -38,6 +40,13 @@ public class ValidationUtil {
         } else if (model.getId() != id) {
             throw new IllegalArgumentException(model + " must be with id=" + id);
         }
+    }
+
+    //  https://stackoverflow.com/a/65442410/548473
+    @NonNull
+    public static Throwable getRootCause(@NonNull Throwable t) {
+        Throwable rootCause = NestedExceptionUtils.getRootCause(t);
+        return rootCause != null ? rootCause : t;
     }
 
 }

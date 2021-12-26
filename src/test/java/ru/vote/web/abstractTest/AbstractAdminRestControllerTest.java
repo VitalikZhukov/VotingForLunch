@@ -2,34 +2,24 @@ package ru.vote.web.abstractTest;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.context.jdbc.SqlConfig;
-import org.springframework.test.context.junit4.SpringRunner;
-import ru.vote.ActiveDbProfileResolver;
 import ru.vote.UserTestData;
+import ru.vote.model.Role;
 import ru.vote.model.User;
 import ru.vote.util.exeption.NotFoundException;
 import ru.vote.web.user.AdminRestController;
 
+import javax.validation.ConstraintViolationException;
+import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 import static ru.vote.UserTestData.*;
 import static ru.vote.UserTestData.NOT_FOUND;
 
-@ContextConfiguration({
-        "classpath:spring/spring.xml",
-        "classpath:spring/springDB.xml"
-})
-@RunWith(SpringRunner.class)
-@Sql(scripts = "classpath:db/initDB.sql", config = @SqlConfig(encoding = "UTF-8"))
-@ActiveProfiles(resolver = ActiveDbProfileResolver.class)
-public abstract class AbstractAdminRestControllerTest {
+public abstract class AbstractAdminRestControllerTest extends AbstractRestControllerTest {
 
     @Autowired
     private AdminRestController controller;
@@ -91,5 +81,12 @@ public abstract class AbstractAdminRestControllerTest {
     @Test
     public void deletedNotFound() {
         assertThrows(NotFoundException.class, () -> controller.delete(NOT_FOUND));
+    }
+
+    @Test
+    public void createWithException() throws Exception {
+        validateRootCause(ConstraintViolationException.class, () -> controller.create(new User(null, " ", "mail@tut.by", "password", 10000, Role.USER)));
+        validateRootCause(ConstraintViolationException.class, () -> controller.create(new User(null, "User", " ", "password", 10000, Role.USER)));
+        validateRootCause(ConstraintViolationException.class, () -> controller.create(new User(null, "User", "mail@tut.by", " ", 10000, Role.USER)));
     }
 }

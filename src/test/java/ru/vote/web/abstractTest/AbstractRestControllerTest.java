@@ -18,7 +18,7 @@ import static ru.vote.util.ValidationUtil.getRootCause;
 @RunWith(SpringRunner.class)
 @Sql(scripts = "classpath:db/initDB.sql", config = @SqlConfig(encoding = "UTF-8"))
 @ActiveProfiles(resolver = ActiveDbProfileResolver.class)
-public class AbstractRestControllerTest {
+public abstract class AbstractRestControllerTest {
 
     //  Check root cause in JUnit: https://github.com/junit-team/junit4/pull/778
     protected <T extends Throwable> void validateRootCause(Class<T> rootExceptionClass, Runnable runnable) {

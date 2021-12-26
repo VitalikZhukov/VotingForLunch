@@ -1,10 +1,12 @@
 package ru.vote.repository.datajpa;
 
+import org.springframework.stereotype.Repository;
 import ru.vote.model.Menu;
 import ru.vote.repository.MenuRepository;
 
 import java.util.List;
 
+@Repository
 public class DataJpaMenuRepository implements MenuRepository {
     private final CrudMenuRepository crudRepository;
 

@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import ru.vote.model.Restaurant;
-import ru.vote.repository.RestaurantRepository;
+import ru.vote.service.RestaurantService;
 
 import java.util.List;
 
@@ -17,46 +17,44 @@ import static ru.vote.util.ValidationUtil.assureIdConsistent;
 public class RestaurantRestController {
     private final Logger log = LoggerFactory.getLogger(RestaurantRestController.class);
 
-    private final RestaurantRepository restaurantRepository;
+    private final RestaurantService restaurantService;
 
-    protected RestaurantRestController(RestaurantRepository restaurantRepository) {
-        this.restaurantRepository = restaurantRepository;
+    protected RestaurantRestController(RestaurantService restaurantService) {
+        this.restaurantService = restaurantService;
     }
 
     public Restaurant create(Restaurant restaurant) {
         log.info("create {}", restaurant);
-        checkNew(restaurant);
-        return restaurantRepository.save(restaurant);
+        return restaurantService.create(restaurant);
     }
 
     public Restaurant get(int id) {
         log.info("get {}", id);
-        return checkNotFoundWithId(restaurantRepository.get(id), id);
+        return restaurantService.get(id);
     }
 
     public List<Restaurant> getAll() {
         log.info("getAll");
-        return checkNotFound(restaurantRepository.getAll());
+        return restaurantService.getAll();
     }
 
     public void update(Restaurant restaurant, int id) {
         log.info("update {} id = {}", restaurant, id);
-        assureIdConsistent(restaurant, id);
-        restaurantRepository.save(restaurant);
+        restaurantService.update(restaurant, id);
     }
 
     public void delete(int id) {
         log.info("delete {}", id);
-        checkNotFoundWithId(restaurantRepository.delete(id), id);
+        restaurantService.delete(id);
     }
 
     public void incrementVoteCounter(int id) {
         log.info("incrementVoteCounter id = {}", id);
-        checkNotFoundWithId(restaurantRepository.incrementVoteCounter(id), id);
+        restaurantService.incrementVoteCounter(id);
     }
 
     public int getVoteCounter(int id) {
         log.info("getVoteCounter {}", id);
-        return checkNotFoundWithId(restaurantRepository.getVoteCounter(id), id);
+        return restaurantService.getVoteCounter(id);
     }
 }

@@ -3,6 +3,8 @@ package ru.vote.web;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.util.StringUtils;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 import ru.vote.Profiles;
 import ru.vote.model.Menu;
 import ru.vote.model.Restaurant;
@@ -22,23 +24,14 @@ import ru.vote.web.restaurant.RestaurantRestController;
 public class RestaurantServlet extends HttpServlet {
     //logging in the controller
 
-    private ConfigurableApplicationContext springContext;
     private RestaurantRestController restaurantController;
     private MenuRestController menuController;
 
     @Override
     public void init() {
-        springContext = new ClassPathXmlApplicationContext(new String[]{"spring/spring.xml", "spring/springDB.xml"}, false);
-        springContext.getEnvironment().setActiveProfiles(Profiles.getActiveDbProfile(), Profiles.REPOSITORY_IMPLEMENTATION);
-        springContext.refresh();
+        WebApplicationContext springContext = WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());
         restaurantController = springContext.getBean(RestaurantRestController.class);
         menuController = springContext.getBean(MenuRestController.class);
-    }
-
-    @Override
-    public void destroy() {
-        springContext.close();
-        super.destroy();
     }
 
     @Override

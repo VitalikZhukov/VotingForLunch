@@ -33,11 +33,11 @@
     <!--
     <Valve className="org.apache.catalina.valves.CometConnectionManagerValve" />
     -->
-    <Resource name="jdbc/topjava"
+    <Resource name="jdbc/vote"
               auth="Container"
               type="javax.sql.DataSource"
-              url="jdbc:postgresql://localhost:5432/topjava"
-              username="user"
+              url="jdbc:postgresql://localhost:5432/vote"
+              username="userVote"
               password="password"
               driverClassName="org.postgresql.Driver"
               validationQuery="SELECT 1"

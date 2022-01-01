@@ -3,7 +3,7 @@ package ru.vote.web.user;
 import org.springframework.stereotype.Controller;
 import ru.vote.model.User;
 
-import static ru.vote.web.SecurityUtil.authUserId;
+import static ru.vote.util.SecurityUtil.authUserId;
 
 @Controller
 public class ProfileRestController extends AbstractUserController {

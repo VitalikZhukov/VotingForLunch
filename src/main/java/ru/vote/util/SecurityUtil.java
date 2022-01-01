@@ -1,4 +1,4 @@
-package ru.vote.web;
+package ru.vote.util;
 
 // stub until I deploy Spring Security
 // returns SEQUENCE as validation for user ID

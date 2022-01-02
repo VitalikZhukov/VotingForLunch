@@ -8,8 +8,6 @@ import ru.vote.service.RestaurantService;
 
 import java.util.List;
 
-import static ru.vote.util.ValidationUtil.checkNotFoundWithId;
-
 public abstract class AbstractRestaurantController {
     private final Logger log = LoggerFactory.getLogger(getClass());
 

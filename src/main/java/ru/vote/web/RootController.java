@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import ru.vote.service.MenuService;
 import ru.vote.service.RestaurantService;
 import ru.vote.service.UserService;
 import ru.vote.util.SecurityUtil;
@@ -22,6 +23,9 @@ public class RootController {
 
     @Autowired
     private RestaurantService restaurantService;
+
+    @Autowired
+    private MenuService menuService;
 
     @GetMapping("/")
     public String root() {
@@ -40,6 +44,7 @@ public class RootController {
     public String getRestaurants(Model model) {
         log.info("restaurants");
         model.addAttribute("restaurants", restaurantService.getAll());
+        model.addAttribute("menus", menuService.getAll());
         return "restaurants";
     }
 

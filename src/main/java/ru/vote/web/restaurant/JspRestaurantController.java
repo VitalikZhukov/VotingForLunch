@@ -13,7 +13,6 @@ import ru.vote.web.menu.MenuRestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 @Controller
@@ -28,48 +27,50 @@ public class JspRestaurantController extends AbstractRestaurantController{
         return Integer.parseInt(paramId);
     }
 
+    public int getMenuId(HttpServletRequest request, String paramName) {
+        String paramId = Objects.requireNonNull(request.getParameter(paramName));
+        return Integer.parseInt(paramId);
+    }
+
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("restaurant", new Restaurant("Enter restaurant name", 0));
+        model.addAttribute("menu1", new Menu("Dish #1", 0.0));
+        model.addAttribute("menu2", new Menu("Dish #2", 0.0));
+        model.addAttribute("menu3", new Menu("Dish #3", 0.0));
         return "restaurantForm";
     }
 
     @GetMapping("/update")
     public String update(HttpServletRequest request, Model model) {
         model.addAttribute("restaurant", super.get(getId(request)));
-
+        List<Menu> menuList = menuRestController.getListByRestaurantId(getId(request));
+        for (int i = 0; i < menuList.size(); i++) {
+            model.addAttribute("menu" + (i + 1), menuList.get(i));
+        }
         return "restaurantForm";
     }
 
     @GetMapping("/delete")
     public String delete(HttpServletRequest request) {
         super.delete(getId(request));
+        menuRestController.deleteAllByRestaurantId(getId(request));
         return "redirect:/restaurants";
     }
 
     @PostMapping
     public String updateOrCreate(HttpServletRequest request) {
         Restaurant restaurant = new Restaurant(request.getParameter("name"));
-        Integer id = request.getParameter("id").isEmpty() ? null : Integer.valueOf(request.getParameter("id"));
-        Menu menu1 = new Menu(id, request.getParameter("dish1"), Double.parseDouble(request.getParameter("price1")));
-        Menu menu2 = new Menu(id, request.getParameter("dish2"), Double.parseDouble(request.getParameter("price2")));
-        Menu menu3 = new Menu(id, request.getParameter("dish3"), Double.parseDouble(request.getParameter("price3")));
+        Menu menu1 = new Menu(request.getParameter("dish1"), Double.parseDouble(request.getParameter("price1")));
+        Menu menu2 = new Menu(request.getParameter("dish2"), Double.parseDouble(request.getParameter("price2")));
+        Menu menu3 = new Menu(request.getParameter("dish3"), Double.parseDouble(request.getParameter("price3")));
 
-        Map<String, String[]> map = request.getParameterMap();
-
-        for (Map.Entry<String, String[]> parse : map.entrySet()) {
-            System.out.print(parse.getKey() + " : ");
-            for (String str : parse.getValue()) {
-                System.out.print(str + ", ");
-            }
-            System.out.println();
-        }
-
-
-        if (id == null) {
+        if (request.getParameter("id").isEmpty()) {
             Restaurant newRestaurant = super.create(restaurant);
+
             Integer restaurantId = newRestaurant.getId();
             ValidationUtil.checkNotFound(restaurantId);
+
             menu1.setRestaurantId(restaurantId);
             menu2.setRestaurantId(restaurantId);
             menu3.setRestaurantId(restaurantId);
@@ -77,9 +78,15 @@ public class JspRestaurantController extends AbstractRestaurantController{
             menuRestController.create(menu2);
             menuRestController.create(menu3);
         } else {
-            super.update(restaurant, getId(request));
-            //take the menu list by restaurantId, go through it and update
-            //checking for new / not new menu
+            int restaurantId = getId(request);
+            super.update(restaurant, restaurantId);
+
+            menu1.setRestaurantId(restaurantId);
+            menu2.setRestaurantId(restaurantId);
+            menu3.setRestaurantId(restaurantId);
+            menuRestController.update(menu1, getMenuId(request, "menuId1"));
+            menuRestController.update(menu2, getMenuId(request, "menuId2"));
+            menuRestController.update(menu3, getMenuId(request, "menuId3"));
         }
         return "redirect:/restaurants";
     }

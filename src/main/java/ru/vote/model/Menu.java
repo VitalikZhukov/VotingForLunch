@@ -45,6 +45,11 @@ public class Menu extends AbstractModel {
         this.restaurantId = restaurantId;
     }
 
+    public Menu(String dish, Double price) {
+        this.dish = dish;
+        this.price = price;
+    }
+
     public Menu(Integer restaurantId, String dish, Double price) {
         this.restaurantId = restaurantId;
         this.dish = dish;

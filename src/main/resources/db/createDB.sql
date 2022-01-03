@@ -38,5 +38,5 @@ CREATE TABLE menu
     id              INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
     restaurant_id   INTEGER                             NOT NULL,
     dish            VARCHAR                             NOT NULL,
-    price           REAL                                NOT NULL
+    price           NUMERIC                             NOT NULL
 );

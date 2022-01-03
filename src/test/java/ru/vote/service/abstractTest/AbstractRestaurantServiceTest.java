@@ -1,4 +1,4 @@
-package ru.vote.web.abstractTest;
+package ru.vote.service.abstractTest;
 
 import org.junit.Assume;
 import org.junit.Before;
@@ -15,7 +15,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 import static ru.vote.RestaurantTestData.*;
 
-public abstract class AbstractRestaurantRestControllerTest extends AbstractRestControllerTest {
+public abstract class AbstractRestaurantServiceTest extends AbstractServiceTest {
 
     @Autowired
     private RestaurantService restaurantService;

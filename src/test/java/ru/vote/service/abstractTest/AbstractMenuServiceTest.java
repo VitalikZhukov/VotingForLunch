@@ -1,4 +1,4 @@
-package ru.vote.web.abstractTest;
+package ru.vote.service.abstractTest;
 
 import org.junit.Assume;
 import org.junit.Before;
@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 import static ru.vote.MenuTestData.*;
 
 
-public abstract class AbstractMenuRestControllerTest extends AbstractRestControllerTest {
+public abstract class AbstractMenuServiceTest extends AbstractServiceTest {
 
     @Autowired
     private MenuService menuService;

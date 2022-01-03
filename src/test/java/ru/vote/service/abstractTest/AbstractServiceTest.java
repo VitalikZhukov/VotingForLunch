@@ -1,4 +1,4 @@
-package ru.vote.web.abstractTest;
+package ru.vote.service.abstractTest;
 
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ import static ru.vote.util.ValidationUtil.getRootCause;
 @RunWith(SpringRunner.class)
 @Sql(scripts = "classpath:db/initDB.sql", config = @SqlConfig(encoding = "UTF-8"))
 @ActiveProfiles(resolver = ActiveDbProfileResolver.class)
-public abstract class AbstractRestControllerTest {
+public abstract class AbstractServiceTest {
 
     @Autowired
     public Environment env;

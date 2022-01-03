@@ -1,11 +1,10 @@
-package ru.vote.web.abstractTest;
+package ru.vote.service.abstractTest;
 
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
-import ru.vote.UserTestData;
 import ru.vote.model.Role;
 import ru.vote.model.User;
 import ru.vote.service.UserService;
@@ -18,7 +17,7 @@ import static org.junit.Assert.*;
 import static ru.vote.UserTestData.*;
 import static ru.vote.UserTestData.NOT_FOUND;
 
-public abstract class AbstractAdminRestControllerTest extends AbstractRestControllerTest {
+public abstract class AbstractUserServiceTest extends AbstractServiceTest {
 
     @Autowired
     private UserService userService;

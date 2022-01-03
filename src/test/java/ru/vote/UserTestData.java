@@ -8,7 +8,7 @@ import java.util.Collections;
 import static ru.vote.model.AbstractModel.START_SEQ;
 
 public class UserTestData {
-    public static final MatcherFactory.Matcher<User> USER_MATCHER = MatcherFactory.usingIgnoringFieldsComparator("registered", "roles", "checkTimeVote");
+    public static final MatcherFactory.Matcher<User> USER_MATCHER = MatcherFactory.usingIgnoringFieldsComparator("registered", "checkTimeVote");
 
     public static final int USER_ID = START_SEQ;
     public static final int USER_ID_SECOND = START_SEQ + 1;
@@ -17,7 +17,7 @@ public class UserTestData {
 
     public static final User user = new User(USER_ID, "User1", "1@tut.by", "Password1", 10000, Role.USER);
     public static final User user2 = new User(USER_ID_SECOND, "User2", "2@tut.by", "Password2", 10001, Role.USER);
-    public static final User admin = new User(ADMIN_ID, "Admin", "admin@tut.by", "Password", null, Role.ADMIN);
+    public static final User admin = new User(ADMIN_ID, "Admin", "admin@tut.by", "Password", null, Role.ADMIN, Role.USER);
 
     public static User getNew() {
         return new User(null, "NewName", "new@tut.by", "NewPass", 50, Role.USER);

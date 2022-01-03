@@ -12,6 +12,7 @@ VALUES ('User1', 'Password1', '1@tut.by', 10000),
 INSERT INTO user_roles (user_id, role)
 VALUES (10000, 'USER'),
        (10001, 'USER'),
+       (10002, 'USER'),
        (10002, 'ADMIN');
 
 INSERT INTO restaurants (name, vote_counter)

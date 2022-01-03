@@ -56,8 +56,8 @@ public abstract class AbstractAdminRestControllerTest extends AbstractRestContro
 
     @Test
     public void get() {
-        User user = userService.get(USER_ID);
-        USER_MATCHER.assertMatch(user, UserTestData.user);
+        User user = userService.get(ADMIN_ID);
+        USER_MATCHER.assertMatch(user, admin);
     }
 
     @Test

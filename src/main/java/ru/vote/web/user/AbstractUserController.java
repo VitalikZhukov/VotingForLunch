@@ -37,7 +37,7 @@ public abstract class AbstractUserController {
 
     public void update(User user, int id) {
         log.info("update {} id = {}", user, id);
-        userService.update(user, id);
+        userService.update(user);
     }
 
     public void delete(int id) {

@@ -30,12 +30,6 @@ public class Restaurant extends AbstractModel {
     @NotNull
     private Integer voteCounter;
 
-    @Transient
-    private String menu;
-
-    @Transient
-    private String price;
-
     public Restaurant() {}
 
     //copy constructor
@@ -80,22 +74,6 @@ public class Restaurant extends AbstractModel {
 
     public void setVoteCounter(Integer voteCounter) {
         this.voteCounter = voteCounter;
-    }
-
-    public String getMenu() {
-        return menu;
-    }
-
-    public void setMenu(String menu) {
-        this.menu = menu;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
     }
 
     @Override

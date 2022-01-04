@@ -1,6 +1,5 @@
 package ru.vote.service.abstractTest;
 
-import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +42,7 @@ public abstract class AbstractUserServiceTest extends AbstractServiceTest {
     @Test
     public void update() {
         User updated = getUpdated();
-        userService.update(updated, updated.getId());
+        userService.update(updated);
         USER_MATCHER.assertMatch(userService.get(USER_ID), getUpdated());
     }
 
@@ -83,7 +82,6 @@ public abstract class AbstractUserServiceTest extends AbstractServiceTest {
 
     @Test
     public void createWithException() throws Exception {
-        Assume.assumeTrue("Validation not supported (JPA only)", isJpaBased());
         validateRootCause(ConstraintViolationException.class, () -> userService.create(new User(null, " ", "mail@tut.by", "password", 10000, Role.USER)));
         validateRootCause(ConstraintViolationException.class, () -> userService.create(new User(null, "User", " ", "password", 10000, Role.USER)));
         validateRootCause(ConstraintViolationException.class, () -> userService.create(new User(null, "User", "mail@tut.by", " ", 10000, Role.USER)));

@@ -14,6 +14,7 @@ import org.springframework.util.CollectionUtils;
 import ru.vote.model.Role;
 import ru.vote.model.User;
 import ru.vote.repository.UserRepository;
+import ru.vote.util.ValidationUtil;
 
 import java.util.*;
 
@@ -41,6 +42,8 @@ public class JdbcUserRepository implements UserRepository {
     @Override
     @Transactional
     public User save(User user) {
+        ValidationUtil.validate(user);
+
         BeanPropertySqlParameterSource parameterSource = new BeanPropertySqlParameterSource(user);
 
         if (user.isNew()) {
@@ -49,8 +52,8 @@ public class JdbcUserRepository implements UserRepository {
             insertRoles(user);
         } else {
             if (jdbcNamed.update("""
-                       UPDATE users SET login=:login, email=:email, password=:password, 
-                       registered=:registered, enabled=:enabled WHERE id=:id
+                       UPDATE users SET login=:login, password=:password, email=:email, registered=:registered, 
+                       enabled=:enabled, restaurant_id=:restaurantId WHERE id=:id
                     """, parameterSource) == 0) {
                 return null;
             }

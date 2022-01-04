@@ -3,6 +3,7 @@ package ru.vote.service;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import ru.vote.model.User;
 import ru.vote.repository.UserRepository;
 
@@ -38,9 +39,9 @@ public class UserService {
     }
 
     @CacheEvict(value = "usersCache", allEntries = true)
-    public void update(User user, int id) {
-        assureIdConsistent(user, id);
-        repository.save(user);
+    public void update(User user) {
+        Assert.notNull(user, "user must not be null");
+        checkNotFoundWithId(repository.save(user), user.id());
     }
 
     @CacheEvict(value = "usersCache", allEntries = true)

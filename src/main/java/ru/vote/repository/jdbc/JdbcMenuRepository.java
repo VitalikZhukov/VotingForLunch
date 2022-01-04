@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.vote.model.Menu;
 import ru.vote.repository.MenuRepository;
+import ru.vote.util.ValidationUtil;
 
 import java.util.List;
 
@@ -37,6 +38,8 @@ public class JdbcMenuRepository implements MenuRepository {
     @Override
     @Transactional
     public Menu save(Menu menu) {
+        ValidationUtil.validate(menu);
+
         MapSqlParameterSource map = new MapSqlParameterSource()
                 .addValue("id", menu.getId())
                 .addValue("restaurant_id", menu.getRestaurantId())
@@ -76,6 +79,7 @@ public class JdbcMenuRepository implements MenuRepository {
     }
 
     @Override
+    @Transactional
     public boolean deleteAllByRestaurantId(int restaurantId) {
         return jdbcTemplate.update("DELETE FROM menu WHERE restaurant_id=?", restaurantId) != 0;
     }

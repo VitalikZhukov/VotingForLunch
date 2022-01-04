@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.vote.model.Restaurant;
 import ru.vote.repository.RestaurantRepository;
+import ru.vote.util.ValidationUtil;
 
 import java.util.List;
 
@@ -41,6 +42,8 @@ public class JdbcRestaurantRepository implements RestaurantRepository {
     @Override
     @Transactional
     public Restaurant save(Restaurant restaurant) {
+        ValidationUtil.validate(restaurant);
+
         MapSqlParameterSource map = new MapSqlParameterSource()
                 .addValue("id", restaurant.getId())
                 .addValue("name", restaurant.getName())
@@ -76,6 +79,7 @@ public class JdbcRestaurantRepository implements RestaurantRepository {
     }
 
     @Override
+    @Transactional
     public boolean incrementVoteCounter(int id) {
         int voteCounter = get(id).getVoteCounter();
         voteCounter++;

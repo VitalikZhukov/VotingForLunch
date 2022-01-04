@@ -1,6 +1,5 @@
 package ru.vote.service.abstractTest;
 
-import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,7 +87,6 @@ public abstract class AbstractRestaurantServiceTest extends AbstractServiceTest 
 
     @Test
     public void createWithException() throws Exception {
-        Assume.assumeTrue("Validation not supported (JPA only)", isJpaBased());
         validateRootCause(ConstraintViolationException.class, () -> restaurantService.create(new Restaurant(null, " ", 5)));
         validateRootCause(ConstraintViolationException.class, () -> restaurantService.create(new Restaurant(null, "Restaurant", null)));
     }

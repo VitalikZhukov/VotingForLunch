@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.vote.model.Restaurant;
 import ru.vote.repository.RestaurantRepository;
 
@@ -15,6 +16,7 @@ import java.util.List;
 
 
 @Repository
+@Transactional(readOnly = true)
 public class JdbcRestaurantRepository implements RestaurantRepository {
     //logging in the controller
 
@@ -37,6 +39,7 @@ public class JdbcRestaurantRepository implements RestaurantRepository {
 
 
     @Override
+    @Transactional
     public Restaurant save(Restaurant restaurant) {
         MapSqlParameterSource map = new MapSqlParameterSource()
                 .addValue("id", restaurant.getId())
@@ -54,6 +57,7 @@ public class JdbcRestaurantRepository implements RestaurantRepository {
     }
 
     @Override
+    @Transactional
     public boolean delete(int id) {
         return jdbcTemplate.update("DELETE FROM restaurants WHERE id=?", id) != 0;
     }

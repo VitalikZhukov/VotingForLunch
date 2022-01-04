@@ -8,12 +8,14 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.vote.model.Menu;
 import ru.vote.repository.MenuRepository;
 
 import java.util.List;
 
 @Repository
+@Transactional(readOnly = true)
 public class JdbcMenuRepository implements MenuRepository {
     private static final BeanPropertyRowMapper<Menu> ROW_MAPPER_MENU = BeanPropertyRowMapper.newInstance(Menu.class);
 
@@ -33,6 +35,7 @@ public class JdbcMenuRepository implements MenuRepository {
     }
 
     @Override
+    @Transactional
     public Menu save(Menu menu) {
         MapSqlParameterSource map = new MapSqlParameterSource()
                 .addValue("id", menu.getId())
@@ -67,6 +70,7 @@ public class JdbcMenuRepository implements MenuRepository {
     }
 
     @Override
+    @Transactional
     public boolean delete(int id) {
         return jdbcTemplate.update("DELETE FROM menu WHERE id=?", id) != 0;
     }

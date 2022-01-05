@@ -6,5 +6,5 @@ import ru.vote.service.abstractTest.AbstractMenuServiceTest;
 import static ru.vote.Profiles.JDBC;
 
 @ActiveProfiles(JDBC)
-public class JdbcMenuServiceTest extends AbstractMenuServiceTest {
+class JdbcMenuServiceTest extends AbstractMenuServiceTest {
 }

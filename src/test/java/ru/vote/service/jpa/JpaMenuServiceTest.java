@@ -6,5 +6,5 @@ import ru.vote.service.abstractTest.AbstractMenuServiceTest;
 import static ru.vote.Profiles.JPA;
 
 @ActiveProfiles(JPA)
-public class JpaMenuServiceTest extends AbstractMenuServiceTest {
+class JpaMenuServiceTest extends AbstractMenuServiceTest {
 }

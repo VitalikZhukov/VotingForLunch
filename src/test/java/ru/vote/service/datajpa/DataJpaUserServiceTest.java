@@ -6,5 +6,5 @@ import ru.vote.service.abstractTest.AbstractUserServiceTest;
 import static ru.vote.Profiles.DATAJPA;
 
 @ActiveProfiles(DATAJPA)
-public class DataJpaUserServiceTest extends AbstractUserServiceTest {
+class DataJpaUserServiceTest extends AbstractUserServiceTest {
 }

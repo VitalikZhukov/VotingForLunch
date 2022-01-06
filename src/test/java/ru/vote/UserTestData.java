@@ -8,7 +8,7 @@ import java.util.Collections;
 import static ru.vote.model.AbstractModel.START_SEQ;
 
 public class UserTestData {
-    public static final MatcherFactory.Matcher<User> USER_MATCHER = MatcherFactory.usingIgnoringFieldsComparator("registered", "checkTimeVote");
+    public static final MatcherFactory.Matcher<User> USER_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(User.class, "registered", "checkTimeVote");
 
     public static final int USER_ID = START_SEQ;
     public static final int USER_ID_SECOND = START_SEQ + 1;

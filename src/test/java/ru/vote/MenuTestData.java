@@ -5,7 +5,7 @@ import ru.vote.model.Menu;
 import static ru.vote.model.AbstractModel.START_SEQ;
 
 public class MenuTestData {
-    public static final MatcherFactory.Matcher<Menu> MENU_MATCHER = MatcherFactory.usingIgnoringFieldsComparator("");
+    public static final MatcherFactory.Matcher<Menu> MENU_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(Menu.class, "");
 
     public static final int MENU_ID = START_SEQ + 5;
     public static final int RESTAURANT_ID = START_SEQ + 3;

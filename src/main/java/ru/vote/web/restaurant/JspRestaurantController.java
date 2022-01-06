@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Controller
-@RequestMapping("restaurants")
+@RequestMapping("/restaurants")
 public class JspRestaurantController extends AbstractRestaurantController{
 
     @Autowired

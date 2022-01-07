@@ -29,12 +29,14 @@ public class RestaurantRestController  extends AbstractRestaurantController{
 
     @Override
     @GetMapping("/{id}")
+    @ResponseBody
     public Restaurant get(@PathVariable int id) {
         return super.get(id);
     }
 
     @Override
     @GetMapping
+    @ResponseBody
     public List<Restaurant> getAll() {
         return super.getAll();
     }

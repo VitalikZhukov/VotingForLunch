@@ -50,10 +50,8 @@
             <dt><spring:message code="restaurant.price3"/>:</dt>
             <dd><input type="text" value="${menu3.price}" name="price3" required></dd>
         </dl>
-        <dl>
-            <button type="submit"><spring:message code="common.save"/></button>
-            <button onclick="window.history.back()" type="button"><spring:message code="common.cancel"/></button>
-        </dl>
+        <button type="submit"><spring:message code="common.save"/></button>
+        <button onclick="window.history.back()" type="button"><spring:message code="common.cancel"/></button>
     </form>
 </section>
 </body>

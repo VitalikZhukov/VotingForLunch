@@ -13,6 +13,7 @@ import ru.vote.web.menu.MenuRestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @Controller
@@ -22,13 +23,8 @@ public class JspRestaurantController extends AbstractRestaurantController{
     @Autowired
     private MenuRestController menuRestController;
 
-    public int getId(HttpServletRequest request) {
+    public int getId(HttpServletRequest request, String paramName) {
         String paramId = Objects.requireNonNull(request.getParameter("id"));
-        return Integer.parseInt(paramId);
-    }
-
-    public int getMenuId(HttpServletRequest request, String paramName) {
-        String paramId = Objects.requireNonNull(request.getParameter(paramName));
         return Integer.parseInt(paramId);
     }
 
@@ -43,8 +39,8 @@ public class JspRestaurantController extends AbstractRestaurantController{
 
     @GetMapping("/update")
     public String update(HttpServletRequest request, Model model) {
-        model.addAttribute("restaurant", super.get(getId(request)));
-        List<Menu> menuList = menuRestController.getListByRestaurantId(getId(request));
+        model.addAttribute("restaurant", super.get(getId(request, "id")));
+        List<Menu> menuList = menuRestController.getListByRestaurantId(getId(request, "id"));
         for (int i = 0; i < menuList.size(); i++) {
             model.addAttribute("menu" + (i + 1), menuList.get(i));
         }
@@ -53,13 +49,20 @@ public class JspRestaurantController extends AbstractRestaurantController{
 
     @GetMapping("/delete")
     public String delete(HttpServletRequest request) {
-        super.delete(getId(request));
-        menuRestController.deleteAllByRestaurantId(getId(request));
+        super.delete(getId(request, "id"));
+        menuRestController.deleteAllByRestaurantId(getId(request, "id"));
         return "redirect:/restaurants";
     }
 
     @PostMapping
     public String updateOrCreate(HttpServletRequest request) {
+
+        String voteId = request.getParameter("vote");
+        if(voteId != null) {
+            super.incrementVoteCounter(Integer.parseInt(voteId));
+            return "redirect:/restaurants";
+        }
+
         Restaurant restaurant = new Restaurant(request.getParameter("name"));
         Menu menu1 = new Menu(request.getParameter("dish1"), Double.parseDouble(request.getParameter("price1")));
         Menu menu2 = new Menu(request.getParameter("dish2"), Double.parseDouble(request.getParameter("price2")));
@@ -78,15 +81,15 @@ public class JspRestaurantController extends AbstractRestaurantController{
             menuRestController.create(menu2);
             menuRestController.create(menu3);
         } else {
-            int restaurantId = getId(request);
+            int restaurantId = getId(request, "id");
             super.update(restaurant, restaurantId);
 
             menu1.setRestaurantId(restaurantId);
             menu2.setRestaurantId(restaurantId);
             menu3.setRestaurantId(restaurantId);
-            menuRestController.update(menu1, getMenuId(request, "menuId1"));
-            menuRestController.update(menu2, getMenuId(request, "menuId2"));
-            menuRestController.update(menu3, getMenuId(request, "menuId3"));
+            menuRestController.update(menu1, getId(request, "menuId1"));
+            menuRestController.update(menu2, getId(request, "menuId2"));
+            menuRestController.update(menu3, getId(request, "menuId3"));
         }
         return "redirect:/restaurants";
     }

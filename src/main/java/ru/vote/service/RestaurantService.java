@@ -28,7 +28,7 @@ public class RestaurantService {
         return checkNotFoundWithId(repository.get(id), id);
     }
 
-    @Cacheable("restaurantsCache")
+//    @Cacheable("restaurantsCache")
     public List<Restaurant> getAll() {
         return checkNotFound(repository.getAll());
     }

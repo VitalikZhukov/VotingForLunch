@@ -33,7 +33,7 @@ public class MenuService {
         return checkNotFound(repository.getListByRestaurantId(restaurantId));
     }
 
-    @Cacheable("menuCache")
+//    @Cacheable("menuCache")
     public List<Menu> getAll() {
         return checkNotFound(repository.getAll());
     }

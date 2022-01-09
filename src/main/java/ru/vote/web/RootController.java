@@ -35,14 +35,14 @@ public class RootController {
 
     @GetMapping("/users")
     public String getUsers(Model model) {
-        log.info("users");
+        log.info("root getUsers");
         model.addAttribute("users", userService.getAll());
         return "users";
     }
 
     @GetMapping("/restaurants")
     public String getRestaurants(Model model) {
-        log.info("restaurants");
+        log.info("root getRestaurants");
         model.addAttribute("restaurants", restaurantService.getAll());
         model.addAttribute("menus", menuService.getAll());
         return "restaurants";
@@ -51,7 +51,7 @@ public class RootController {
     @PostMapping("/users")
     public String setUser(HttpServletRequest request) {
         int userId = Integer.parseInt(request.getParameter("userId"));
-        log.info("setUser {}", userId);
+        log.info("root setUser {}", userId);
         SecurityUtil.setAuthUserId(userId);
         return "redirect:restaurants";
     }

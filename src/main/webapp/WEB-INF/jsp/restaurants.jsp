@@ -12,7 +12,7 @@
     <h2><spring:message code="restaurant.title"/></h2>
     <br>
 
-    <h4>Your choose: ${requestScope.choose}</h4>
+    <h4><spring:message code="restaurant.choose"/> </h4>
     <br>
 
     <a href="restaurants/create"><spring:message code="restaurant.add"/></a>
@@ -51,7 +51,7 @@
 
         </table>
         <br>
-        <button type="submit">Vote</button>
+        <button type="submit"><spring:message code="restaurant.vote"/></button>
         </form>
 </section>
 </body>

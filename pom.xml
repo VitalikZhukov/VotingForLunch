@@ -29,7 +29,8 @@
         <jstl.version>1.2</jstl.version>
         <!--    Spring  -->
         <spring.version>5.3.13</spring.version>
-        <spring-data-jpa.version>2.5.6</spring-data-jpa.version>
+        <spring-data-jpa.version>2.6.0</spring-data-jpa.version>
+        <spring.security.version>5.6.0</spring.security.version>
         <!--    Tests  -->
         <junit.jupiter.version>5.8.1</junit.jupiter.version>
         <assertj.version>3.21.0</assertj.version>
@@ -197,6 +198,18 @@
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
             <version>${spring-data-jpa.version}</version>
+        </dependency>
+
+                        <!--Security-->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.security.version}</version>
         </dependency>
 
                         <!--- Hibernate -->

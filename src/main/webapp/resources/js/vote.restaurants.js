@@ -1,33 +1,41 @@
-const userAjaxUrl = "admin/users/";
+const restaurantAjaxUrl = "profile/restaurants";
 
-// https://stackoverflow.com/a/5064235/548473
 const ctx = {
-    ajaxUrl: userAjaxUrl,
+    ajaxUrl: restaurantAjaxUrl,
     updateTable: function () {
-        $.get(userAjaxUrl, updateTableByData);
+        $.ajax({
+            type: "GET",
+            url: restaurantAjaxUrl
+        });
     }
 }
 
-$(function () {
+(function () {
     makeEditable(
         $("#datatable").DataTable({
             "paging": false,
             "info": true,
             "columns": [
                 {
-                    "data": "login"
+                    "data": "name"
                 },
                 {
-                    "data": "email"
+                    "data": "dish1"
                 },
                 {
-                    "data": "roles"
+                    "data": "price1"
                 },
                 {
-                    "data": "enabled"
+                    "data": "dish2"
                 },
                 {
-                    "data": "registered"
+                    "data": "price2"
+                },
+                {
+                    "data": "dish3"
+                },
+                {
+                    "data": "price3"
                 },
                 {
                     "defaultContent": "Edit",
@@ -41,7 +49,7 @@ $(function () {
             "order": [
                 [
                     0,
-                    "asc"
+                    "desc"
                 ]
             ]
         })

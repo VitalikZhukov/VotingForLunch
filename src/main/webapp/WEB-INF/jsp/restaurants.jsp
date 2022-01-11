@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<html lang="ru">
+<html>
 <jsp:include page="fragments/headTag.jsp"/>
 <body>
 <script type="text/javascript" src="resources/js/vote.common.js" defer></script>
@@ -11,19 +11,18 @@
 
 <div class="jumbotron pt-4">
     <div class="container">
-    <h2><spring:message code="restaurant.title"/></h2>
-    <br>
-
+    <h3 class="text-center"><spring:message code="restaurant.title"/></h3>
+        <br>
     <h4><spring:message code="restaurant.choose"/> </h4>
-    <br>
-
+        <br>
         <button class="btn btn-primary" onclick="add()">
             <span class="fa fa-plus"></span>
             <spring:message code="common.add"/>
         </button>
-    <br>
+        <br>
 
-        <table class="table table-striped" id="datatable">
+        <form>
+        <table class="table table-bordered" id="datatable">
             <thead>
             <tr>
                 <th></th>
@@ -54,7 +53,6 @@
                     </c:forEach>--%>
                 </tr>
             </c:forEach>
-
         </table>
         <br>
         <button type="submit"><spring:message code="restaurant.vote"/></button>

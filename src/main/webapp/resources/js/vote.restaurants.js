@@ -1,12 +1,9 @@
-const restaurantAjaxUrl = "profile/restaurants";
+const restaurantAjaxUrl = "/profile/restaurants";
 
 const ctx = {
     ajaxUrl: restaurantAjaxUrl,
     updateTable: function () {
-        $.ajax({
-            type: "GET",
-            url: restaurantAjaxUrl
-        });
+        $.get(restaurantAjaxUrl, updateTableByData);
     }
 }
 

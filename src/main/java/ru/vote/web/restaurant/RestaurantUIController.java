@@ -18,7 +18,10 @@ public class RestaurantUIController extends AbstractRestaurantController{
 
     @PostMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void create(@RequestParam String name) {
+    public void create(@RequestParam String name,
+                       @RequestParam String dish1, @RequestParam String price1,
+                       @RequestParam String dish2, @RequestParam String price2,
+                       @RequestParam String dish3, @RequestParam String price3) {
         super.create(new Restaurant(null, name, 0));
     }
 

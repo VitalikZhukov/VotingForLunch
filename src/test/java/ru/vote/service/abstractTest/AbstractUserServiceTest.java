@@ -12,7 +12,7 @@ import ru.vote.util.exeption.NotFoundException;
 import javax.validation.ConstraintViolationException;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static ru.vote.UserTestData.*;
 
 public abstract class AbstractUserServiceTest extends AbstractServiceTest {
@@ -84,5 +84,13 @@ public abstract class AbstractUserServiceTest extends AbstractServiceTest {
         validateRootCause(ConstraintViolationException.class, () -> userService.create(new User(null, " ", "mail@tut.by", "password", 10000, Role.USER)));
         validateRootCause(ConstraintViolationException.class, () -> userService.create(new User(null, "User", " ", "password", 10000, Role.USER)));
         validateRootCause(ConstraintViolationException.class, () -> userService.create(new User(null, "User", "mail@tut.by", " ", 10000, Role.USER)));
+    }
+
+    @Test
+    void enable() {
+        userService.enable(USER_ID, false);
+        assertFalse(userService.get(USER_ID).isEnabled());
+        userService.enable(USER_ID, true);
+        assertTrue(userService.get(USER_ID).isEnabled());
     }
 }

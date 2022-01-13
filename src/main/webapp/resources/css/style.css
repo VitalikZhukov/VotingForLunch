@@ -1,3 +1,7 @@
 .fa {
     cursor: pointer;
 }
+
+tr[data-user-enabled="false"] {
+    opacity: 0.3;
+}

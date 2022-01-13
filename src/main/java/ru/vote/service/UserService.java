@@ -3,6 +3,7 @@ package ru.vote.service;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import ru.vote.model.User;
 import ru.vote.repository.UserRepository;
@@ -47,5 +48,12 @@ public class UserService {
     @CacheEvict(value = "usersCache", allEntries = true)
     public void delete(int id) {
         checkNotFoundWithId(repository.delete(id), id);
+    }
+
+    @Transactional
+    public void enable(int id, boolean enabled) {
+        User user = get(id);
+        user.setEnabled(enabled);
+        repository.save(user);  // !! need only for JDBC implementation
     }
 }

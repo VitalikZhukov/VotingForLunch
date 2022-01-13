@@ -5,6 +5,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.vote.model.Role;
 import ru.vote.model.User;
+import ru.vote.to.UserTo;
 
 import java.util.List;
 
@@ -27,10 +28,8 @@ public class AdminUIController extends AbstractUserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void create(@RequestParam String login,
-                       @RequestParam String email,
-                       @RequestParam String password) {
-        super.create(new User(null, login, email, password, null, Role.USER));
+    public void create(UserTo userTo) {
+        super.create(userTo);
     }
 
     @Override

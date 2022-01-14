@@ -1,7 +1,6 @@
 package ru.vote.to;
 
-public class UserTo {
-    private Integer id;
+public class UserTo extends BaseTo{
 
     private String login;
 
@@ -15,19 +14,11 @@ public class UserTo {
     }
 
     public UserTo(Integer id, String login, String email, String password, Integer restaurantId) {
-        this.id = id;
+        super(id);
         this.login = login;
         this.email = email;
         this.password = password;
         this.restaurantId = restaurantId;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getPassword() {
@@ -60,10 +51,6 @@ public class UserTo {
 
     public void setRestaurantId(Integer restaurantId) {
         this.restaurantId = restaurantId;
-    }
-
-    public boolean isNew() {
-        return id == null;
     }
 
     @Override

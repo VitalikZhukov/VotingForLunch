@@ -7,6 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import ru.vote.model.User;
 import ru.vote.repository.UserRepository;
+import ru.vote.to.UserTo;
+import ru.vote.util.UserUtil;
 
 import java.util.List;
 
@@ -22,7 +24,6 @@ public class UserService {
 
     @CacheEvict(value = "usersCache", allEntries = true)
     public User create(User user) {
-        checkNew(user);
         return repository.save(user);
     }
 
@@ -42,7 +43,16 @@ public class UserService {
     @CacheEvict(value = "usersCache", allEntries = true)
     public void update(User user) {
         Assert.notNull(user, "user must not be null");
-        checkNotFoundWithId(repository.save(user), user.id());
+//      checkNotFoundWithId : check works only for JDBC, disabled
+        repository.save(user);
+    }
+
+    @CacheEvict(value = "usersCache", allEntries = true)
+    @Transactional
+    public void update(UserTo userTo) {
+        User user = get(userTo.id());
+        User updatedUser = UserUtil.updateFromTo(user, userTo);
+        repository.save(updatedUser);   // !! need only for JDBC implementation
     }
 
     @CacheEvict(value = "usersCache", allEntries = true)

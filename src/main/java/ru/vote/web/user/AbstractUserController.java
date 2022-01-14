@@ -10,6 +10,9 @@ import ru.vote.util.UserUtil;
 
 import java.util.List;
 
+import static ru.vote.util.ValidationUtil.assureIdConsistent;
+import static ru.vote.util.ValidationUtil.checkNew;
+
 
 public abstract class AbstractUserController {
     protected final Logger log = LoggerFactory.getLogger(getClass());
@@ -18,11 +21,13 @@ public abstract class AbstractUserController {
     private UserService userService;
 
     public void create(UserTo userTo) {
-        create(UserUtil.createNewFromTo(userTo));
+        checkNew(userTo);
+        userService.create(UserUtil.createNewFromTo(userTo));
     }
 
     public User create(User user) {
         log.info("create {}", user);
+        checkNew(user);
         return userService.create(user);
     }
 
@@ -43,7 +48,14 @@ public abstract class AbstractUserController {
 
     public void update(User user, int id) {
         log.info("update {} id = {}", user, id);
+        assureIdConsistent(user, id);
         userService.update(user);
+    }
+
+    public void update(UserTo userTo, int id) {
+        log.info("update {} with id={}", userTo, id);
+        assureIdConsistent(userTo, id);
+        userService.update(userTo);
     }
 
     public void delete(int id) {

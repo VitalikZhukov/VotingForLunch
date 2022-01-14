@@ -1,13 +1,16 @@
-const restaurantAjaxUrl = "/profile/restaurants";
+const restaurantAjaxUrl = "profile/restaurants/";
 
 const ctx = {
     ajaxUrl: restaurantAjaxUrl,
     updateTable: function () {
-        $.get(restaurantAjaxUrl, updateTableByData);
+        $.ajax({
+            type: "GET",
+            url: restaurantAjaxUrl
+        }).done(updateTableByData);
     }
 }
 
-(function () {
+$(function () {
     makeEditable(
         $("#datatable").DataTable({
             "paging": false,

@@ -8,6 +8,9 @@ import ru.vote.model.AbstractModel;
 public class SecurityUtil {
     private static int id = AbstractModel.START_SEQ;
 
+    private SecurityUtil() {
+    }
+
     public static int authUserId() {
         return id;
     }

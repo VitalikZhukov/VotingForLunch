@@ -2,6 +2,7 @@ package ru.vote.util;
 
 import org.springframework.core.NestedExceptionUtils;
 import org.springframework.lang.NonNull;
+import ru.vote.HasId;
 import ru.vote.model.AbstractModel;
 import ru.vote.util.exeption.NotFoundException;
 
@@ -39,18 +40,18 @@ public class ValidationUtil {
         return object;
     }
 
-    public static void checkNew(AbstractModel model) {
-        if (!model.isNew()) {
-            throw new IllegalArgumentException(model + "must be new");
+    public static void checkNew(HasId bean) {
+        if (!bean.isNew()) {
+            throw new IllegalArgumentException(bean + " must be new (id=null)");
         }
     }
 
-    //http://stackoverflow.com/a/32728226/548473
-    public static void assureIdConsistent(AbstractModel model, int id) {
-        if (model.isNew()) {
-            model.setId(id);
-        } else if (model.getId() != id) {
-            throw new IllegalArgumentException(model + " must be with id=" + id);
+    public static void assureIdConsistent(HasId bean, int id) {
+//      conservative when you reply, but accept liberally (http://stackoverflow.com/a/32728226/548473)
+        if (bean.isNew()) {
+            bean.setId(id);
+        } else if (bean.id() != id) {
+            throw new IllegalArgumentException(bean + " must be with id=" + id);
         }
     }
 

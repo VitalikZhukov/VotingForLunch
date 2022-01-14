@@ -11,4 +11,12 @@ public class UserUtil {
     public static User createNewFromTo(UserTo userTo) {
         return new User(null, userTo.getLogin(), userTo.getEmail().toLowerCase(), userTo.getPassword(), userTo.getRestaurantId(), Role.USER);
     }
+
+    public static User updateFromTo(User user, UserTo userTo) {
+        user.setLogin(userTo.getLogin());
+        user.setEmail(userTo.getEmail().toLowerCase());
+        user.setPassword(userTo.getPassword());
+        user.setRestaurantId(userTo.getRestaurantId());
+        return user;
+    }
 }

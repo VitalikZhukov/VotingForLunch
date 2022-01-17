@@ -7,11 +7,11 @@ import static ru.vote.model.AbstractModel.START_SEQ;
 public class RestaurantTestData {
     public static final MatcherFactory.Matcher<Restaurant> RESTAURANT_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(Restaurant.class);
 
-    public static final int RESTAURANT_ID = START_SEQ + 3;
+    public static final int RESTAURANT_ID = START_SEQ + 2;
     public static final int VOTE_COUNTER = 8;
     public static final int NOT_FOUND = 10;
 
-    public static final Restaurant restaurant1 = new Restaurant(RESTAURANT_ID, "Brovar", 8);
+    public static final Restaurant restaurant1 = new Restaurant(RESTAURANT_ID, "Brovar", VOTE_COUNTER);
     public static final Restaurant restaurant2 = new Restaurant(RESTAURANT_ID + 1, "Lidbeer", 15);
 
     public static Restaurant getNew() {

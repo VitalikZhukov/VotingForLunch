@@ -7,8 +7,8 @@ import static ru.vote.model.AbstractModel.START_SEQ;
 public class MenuTestData {
     public static final MatcherFactory.Matcher<Menu> MENU_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(Menu.class, "");
 
-    public static final int MENU_ID = START_SEQ + 5;
-    public static final int RESTAURANT_ID = START_SEQ + 3;
+    public static final int MENU_ID = START_SEQ + 4;
+    public static final int RESTAURANT_ID = START_SEQ + 2;
     public static final int NOT_FOUND = 10;
 
     public static final Menu menu = new Menu(MENU_ID, "Dish1", 99.99);

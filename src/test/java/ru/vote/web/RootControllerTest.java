@@ -24,7 +24,7 @@ class RootControllerTest extends AbstractControllerTest {
                         new AssertionMatcher<List<User>>() {
                             @Override
                             public void assertion(List<User> actual) throws AssertionError {
-                                USER_MATCHER.assertMatch(actual, admin, user, user2);
+                                USER_MATCHER.assertMatch(actual, admin, user);
                             }
                         }
                 ));

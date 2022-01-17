@@ -11,12 +11,10 @@ public class UserTestData {
     public static final MatcherFactory.Matcher<User> USER_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(User.class, "registered", "checkTimeVote");
 
     public static final int USER_ID = START_SEQ;
-    public static final int USER_ID_SECOND = START_SEQ + 1;
-    public static final int ADMIN_ID = START_SEQ + 2;
+    public static final int ADMIN_ID = START_SEQ + 1;
     public static final int NOT_FOUND = 10;
 
-    public static final User user = new User(USER_ID, "User1", "1@tut.by", "Password1", null, Role.USER);
-    public static final User user2 = new User(USER_ID_SECOND, "User2", "2@tut.by", "Password2", null, Role.USER);
+    public static final User user = new User(USER_ID, "User", "1@tut.by", "Password1", null, Role.USER);
     public static final User admin = new User(ADMIN_ID, "Admin", "admin@tut.by", "Password", null, Role.ADMIN, Role.USER);
 
     public static User getNew() {

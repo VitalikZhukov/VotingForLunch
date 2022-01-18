@@ -1,11 +1,12 @@
-Design and implement a REST API using Hibernate/Spring/SpringMVC (or Spring-Boot) without frontend.
+This is my project, as close as possible to the Topjava internship. Created for a more detailed analysis of the studied technologies during the internship.
 
-The task is:
+Lunch Restaurant Voting System.
+The system has two roles: user and administrator. The user votes for the selected restaurant. The administrator can edit the list of restaurants and their menus.
 
-Build a voting system for deciding where to have lunch.
-
-2 types of users: admin and regular users Admin can input a restaurant and it's lunch menu of the day (2-5 items usually, just a dish name and price) Menu changes each day (admins do the updates) Users can vote on which restaurant they want to have lunch at Only one vote counted per user If user votes again the same day: If it is before 11:00 we assume that he changed his mind. If it is after 11:00 then it is too late, vote can't be changed Each restaurant provides a new menu each day.
-
-As a result, provide a link to github repository. It should contain the code, README.md with API documentation and couple curl commands to test it (better - link to Swagger).
-
-P.S.: Make sure everything works with latest version that is on github :) P.P.S.: Assume that your API will be used by a frontend developer to build frontend on top of that.
+Used technologies:
+- maven
+- servlet: tomcat
+- logging: slf4j and logback
+- database: postgres and hsqldb with work through jpa, jdbc, hibernate
+- test: JUnit5
+- spring: core, mvc, security

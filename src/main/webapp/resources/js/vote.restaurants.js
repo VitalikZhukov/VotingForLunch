@@ -5,7 +5,8 @@ const ctx = {
     updateTable: function () {
         $.ajax({
             type: "GET",
-            url: restaurantAjaxUrl
+            url: restaurantAjaxUrl + "filter",
+            data: $("#filter").serialize()
         }).done(updateTableByData);
     }
 }
@@ -17,33 +18,27 @@ $(function () {
             "info": true,
             "columns": [
                 {
-                    "data": "name"
-                },
-                {
-                    "data": "dish1"
-                },
-                {
-                    "data": "price1"
-                },
-                {
-                    "data": "dish2"
-                },
-                {
-                    "data": "price2"
-                },
-                {
-                    "data": "dish3"
-                },
-                {
-                    "data": "price3"
-                },
-                {
                     "defaultContent": "Edit",
                     "orderable": false
                 },
                 {
                     "defaultContent": "Delete",
                     "orderable": false
+                },
+                {
+                    "data": "vote"
+                },
+                {
+                    "data": "name"
+                },
+                {
+                    "data": "voteCounter"
+                },
+                {
+                    "data": "menu"
+                },
+                {
+                    "data": "price"
                 }
             ],
             "order": [

@@ -22,7 +22,7 @@
         <br>
 
         <form>
-        <table class="table table-bordered" id="datatable">
+        <table class="table table-bordered" id="datatable>
             <thead>
             <tr>
                 <th></th>
@@ -50,7 +50,7 @@
                                 <td>${menu.price}</td>
                             </tr>
                         </c:if>
-                    </c:forEach>--%>
+                    </c:forEach>
                 </tr>
             </c:forEach>
         </table>

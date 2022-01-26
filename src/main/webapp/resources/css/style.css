@@ -5,3 +5,11 @@
 tr[data-user-enabled="false"] {
     opacity: 0.3;
 }
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    margin-bottom: 60px !important;
+}

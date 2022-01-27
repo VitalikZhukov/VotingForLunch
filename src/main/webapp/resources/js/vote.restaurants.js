@@ -5,8 +5,7 @@ const ctx = {
     updateTable: function () {
         $.ajax({
             type: "GET",
-            url: restaurantAjaxUrl + "filter",
-            data: $("#filter").serialize()
+            url: restaurantAjaxUrl
         }).done(updateTableByData);
     }
 }
@@ -33,12 +32,12 @@ $(function () {
                 },
                 {
                     "data": "voteCounter"
+/*                },
+                {
+                    "data": "dish"
                 },
                 {
-                    "data": "menu"
-                },
-                {
-                    "data": "price"
+                    "data": "price"*/
                 }
             ],
             "order": [

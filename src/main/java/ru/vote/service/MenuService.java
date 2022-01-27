@@ -49,7 +49,7 @@ public class MenuService {
         checkNotFoundWithId(repository.delete(id), id);
     }
 
-    public void deleteAllByRestaurantId (int restaurant_id) {
-        checkNotFoundWithId(repository.deleteAllByRestaurantId(restaurant_id), restaurant_id);
+    public void deleteAllByRestaurantId (int restaurantId) {
+        checkNotFoundWithId(repository.deleteAllByRestaurantId(restaurantId), restaurantId);
     }
 }

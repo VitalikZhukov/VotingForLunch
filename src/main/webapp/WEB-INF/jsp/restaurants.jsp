@@ -22,35 +22,35 @@
         <br>
 
         <form>
-        <table class="table table-bordered" id="datatable>
+        <table class="table table-bordered" id="datatable">
             <thead>
             <tr>
-                <th></th>
-                <th></th>
                 <th><spring:message code="restaurant.vote"/></th>
                 <th><spring:message code="restaurant.name"/></th>
                 <th><spring:message code="restaurant.voteCounter"/></th>
-                <th><spring:message code="restaurant.menu"/></th>
-                <th><spring:message code="restaurant.price"/></th>
+                <th></th>
+                <th></th>
+<%--                <th><spring:message code="restaurant.menu"/></th>--%>
+<%--                <th><spring:message code="restaurant.price"/></th>--%>
             </tr>
             </thead>
 
             <c:forEach var="restaurant" items="${requestScope.restaurants}">
                 <jsp:useBean id="restaurant" type="ru.vote.model.Restaurant"/>
                 <tr>
-                    <td rowspan="3"><a><span class="fa fa-pencil"></span></a></td>
-                    <td rowspan="3"><a onclick="deleteRow(${restaurant.id})"><span class="fa fa-remove"></span></a></td>
-                    <td rowspan="3"><label><input type="radio" name="vote" value="${restaurant.id}"/></label></td>
-                    <td rowspan="3">${restaurant.name}</td>
-                    <td rowspan="3">${restaurant.voteCounter}</td>
-                    <c:forEach var="menu" items="${requestScope.menus}">
-                        <jsp:useBean id="menu" type="ru.vote.model.Menu"/>
-                        <c:if test="${menu.restaurantId == restaurant.id}">
-                                <td>${menu.dish}</td>
-                                <td>${menu.price}</td>
-                            </tr>
-                        </c:if>
-                    </c:forEach>
+                    <td><label><input type="radio" name="vote" value="${restaurant.id}"/></label></td>
+                    <td><a href="menus" >${restaurant.name}</a></td>
+                    <td>${restaurant.voteCounter}</td>
+                    <td><a><span class="fa fa-pencil"></span></a></td>
+                    <td><a onclick="deleteRow(${restaurant.id})"><span class="fa fa-remove"></span></a></td>
+<%--                    <c:forEach var="menu" items="${requestScope.menus}">--%>
+<%--                        <jsp:useBean id="menu" type="ru.vote.model.Menu"/>--%>
+<%--                        <c:if test="${menu.restaurantId == restaurant.id}">--%>
+<%--                                <td>${menu.dish}</td>--%>
+<%--                                <td>${menu.price}</td>--%>
+<%--                            </tr>--%>
+<%--                        </c:if>--%>
+<%--                    </c:forEach>--%>
                 </tr>
             </c:forEach>
         </table>

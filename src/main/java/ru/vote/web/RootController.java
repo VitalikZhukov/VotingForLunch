@@ -44,8 +44,14 @@ public class RootController {
     public String getRestaurants(Model model) {
         log.info("root getRestaurants");
         model.addAttribute("restaurants", restaurantService.getAll());
-        model.addAttribute("menus", menuService.getAll());
         return "restaurants";
+    }
+
+    @GetMapping("/menus")
+    public String getMenu(Model model) {
+        log.info("root menus");
+        model.addAttribute("menus", menuService.getAll());
+        return "menus";
     }
 
     @PostMapping("/users")

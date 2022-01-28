@@ -30,8 +30,6 @@
                 <th><spring:message code="restaurant.voteCounter"/></th>
                 <th></th>
                 <th></th>
-<%--                <th><spring:message code="restaurant.menu"/></th>--%>
-<%--                <th><spring:message code="restaurant.price"/></th>--%>
             </tr>
             </thead>
 
@@ -39,18 +37,10 @@
                 <jsp:useBean id="restaurant" type="ru.vote.model.Restaurant"/>
                 <tr>
                     <td><label><input type="radio" name="vote" value="${restaurant.id}"/></label></td>
-                    <td><a href="menus" >${restaurant.name}</a></td>
+                    <td><a href="menus?restaurantId=${restaurant.id}" >${restaurant.name}</a></td>
                     <td>${restaurant.voteCounter}</td>
                     <td><a><span class="fa fa-pencil"></span></a></td>
                     <td><a onclick="deleteRow(${restaurant.id})"><span class="fa fa-remove"></span></a></td>
-<%--                    <c:forEach var="menu" items="${requestScope.menus}">--%>
-<%--                        <jsp:useBean id="menu" type="ru.vote.model.Menu"/>--%>
-<%--                        <c:if test="${menu.restaurantId == restaurant.id}">--%>
-<%--                                <td>${menu.dish}</td>--%>
-<%--                                <td>${menu.price}</td>--%>
-<%--                            </tr>--%>
-<%--                        </c:if>--%>
-<%--                    </c:forEach>--%>
                 </tr>
             </c:forEach>
         </table>
@@ -76,42 +66,6 @@
                         <label for="name" class="col-form-label"><spring:message code="restaurant.name"/></label>
                         <input type="text" class="form-control" id="name" name="name"
                                placeholder="<spring:message code="restaurant.name"/>">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="dish1" class="col-form-label"><spring:message code="restaurant.dish1"/></label>
-                        <input type="text" class="form-control" id="dish1" name="dish1"
-                               placeholder="<spring:message code="restaurant.dish1"/>">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="price1" class="col-form-label"><spring:message code="restaurant.price1"/></label>
-                        <input type="text" class="form-control" id="price1" name="price1"
-                               placeholder="<spring:message code="restaurant.price1"/>">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="dish2" class="col-form-label"><spring:message code="restaurant.dish2"/></label>
-                        <input type="text" class="form-control" id="dish2" name="dish2"
-                               placeholder="<spring:message code="restaurant.dish2"/>">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="price2" class="col-form-label"><spring:message code="restaurant.price2"/></label>
-                        <input type="text" class="form-control" id="price2" name="price2"
-                               placeholder="<spring:message code="restaurant.price2"/>">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="dish3" class="col-form-label"><spring:message code="restaurant.dish3"/></label>
-                        <input type="text" class="form-control" id="dish3" name="dish3"
-                               placeholder="<spring:message code="restaurant.dish3"/>">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="price3" class="col-form-label"><spring:message code="restaurant.price3"/></label>
-                        <input type="text" class="form-control" id="price3" name="price3"
-                               placeholder="<spring:message code="restaurant.price3"/>">
                     </div>
 
                 </form>

@@ -1,11 +1,11 @@
-const restaurantAjaxUrl = "profile/restaurants/";
+const menuAjaxUrl = "profile/menus/";
 
 const ctx = {
-    ajaxUrl: restaurantAjaxUrl,
+    ajaxUrl: menuAjaxUrl,
     updateTable: function () {
         $.ajax({
             type: "GET",
-            url: restaurantAjaxUrl
+            url: menuAjaxUrl
         }).done(updateTableByData);
     }
 }
@@ -17,13 +17,13 @@ $(function () {
             "info": true,
             "columns": [
                 {
-                    "data": "vote"
+                    "data": "number"
                 },
                 {
-                    "data": "name"
+                    "data": "dish"
                 },
                 {
-                    "data": "voteCounter"
+                    "data": "price"
                 },
                 {
                     "defaultContent": "Edit",
@@ -42,4 +42,10 @@ $(function () {
             ]
         })
     );
+});
+
+$(function(){
+    $('table td:first-child').each(function (i) {
+        $(this).html(i+1);
+    });
 });

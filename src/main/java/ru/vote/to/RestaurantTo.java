@@ -1,12 +1,17 @@
 package ru.vote.to;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.beans.ConstructorProperties;
 import java.util.Objects;
 
 public class RestaurantTo extends BaseTo {
 
+    @NotBlank
+    @Size(min = 2, max = 100)
     private final String name;
 
+    @NotBlank
     private final int voteCounter;
 
     @ConstructorProperties({"id", "name", "voteCounter"})

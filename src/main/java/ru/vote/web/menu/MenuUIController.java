@@ -13,8 +13,8 @@ public class MenuUIController extends AbstractMenuController{
 
     @PostMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void create(@RequestParam String dish, @RequestParam double price) {
-        super.create(new Menu(null, dish, price));
+    public void create(@RequestParam String dish, @RequestParam double price, @RequestBody int restaurantId) {
+        super.create(new Menu(restaurantId, dish, price));
     }
 
     @Override

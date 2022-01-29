@@ -1,12 +1,17 @@
 package ru.vote.to;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.beans.ConstructorProperties;
 import java.util.Objects;
 
 public class MenuTo extends BaseTo {
 
+    @NotBlank
+    @Size(min = 2, max = 100)
     private final String dish;
 
+    @NotBlank
     private final double price;
 
     @ConstructorProperties({"id", "dish", "price"})

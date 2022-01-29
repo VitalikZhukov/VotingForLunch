@@ -19,14 +19,24 @@ class RootControllerTest extends AbstractControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("users"))
-                .andExpect(forwardedUrl("/WEB-INF/jsp/users.jsp"))
-                .andExpect(model().attribute("users",
-                        new AssertionMatcher<List<User>>() {
-                            @Override
-                            public void assertion(List<User> actual) throws AssertionError {
-                                USER_MATCHER.assertMatch(actual, admin, user);
-                            }
-                        }
-                ));
+                .andExpect(forwardedUrl("/WEB-INF/jsp/users.jsp"));
+    }
+
+    @Test
+    void getRestaurants() throws Exception {
+        perform(get("/restaurants"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(view().name("restaurants"))
+                .andExpect(forwardedUrl("/WEB-INF/jsp/restaurants.jsp"));
+    }
+
+    @Test
+    void getMenus() throws Exception {
+        perform(get("/menus"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(view().name("menus"))
+                .andExpect(forwardedUrl("/WEB-INF/jsp/menus.jsp"));
     }
 }

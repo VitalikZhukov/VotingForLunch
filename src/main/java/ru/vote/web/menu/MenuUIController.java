@@ -18,10 +18,16 @@ public class MenuUIController extends AbstractMenuController{
     }
 
     @Override
+    @GetMapping("/{id}")
+    public Menu get(@PathVariable int id) {
+        return super.get(id);
+    }
+
+/*    @Override
     @GetMapping("/{restaurantId}")
     public List<Menu> getListByRestaurantId(@PathVariable int restaurantId) {
         return super.getListByRestaurantId(restaurantId);
-    }
+    }*/
 
     @Override
     @DeleteMapping("/{id}")
@@ -30,10 +36,10 @@ public class MenuUIController extends AbstractMenuController{
         super.delete(id);
     }
 
-    @Override
+/*    @Override
     @DeleteMapping("/{restaurantId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteAllByRestaurantId(@PathVariable int restaurantId) {
         super.deleteAllByRestaurantId(restaurantId);
-    }
+    }*/
 }

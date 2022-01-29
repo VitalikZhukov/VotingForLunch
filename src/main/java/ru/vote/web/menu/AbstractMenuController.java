@@ -15,32 +15,37 @@ public class AbstractMenuController {
     private MenuService menuService;
 
     public Menu create(Menu menu) {
-        log.info("create{}", menu);
+        log.info("create menu {}", menu);
         return menuService.create(menu);
     }
 
-    public List<Menu> getListByRestaurantId(int restaurantId) {
-        log.info("getListByRestaurantId {}", restaurantId);
-        return menuService.getListByRestaurantId(restaurantId);
+    public Menu get(int id) {
+        log.info(("get menu {}"), id);
+        return menuService.get(id);
     }
 
+/*    public List<Menu> getListByRestaurantId(int restaurantId) {
+        log.info("getListByRestaurantId {}", restaurantId);
+        return menuService.getListByRestaurantId(restaurantId);
+    }*/
+
     public List<Menu> getAll() {
-        log.info("getAll");
+        log.info("getAll menus");
         return menuService.getAll();
     }
 
     public void update(Menu menu, int id) {
-        log.info("update{} id = {}", menu, id);
+        log.info("update menu {} id = {}", menu, id);
         menuService.update(menu, id);
     }
 
     public void delete(int id) {
-        log.info("delete {}", id);
+        log.info("delete menu {}", id);
         menuService.delete(id);
     }
 
-    public void deleteAllByRestaurantId (int restaurantId) {
+/*    public void deleteAllByRestaurantId (int restaurantId) {
         log.info("deleteAllByRestaurantId {}", restaurantId);
         menuService.deleteAllByRestaurantId(restaurantId);
-    }
+    }*/
 }

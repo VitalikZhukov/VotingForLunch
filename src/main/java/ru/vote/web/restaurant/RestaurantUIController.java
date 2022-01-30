@@ -2,9 +2,13 @@ package ru.vote.web.restaurant;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.vote.model.Restaurant;
+import ru.vote.util.ValidationUtil;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -13,8 +17,23 @@ public class RestaurantUIController extends AbstractRestaurantController{
 
     @PostMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void create(@RequestParam String name) {
-        super.create(new Restaurant(null, name, 0));
+    public ResponseEntity<String> createOrUpdate(@Valid Restaurant restaurant, BindingResult result) {
+        if (result.hasErrors()) {
+            return ValidationUtil.getErrorResponse(result);
+        }
+        restaurant.setVoteCounter(0);
+        if (restaurant.isNew()) {
+            super.create(restaurant);
+        } else {
+            super.update(restaurant, restaurant.getId());
+        }
+        return ResponseEntity.ok().build();
+    }
+
+    @Override
+    @GetMapping("/{id}")
+    public Restaurant get(@PathVariable int id) {
+        return super.get(id);
     }
 
     @Override

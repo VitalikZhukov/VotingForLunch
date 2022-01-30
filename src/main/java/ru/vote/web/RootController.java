@@ -14,9 +14,6 @@ public class RootController {
     private static final Logger log = LoggerFactory.getLogger(RootController.class);
 
     @Autowired
-    private RestaurantService restaurantService;
-
-    @Autowired
     private MenuService menuService;
 
     @GetMapping("/")
@@ -32,9 +29,8 @@ public class RootController {
     }
 
     @GetMapping("/restaurants")
-    public String getRestaurants(Model model) {
+    public String getRestaurants() {
         log.info("root getRestaurants");
-        model.addAttribute("restaurants", restaurantService.getAll());
         return "restaurants";
     }
 

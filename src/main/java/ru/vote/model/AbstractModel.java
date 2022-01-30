@@ -32,12 +32,6 @@ public abstract class AbstractModel implements HasId {
         this.id = id;
     }
 
-    // doesn't work for hibernate lazy proxy
-    public int id() {
-        Assert.notNull(id, "Entity must have id");
-        return id;
-    }
-
     @Override
     public int hashCode() {
         return id == null ? 0 : id;

@@ -15,7 +15,7 @@ import static ru.vote.util.ValidationUtil.getRootCause;
         "classpath:spring/spring.xml",
         "classpath:spring/springDB.xml"
 })
-@Sql(scripts = "classpath:db/initDB.sql", config = @SqlConfig(encoding = "UTF-8"))
+@Sql(scripts = "classpath:db/initDB.sql", config = @SqlConfig(encoding = "UTF-8"), executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 @ActiveProfiles(resolver = ActiveDbProfileResolver.class)
 public abstract class AbstractServiceTest {
 

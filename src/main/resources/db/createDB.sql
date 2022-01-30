@@ -30,7 +30,7 @@ CREATE TABLE restaurants
 (
     id              INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
     name            VARCHAR                             NOT NULL,
-    vote_counter    INTEGER                 DEFAULT 0   NOT NULL
+    vote_counter    INTEGER                             DEFAULT 0
 );
 
 CREATE TABLE menu

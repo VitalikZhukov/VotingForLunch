@@ -8,16 +8,16 @@ const ctx = {
             url: restaurantAjaxUrl
         }).done(updateTableByData);
     }
-}
+};
 
 $(function () {
-    makeEditable(
-        $("#datatable").DataTable({
-            "paging": false,
-            "info": true,
+    makeEditable( {
             "columns": [
                 {
-                    "data": "vote"
+                    "data": "vote",
+                    "render": function () {
+                        return "<input type='radio' name='vote'/>";
+                    }
                 },
                 {
                     "data": "name"
@@ -26,11 +26,13 @@ $(function () {
                     "data": "voteCounter"
                 },
                 {
-                    "defaultContent": "Edit",
+                    "render": renderEditBtn,
+                    "defaultContent": "",
                     "orderable": false
                 },
                 {
-                    "defaultContent": "Delete",
+                    "render": renderDeleteBtn,
+                    "defaultContent": "",
                     "orderable": false
                 }
             ],
@@ -39,7 +41,9 @@ $(function () {
                     0,
                     "desc"
                 ]
-            ]
-        })
-    );
+            ],
+        "createdRow": function (row, data, dataIndex) {
+            $(row).attr("data-meal-excess", data.excess);
+        }
+        });
 });

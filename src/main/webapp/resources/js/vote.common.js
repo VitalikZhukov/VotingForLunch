@@ -1,7 +1,18 @@
 let form;
 
-function makeEditable(datatableApi) {
-    ctx.datatableApi = datatableApi;
+function makeEditable(datatableOpts) {
+    ctx.datatableApi = $("#datatable").DataTable(
+        // https://api.jquery.com/jquery.extend/#jQuery-extend-deep-target-object1-objectN
+        $.extend(true, datatableOpts,
+            {
+                "ajax": {
+                    "url": ctx.ajaxUrl,
+                    "dataSrc": ""
+                },
+                "paging": false,
+                "info": true
+            }
+        ));
     form = $('#detailsForm');
 
     $(document).ajaxError(function (event, jqXHR, options, jsExc) {
@@ -10,12 +21,6 @@ function makeEditable(datatableApi) {
 
     // solve problem with cache in IE: https://stackoverflow.com/a/4303862/548473
     $.ajaxSetup({cache: false});
-}
-
-function add() {
-    $("#modalTitle").html(i18n["addTitle"]);
-    form.find(":input").val("");
-    $("#editRow").modal();
 }
 
 function updateRow(id) {

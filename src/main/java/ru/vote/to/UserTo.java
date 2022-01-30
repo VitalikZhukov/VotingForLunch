@@ -2,7 +2,6 @@ package ru.vote.to;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serial;
 import java.io.Serializable;
@@ -25,7 +24,6 @@ public class UserTo extends BaseTo implements Serializable {
     @Size(min = 5, max = 32, message = "length must be between 5 and 32 characters")
     private String password;
 
-    @NotNull
     private Integer restaurantId;
 
     public UserTo() {

@@ -26,8 +26,7 @@ public class Restaurant extends AbstractModel {
     @Size(max = 100)
     private String name;
 
-    @Column(name = "vote_counter", nullable = false)
-    @NotNull
+    @Column(name = "vote_counter")
     private Integer voteCounter;
 
     public Restaurant() {}

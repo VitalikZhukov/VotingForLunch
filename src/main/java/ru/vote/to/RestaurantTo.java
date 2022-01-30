@@ -11,7 +11,6 @@ public class RestaurantTo extends BaseTo {
     @Size(min = 2, max = 100)
     private final String name;
 
-    @NotBlank
     private final int voteCounter;
 
     @ConstructorProperties({"id", "name", "voteCounter"})

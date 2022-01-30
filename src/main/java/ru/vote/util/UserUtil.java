@@ -17,4 +17,8 @@ public class UserUtil {
         user.setRestaurantId(userTo.getRestaurantId());
         return user;
     }
+
+    public static UserTo asTo(User user) {
+        return new UserTo(user.getId(), user.getLogin(), user.getEmail(), user.getPassword(), user.getRestaurantId());
+    }
 }

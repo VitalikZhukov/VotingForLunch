@@ -73,7 +73,7 @@ public class User extends AbstractModel {
 
     //copy constructor
     public User(User u) {
-        this(u.restaurantId, u.login, u.email, u.password, u.registered, u.restaurantId, u.checkTimeVote, u.enabled, u.roles);
+        this(u.id, u.login, u.email, u.password, u.registered, u.restaurantId, u.checkTimeVote, u.enabled, u.roles);
     }
 
     public User(Integer id, String login, String email, String password, Integer restaurantId, Role role, Role... roles) {

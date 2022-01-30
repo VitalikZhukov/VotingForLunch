@@ -14,11 +14,11 @@ public abstract class AbstractModel implements HasId {
     @Id
     @SequenceGenerator(name = "global_seq", sequenceName = "global_seq", allocationSize = 1, initialValue = START_SEQ)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
-    private Integer id;
+    protected Integer id;
 
-    public AbstractModel() {}
+    protected AbstractModel() {}
 
-    public AbstractModel(Integer id) {
+    protected AbstractModel(Integer id) {
         this.id = id;
     }
 

@@ -2,10 +2,13 @@ package ru.vote.web.menu;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.vote.model.Menu;
+import ru.vote.util.ValidationUtil;
 
-import java.util.List;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/profile/menus", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -13,8 +16,16 @@ public class MenuUIController extends AbstractMenuController{
 
     @PostMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void create(@RequestParam String dish, @RequestParam double price, @RequestBody int restaurantId) {
-        super.create(new Menu(restaurantId, dish, price));
+    public ResponseEntity<String> createOrUpdate(@Valid Menu menu, BindingResult result) {
+        if (result.hasErrors()) {
+            return ValidationUtil.getErrorResponse(result);
+        }
+        if (menu.isNew()) {
+            super.create(menu);
+        } else {
+            super.update(menu, menu.getId());
+        }
+        return ResponseEntity.ok().build();
     }
 
     @Override

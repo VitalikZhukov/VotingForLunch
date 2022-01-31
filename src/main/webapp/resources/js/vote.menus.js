@@ -8,17 +8,14 @@ const ctx = {
             url: menuAjaxUrl
         }).done(updateTableByData);
     }
-}
+};
 
 $(function () {
-    makeEditable(
-        $("#datatable").DataTable({
-            "paging": false,
-            "info": true,
+    makeEditable({
             "columns": [
-                {
+/*                {
                     "data": "number"
-                },
+                },*/
                 {
                     "data": "dish"
                 },
@@ -39,13 +36,15 @@ $(function () {
                     0,
                     "desc"
                 ]
-            ]
-        })
-    );
+            ],
+        "createdRow": function (row, data, dataIndex) {
+            $(row).attr("data-meal-excess", data.excess);
+        }
+    });
 });
 
-$(function(){
+/*$(function(){
     $('table td:first-child').each(function (i) {
         $(this).html(i+1);
     });
-});
+});*/

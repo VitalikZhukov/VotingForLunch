@@ -21,7 +21,7 @@
         <table class="table table-bordered" id="datatable">
             <thead>
             <tr>
-                <th>№</th>
+<%--                <th>№</th>--%>
                 <th><spring:message code="menu.dish"/></th>
                 <th><spring:message code="menu.price"/></th>
                 <th></th>
@@ -29,7 +29,7 @@
             </tr>
             </thead>
 
-            <c:forEach var="menu" items="${requestScope.menus}">
+<%--            <c:forEach var="menu" items="${requestScope.menus}">
                 <jsp:useBean id="menu" type="ru.vote.model.Menu"/>
                 <c:if test="${menu.restaurantId == param.restaurantId}">
                     <tr>
@@ -40,7 +40,8 @@
                         <td><a onclick="deleteRow(${menu.id})"><span class="fa fa-remove"></span></a></td>
                     </tr>
                 </c:if>
-            </c:forEach>
+            </c:forEach>--%>
+
         </table>
     </div>
 </div>
@@ -50,7 +51,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="modalTitle"><spring:message code="menu.add"/></h4>
+                <h4 class="modal-title" id="modalTitle"></h4>
                 <button type="button" class="close" data-dismiss="modal" onclick="closeNoty()">&times;</button>
             </div>
             <div class="modal-body">
@@ -89,4 +90,7 @@
 
 
 </body>
+<jsp:include page="fragments/i18n.jsp">
+    <jsp:param name="page" value="menu"/>
+</jsp:include>
 </html>

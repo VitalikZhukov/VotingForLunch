@@ -30,7 +30,8 @@ class RootControllerTest extends AbstractControllerTest {
 
     @Test
     void getRestaurants() throws Exception {
-        perform(get("/restaurants"))
+        perform(get("/restaurants")
+                .with(userAuth(user)))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("restaurants"))
@@ -39,7 +40,8 @@ class RootControllerTest extends AbstractControllerTest {
 
     @Test
     void getMenus() throws Exception {
-        perform(get("/menus"))
+        perform(get("/menus")
+                .with(userAuth(user)))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("menus"))

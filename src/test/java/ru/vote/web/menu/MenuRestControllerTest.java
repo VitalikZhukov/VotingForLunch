@@ -16,6 +16,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static ru.vote.MenuTestData.*;
+import static ru.vote.TestUtil.userHttpBasic;
+import static ru.vote.UserTestData.user;
 
 class MenuRestControllerTest extends AbstractControllerTest {
 
@@ -29,6 +31,7 @@ class MenuRestControllerTest extends AbstractControllerTest {
         Menu newMenu = getNew();
         ResultActions actions = perform(MockMvcRequestBuilders.post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
+                .with(userHttpBasic(user))
                 .content(JsonUtil.writeValue(newMenu)));
 
         Menu created = MENU_MATCHER.readFromJson(actions);
@@ -40,7 +43,8 @@ class MenuRestControllerTest extends AbstractControllerTest {
 
     @Test
     void get() throws Exception {
-        perform(MockMvcRequestBuilders.get(REST_URL + MENU_ID))
+        perform(MockMvcRequestBuilders.get(REST_URL + MENU_ID)
+                .with(userHttpBasic(user)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -49,7 +53,8 @@ class MenuRestControllerTest extends AbstractControllerTest {
 
     @Test
     void getAll() throws Exception {
-        perform(MockMvcRequestBuilders.get(REST_URL))
+        perform(MockMvcRequestBuilders.get(REST_URL)
+                .with(userHttpBasic(user)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -60,6 +65,7 @@ class MenuRestControllerTest extends AbstractControllerTest {
     void update() throws Exception {
         Menu updated = getUpdated();
         perform(MockMvcRequestBuilders.put(REST_URL + MENU_ID).contentType(MediaType.APPLICATION_JSON)
+                .with(userHttpBasic(user))
                 .content(JsonUtil.writeValue(updated)))
                 .andExpect(status().isNoContent());
         MENU_MATCHER.assertMatch(menuService.get(MENU_ID), updated);
@@ -67,7 +73,8 @@ class MenuRestControllerTest extends AbstractControllerTest {
 
     @Test
     void delete() throws Exception {
-        perform(MockMvcRequestBuilders.delete(REST_URL + MENU_ID))
+        perform(MockMvcRequestBuilders.delete(REST_URL + MENU_ID)
+                .with(userHttpBasic(user)))
                 .andExpect(status().isNoContent());
         assertThrows(NotFoundException.class, () -> menuService.get(MENU_ID));
     }

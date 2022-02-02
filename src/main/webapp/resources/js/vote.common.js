@@ -23,6 +23,12 @@ function makeEditable(datatableOpts) {
     $.ajaxSetup({cache: false});
 }
 
+function add() {
+    $("#modalTitle").html(i18n["addTitle"]);
+    form.find(":input").val("");
+    $("#editRow").modal();
+}
+
 function updateRow(id) {
     form.find(":input").val("");
     $("#modalTitle").html(i18n["editTitle"]);

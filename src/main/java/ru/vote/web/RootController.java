@@ -2,6 +2,7 @@ package ru.vote.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -15,6 +16,7 @@ public class RootController {
         return "redirect:restaurants";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/users")
     public String getUsers() {
         log.info("root getUsers");

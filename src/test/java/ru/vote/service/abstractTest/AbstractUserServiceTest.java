@@ -83,7 +83,6 @@ public abstract class AbstractUserServiceTest extends AbstractServiceTest {
     void createWithException() throws Exception {
         validateRootCause(ConstraintViolationException.class, () -> userService.create(new User(null, " ", "mail@tut.by", "password", 10000, Role.USER)));
         validateRootCause(ConstraintViolationException.class, () -> userService.create(new User(null, "User", " ", "password", 10000, Role.USER)));
-        validateRootCause(ConstraintViolationException.class, () -> userService.create(new User(null, "User", "mail@tut.by", " ", 10000, Role.USER)));
     }
 
     @Test

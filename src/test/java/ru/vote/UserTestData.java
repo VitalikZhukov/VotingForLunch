@@ -2,13 +2,14 @@ package ru.vote;
 
 import ru.vote.model.Role;
 import ru.vote.model.User;
+import ru.vote.web.json.JsonUtil;
 
 import java.util.Collections;
 
 import static ru.vote.model.AbstractModel.START_SEQ;
 
 public class UserTestData {
-    public static final MatcherFactory.Matcher<User> USER_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(User.class, "registered", "checkTimeVote");
+    public static final MatcherFactory.Matcher<User> USER_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(User.class, "registered", "checkTimeVote", "password");
 
     public static final int USER_ID = START_SEQ;
     public static final int ADMIN_ID = START_SEQ + 1;
@@ -30,5 +31,9 @@ public class UserTestData {
         updated.setRestaurantId(60);
         updated.setRoles(Collections.singletonList(Role.ADMIN));
         return updated;
+    }
+
+    public static String jsonWithPassword(User user, String passw) {
+        return JsonUtil.writeAdditionProps(user, "password", passw);
     }
 }

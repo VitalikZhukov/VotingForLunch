@@ -1,5 +1,6 @@
 package ru.vote.util;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import ru.vote.model.Role;
 import ru.vote.model.User;
 import ru.vote.to.UserTo;
@@ -20,5 +21,11 @@ public class UserUtil {
 
     public static UserTo asTo(User user) {
         return new UserTo(user.getId(), user.getLogin(), user.getEmail(), user.getPassword(), user.getRestaurantId());
+    }
+
+    public static User prepareToSave(User user, PasswordEncoder passwordEncoder) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setEmail(user.getEmail().toLowerCase());
+        return user;
     }
 }

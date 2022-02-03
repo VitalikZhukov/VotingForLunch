@@ -20,9 +20,10 @@ public abstract class AbstractUserController {
     @Autowired
     private UserService userService;
 
-    public void create(UserTo userTo) {
+    public User create(UserTo userTo) {
+        log.info("create UserTo {}", userTo);
         checkNew(userTo);
-        userService.create(UserUtil.createNewFromTo(userTo));
+        return userService.create(UserUtil.createNewFromTo(userTo));
     }
 
     public User create(User user) {

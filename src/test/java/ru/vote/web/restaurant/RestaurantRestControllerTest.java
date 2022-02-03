@@ -78,12 +78,4 @@ class RestaurantRestControllerTest extends AbstractControllerTest {
                 .andExpect(status().isNoContent());
         assertThrows(NotFoundException.class, () -> restaurantService.get(RESTAURANT_ID));
     }
-
-/*    @Test
-    void incrementVoteCounter() {
-    }
-
-    @Test
-    void getVoteCounter() {
-    }*/
 }

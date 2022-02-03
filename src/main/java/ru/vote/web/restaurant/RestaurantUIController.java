@@ -19,6 +19,7 @@ public class RestaurantUIController extends AbstractRestaurantController{
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<String> createOrUpdate(@Valid Restaurant restaurant, BindingResult result) {
         if (result.hasErrors()) {
+            // TODO change to exception handler
             return ValidationUtil.getErrorResponse(result);
         }
         restaurant.setVoteCounter(0);

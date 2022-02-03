@@ -18,6 +18,7 @@ public class MenuUIController extends AbstractMenuController{
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<String> createOrUpdate(@Valid Menu menu, BindingResult result) {
         if (result.hasErrors()) {
+            // TODO change to exception handler
             return ValidationUtil.getErrorResponse(result);
         }
         if (menu.isNew()) {

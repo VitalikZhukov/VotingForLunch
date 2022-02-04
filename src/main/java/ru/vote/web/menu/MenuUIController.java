@@ -2,11 +2,8 @@ package ru.vote.web.menu;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.vote.model.Menu;
-import ru.vote.util.ValidationUtil;
 
 import javax.validation.Valid;
 
@@ -16,17 +13,12 @@ public class MenuUIController extends AbstractMenuController{
 
     @PostMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public ResponseEntity<String> createOrUpdate(@Valid Menu menu, BindingResult result) {
-        if (result.hasErrors()) {
-            // TODO change to exception handler
-            return ValidationUtil.getErrorResponse(result);
-        }
+    public void createOrUpdate(@Valid Menu menu) {
         if (menu.isNew()) {
             super.create(menu);
         } else {
             super.update(menu, menu.getId());
         }
-        return ResponseEntity.ok().build();
     }
 
     @Override

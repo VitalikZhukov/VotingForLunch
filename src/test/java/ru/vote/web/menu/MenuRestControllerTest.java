@@ -7,16 +7,18 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import ru.vote.model.Menu;
 import ru.vote.service.MenuService;
+import ru.vote.util.exeption.ErrorType;
 import ru.vote.util.exeption.NotFoundException;
 import ru.vote.web.AbstractControllerTest;
 import ru.vote.web.json.JsonUtil;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static ru.vote.MenuTestData.*;
 import static ru.vote.TestUtil.userHttpBasic;
+import static ru.vote.UserTestData.admin;
 import static ru.vote.UserTestData.user;
 
 class MenuRestControllerTest extends AbstractControllerTest {
@@ -77,6 +79,30 @@ class MenuRestControllerTest extends AbstractControllerTest {
                 .with(userHttpBasic(user)))
                 .andExpect(status().isNoContent());
         assertThrows(NotFoundException.class, () -> menuService.get(MENU_ID));
+    }
+
+    @Test
+    void createInvalid() throws Exception {
+        Menu invalid = new Menu(null, null, null, null);
+        perform(MockMvcRequestBuilders.post(REST_URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtil.writeValue(invalid))
+                .with(userHttpBasic(admin)))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity())
+                .andExpect(jsonPath("$.type").value(ErrorType.VALIDATION_ERROR.name()));
+    }
+
+    @Test
+    void updateInvalid() throws Exception {
+        Menu invalid = new Menu(MENU_ID, null, null, null);
+        perform(MockMvcRequestBuilders.put(REST_URL + MENU_ID)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtil.writeValue(invalid))
+                .with(userHttpBasic(user)))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity())
+                .andExpect(jsonPath("$.type").value(ErrorType.VALIDATION_ERROR.name()));
     }
 
 }

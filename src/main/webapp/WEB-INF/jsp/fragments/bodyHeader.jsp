@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
@@ -7,24 +7,24 @@
     <div class="container">
         <a href="restaurants" class="navbar-brand"><img src="resources/images/icon-restaurant.png"> <spring:message code="app.title"/></a>
         <sec:authorize access="isAuthenticated()">
-            <form class="form-inline my-2">
+            <form:form class="form-inline my-2" action="logout" method="post">
                 <sec:authorize access="hasRole('ADMIN')">
                     <a class="btn btn-info mr-1" href="users"><spring:message code="user.title"/></a>
                 </sec:authorize>
                 <a class="btn btn-info mr-1" href="profile">${userTo.login} <spring:message code="app.profile"/></a>
-                <a class="btn btn-primary my-1" href="logout">
+                <button class="btn btn-primary my-1" type="submit">
                     <span class="fa fa-sign-out"></span>
-                </a>
-            </form>
+                </button>
+            </form:form>
         </sec:authorize>
         <sec:authorize access="isAnonymous()">
-            <form class="form-inline my-2" id="login_form" action="spring_security_check" method="post">
+            <form:form class="form-inline my-2" id="login_form" action="spring_security_check" method="post">
                 <input class="form-control mr-1" type="text" placeholder="Email" name="username">
                 <input class="form-control mr-1" type="password" placeholder="Password" name="password">
                 <button class="btn btn-success" type="submit">
                     <span class="fa fa-sign-in"></span>
                 </button>
-            </form>
+            </form:form>
         </sec:authorize>
     </div>
 </nav>

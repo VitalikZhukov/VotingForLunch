@@ -46,4 +46,7 @@ $(function () {
             $(row).attr("data-meal-excess", data.excess);
         }
         });
+
+    $.datetimepicker.setLocale(localeCode);
+
 });

@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ru.vote.AuthorizedUser;
 import ru.vote.util.SecurityUtil;
 import ru.vote.util.ValidationUtil;
+import ru.vote.util.exeption.ErrorType;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -20,11 +21,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
         log.error("Exception at request " + req.getRequestURL(), e);
-        Throwable rootCause = ValidationUtil.getRootCause(e);
+        Throwable rootCause = ValidationUtil.logAndGetRootCause(log, req, e, true, ErrorType.APP_ERROR);
 
         HttpStatus httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
         ModelAndView mav = new ModelAndView("exception",
-                Map.of("exception", rootCause, "message", rootCause.toString(), "status", httpStatus));
+                Map.of("exception", rootCause, "message", ValidationUtil.getMessage(rootCause), "status", httpStatus));
         mav.setStatus(httpStatus);
 
         // Interceptor is not invoked, put userTo

@@ -21,7 +21,6 @@
         </button>
         <br>
 
-        <form>
         <table class="table table-bordered" id="datatable">
             <thead>
             <tr>
@@ -46,8 +45,9 @@
 
         </table>
         <br>
-        <button type="submit"><spring:message code="restaurant.vote"/></button>
-        </form>
+        <button class="btn btn-primary" onclick="voting()">
+            <spring:message code="restaurant.vote"/>
+        </button>
     </div>
 </div>
 

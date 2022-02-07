@@ -10,13 +10,22 @@ const ctx = {
     }
 };
 
+function voting() {
+    var id = $('input[name="vote"]:checked').val();
+    $.ajax({
+        url: restaurantAjaxUrl + id,
+        type: "POST",
+        data: "restaurantId=" + id
+    }).done();
+}
+
 $(function () {
     makeEditable( {
             "columns": [
                 {
                     "data": "vote",
-                    "render": function () {
-                        return "<input type='radio' name='vote'/>";
+                    "render": function (data, type, row) {
+                        return "<input type='radio' name='vote' value='" + row.id + "'/>";
                     }
                 },
                 {
@@ -42,9 +51,6 @@ $(function () {
                     "desc"
                 ]
             ],
-        "createdRow": function (row, data, dataIndex) {
-            $(row).attr("data-meal-excess", data.excess);
-        }
         });
 
     $.datetimepicker.setLocale(localeCode);

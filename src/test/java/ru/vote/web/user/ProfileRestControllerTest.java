@@ -2,14 +2,17 @@ package ru.vote.web.user;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
+import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import ru.vote.model.User;
 import ru.vote.service.UserService;
 import ru.vote.to.UserTo;
 import ru.vote.util.UserUtil;
-import ru.vote.util.exeption.ErrorType;
 import ru.vote.web.AbstractControllerTest;
 import ru.vote.web.json.JsonUtil;
 
@@ -19,6 +22,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static ru.vote.TestUtil.userHttpBasic;
 import static ru.vote.UserTestData.*;
+import static ru.vote.util.exeption.ErrorType.VALIDATION_ERROR;
+import static ru.vote.web.ExceptionInfoHandler.EXCEPTION_DUPLICATE_EMAIL;
 import static ru.vote.web.user.ProfileRestController.REST_URL;
 
 class ProfileRestControllerTest extends AbstractControllerTest {
@@ -85,7 +90,7 @@ class ProfileRestControllerTest extends AbstractControllerTest {
                 .content(JsonUtil.writeValue(newTo)))
                 .andDo(print())
                 .andExpect(status().isUnprocessableEntity())
-                .andExpect(jsonPath("$.type").value(ErrorType.VALIDATION_ERROR.name()));
+                .andExpect(jsonPath("$.type").value(VALIDATION_ERROR.name()));
     }
 
     @Test
@@ -97,6 +102,6 @@ class ProfileRestControllerTest extends AbstractControllerTest {
                 .content(JsonUtil.writeValue(updatedTo)))
                 .andDo(print())
                 .andExpect(status().isUnprocessableEntity())
-                .andExpect(jsonPath("$.type").value(ErrorType.VALIDATION_ERROR.name()));
+                .andExpect(jsonPath("$.type").value(VALIDATION_ERROR.name()));
     }
 }

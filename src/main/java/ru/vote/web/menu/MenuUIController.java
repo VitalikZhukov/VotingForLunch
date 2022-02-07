@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.vote.model.Menu;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/profile/menus", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -27,7 +28,13 @@ public class MenuUIController extends AbstractMenuController{
         return super.get(id);
     }
 
-/*    @Override
+    @Override
+    @GetMapping
+    public List<Menu> getAll() {
+        return super.getAll();
+    }
+
+    /*    @Override
     @GetMapping("/{restaurantId}")
     public List<Menu> getListByRestaurantId(@PathVariable int restaurantId) {
         return super.getListByRestaurantId(restaurantId);

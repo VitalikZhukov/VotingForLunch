@@ -23,11 +23,13 @@ $(function () {
                     "data": "price"
                 },
                 {
-                    "defaultContent": "Edit",
+                    "render": renderEditBtn,
+                    "defaultContent": "",
                     "orderable": false
                 },
                 {
-                    "defaultContent": "Delete",
+                    "render": renderDeleteBtn,
+                    "defaultContent": "",
                     "orderable": false
                 }
             ],
@@ -37,9 +39,6 @@ $(function () {
                     "desc"
                 ]
             ],
-        "createdRow": function (row, data, dataIndex) {
-            $(row).attr("data-meal-excess", data.excess);
-        }
     });
 
     $.datetimepicker.setLocale(localeCode);

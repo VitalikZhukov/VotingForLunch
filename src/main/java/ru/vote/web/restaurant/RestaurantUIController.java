@@ -42,4 +42,12 @@ public class RestaurantUIController extends AbstractRestaurantController{
         super.delete(id);
     }
 
+    @PostMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void getVotingResult (@PathVariable int id) {
+        System.out.println("-----------------");
+        System.out.println(id);
+        System.out.println("-----------------");
+    }
+
 }

@@ -11,12 +11,17 @@ const ctx = {
 };
 
 function voting() {
-    var id = $('input[name="vote"]:checked').val();
+    const value = $('input[name="vote"]:checked').val();
+    const restaurant = value.split(" !! ");
+    let id = restaurant[0];
+    let name = restaurant[1];
+    document.getElementById("restaurantName").innerHTML = name;
     $.ajax({
         url: restaurantAjaxUrl + id,
-        type: "POST",
-        data: "restaurantId=" + id
-    }).done();
+        type: "POST"
+    }).done(function () {
+        successNoty("common.voting" + name);
+    });
 }
 
 $(function () {
@@ -25,7 +30,7 @@ $(function () {
                 {
                     "data": "vote",
                     "render": function (data, type, row) {
-                        return "<input type='radio' name='vote' value='" + row.id + "'/>";
+                        return "<input type='radio' name='vote' value='" + row.id + " !! " + row.name + "'/>";
                     }
                 },
                 {

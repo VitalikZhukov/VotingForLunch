@@ -13,7 +13,7 @@
     <div class="container">
     <h3 class="text-center"><spring:message code="restaurant.title"/></h3>
         <br>
-    <h4><spring:message code="restaurant.choose"/> </h4>
+        <h4><spring:message code="restaurant.choose"/> <span style="white-space: nowrap" id="restaurantName"></span></h4>
         <br>
         <button class="btn btn-primary" onclick="add()">
             <span class="fa fa-plus"></span>

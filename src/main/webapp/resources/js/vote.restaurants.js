@@ -14,13 +14,14 @@ function voting() {
     const value = $('input[name="vote"]:checked').val();
     const restaurant = value.split(" !! ");
     let id = restaurant[0];
-    let name = restaurant[1];
-    document.getElementById("restaurantName").innerHTML = name;
+    document.getElementById("restaurantName").innerHTML = restaurant[1];
+
     $.ajax({
         url: restaurantAjaxUrl + id,
         type: "POST"
     }).done(function () {
-        successNoty("common.voting" + name);
+        ctx.updateTable();
+        successNoty("common.voting");
     });
 }
 
@@ -34,7 +35,13 @@ $(function () {
                     }
                 },
                 {
-                    "data": "name"
+                    "data": "name",
+                    "render": function (data, type, row) {
+                        if (type === "display") {
+                            return "<a href='menus?restaurantId=" + row.id + "'>" + data + "</a>";
+                        }
+                        return data;
+                    }
                 },
                 {
                     "data": "voteCounter"

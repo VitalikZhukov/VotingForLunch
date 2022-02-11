@@ -11,7 +11,7 @@ public class MenuTestData {
     public static final int RESTAURANT_ID = START_SEQ + 2;
     public static final int NOT_FOUND = 10;
 
-    public static final Menu menu = new Menu(MENU_ID, "Dish1", 99.99);
+    public static final Menu menu = new Menu(MENU_ID, RESTAURANT_ID, "Dish1", 99.99);
 
     public static final Menu menu1 = new Menu(MENU_ID, RESTAURANT_ID, "First", 12.5);
     public static final Menu menu2 = new Menu(MENU_ID + 1, RESTAURANT_ID, "Second", 14.8);
@@ -22,13 +22,13 @@ public class MenuTestData {
     public static final Menu menu6 = new Menu(MENU_ID + 5, RESTAURANT_ID + 1, "Third", 2.85);
 
     public static Menu getNew() {
-        return new Menu(null,2, "NewDish", 55.55);
+        return new Menu(null, RESTAURANT_ID, "NewDish", 55.55);
     }
 
     public static Menu getUpdated() {
         Menu updated = new Menu(menu);
         updated.setId(MENU_ID);
-        updated.setRestaurantId(MENU_ID);
+        updated.setRestaurantId(RESTAURANT_ID);
         updated.setDish("updatedDish");
         updated.setPrice(10000);
         return updated;

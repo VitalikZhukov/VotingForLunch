@@ -1,6 +1,7 @@
 package ru.vote.web;
 
 import org.junit.jupiter.api.Test;
+import ru.vote.MenuTestData;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -40,7 +41,7 @@ class RootControllerTest extends AbstractControllerTest {
 
     @Test
     void getMenus() throws Exception {
-        perform(get("/menus")
+        perform(get("/menus?restaurantId=" + MenuTestData.RESTAURANT_ID)
                 .with(userAuth(user)))
                 .andDo(print())
                 .andExpect(status().isOk())

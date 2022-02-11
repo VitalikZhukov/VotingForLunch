@@ -24,14 +24,15 @@ public class AbstractMenuController {
         return menuService.get(id);
     }
 
-/*    public List<Menu> getListByRestaurantId(int restaurantId) {
+    public List<Menu> getListByRestaurantId(int restaurantId) {
         log.info("getListByRestaurantId {}", restaurantId);
         return menuService.getListByRestaurantId(restaurantId);
-    }*/
+    }
 
-    public List<Menu> getAll(int restaurantId) {
+/*    public List<Menu> getAll(int restaurantId) {
         log.info("getAll menus");
-        return menuService.getListByRestaurantId(restaurantId);    }
+        return menuService.getListByRestaurantId(restaurantId);
+    }*/
 
     public void update(Menu menu, int id) {
         log.info("update menu {} id = {}", menu, id);

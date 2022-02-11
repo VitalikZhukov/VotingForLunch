@@ -35,15 +35,9 @@ public class MenuUIController extends AbstractMenuController{
     }
 
     @GetMapping()
-    public List<Menu> getAll() {
-        return super.getAll(rootController.getRestaurantId());
+    public List<Menu> getListByRestaurantId() {
+        return super.getListByRestaurantId(rootController.getRestaurantId());
     }
-
-    /*    @Override
-    @GetMapping("/{restaurantId}")
-    public List<Menu> getListByRestaurantId(@PathVariable int restaurantId) {
-        return super.getListByRestaurantId(restaurantId);
-    }*/
 
     @Override
     @DeleteMapping("/{id}")

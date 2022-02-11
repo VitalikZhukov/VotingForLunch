@@ -89,7 +89,7 @@ public abstract class AbstractMenuServiceTest extends AbstractServiceTest {
 
     @Test
     void createWithException() throws Exception {
-        validateRootCause(ConstraintViolationException.class, () -> menuService.create(new Menu(null, null, "Menu", 50.5)));
+        validateRootCause(ConstraintViolationException.class, () -> menuService.create(new Menu(null, null, null, 50.5)));
         validateRootCause(ConstraintViolationException.class, () -> menuService.create(new Menu(null, 10000, " ", 50.5)));
         validateRootCause(ConstraintViolationException.class, () -> menuService.create(new Menu(null, 10000, "Menu", null)));
 

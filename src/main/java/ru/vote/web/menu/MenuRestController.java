@@ -39,17 +39,10 @@ public class MenuRestController extends AbstractMenuController{
         return super.get(id);
     }
 
-/*    @Override
-    @GetMapping("/{restaurantId}")
-    @ResponseBody
-    public List<Menu> getListByRestaurantId(@PathVariable int restaurantId) {
-        return super.getListByRestaurantId(restaurantId);
-    }*/
-
     @GetMapping
     @ResponseBody
-    public List<Menu> getAll() {
-        return super.getAll(rootController.getRestaurantId());
+    public List<Menu> getListByRestaurantId() {
+        return super.getListByRestaurantId(rootController.getRestaurantId());
     }
 
     @Override

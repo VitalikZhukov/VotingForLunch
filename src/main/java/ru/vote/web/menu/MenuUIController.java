@@ -1,9 +1,11 @@
 package ru.vote.web.menu;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.vote.model.Menu;
+import ru.vote.web.RootController;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -12,9 +14,13 @@ import java.util.List;
 @RequestMapping(value = "/profile/menus", produces = MediaType.APPLICATION_JSON_VALUE)
 public class MenuUIController extends AbstractMenuController{
 
+    @Autowired
+    private RootController rootController;
+
     @PostMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void createOrUpdate(@Valid Menu menu) {
+        menu.setRestaurantId(rootController.getRestaurantId());
         if (menu.isNew()) {
             super.create(menu);
         } else {
@@ -28,10 +34,9 @@ public class MenuUIController extends AbstractMenuController{
         return super.get(id);
     }
 
-    @Override
-    @GetMapping
+    @GetMapping()
     public List<Menu> getAll() {
-        return super.getAll();
+        return super.getAll(rootController.getRestaurantId());
     }
 
     /*    @Override

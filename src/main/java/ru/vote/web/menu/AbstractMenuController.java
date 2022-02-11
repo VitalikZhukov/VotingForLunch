@@ -29,10 +29,9 @@ public class AbstractMenuController {
         return menuService.getListByRestaurantId(restaurantId);
     }*/
 
-    public List<Menu> getAll() {
+    public List<Menu> getAll(int restaurantId) {
         log.info("getAll menus");
-        return menuService.getAll();
-    }
+        return menuService.getListByRestaurantId(restaurantId);    }
 
     public void update(Menu menu, int id) {
         log.info("update menu {} id = {}", menu, id);

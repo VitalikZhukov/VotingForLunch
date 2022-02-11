@@ -1,11 +1,13 @@
 package ru.vote.web.menu;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.vote.model.Menu;
+import ru.vote.web.RootController;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -15,6 +17,9 @@ import java.util.List;
 @RequestMapping(value = MenuRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class MenuRestController extends AbstractMenuController{
     static final String REST_URL = "/rest/profile/menus";
+
+    @Autowired
+    private RootController rootController;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Menu> createWithLocation(@Valid @RequestBody Menu menu) {
@@ -41,11 +46,10 @@ public class MenuRestController extends AbstractMenuController{
         return super.getListByRestaurantId(restaurantId);
     }*/
 
-    @Override
     @GetMapping
     @ResponseBody
     public List<Menu> getAll() {
-        return super.getAll();
+        return super.getAll(rootController.getRestaurantId());
     }
 
     @Override

@@ -21,8 +21,7 @@ public class Menu extends AbstractModel {
     public static final String GET_LIST_BY_RESTAURANT_ID = "Menu.getListByRestaurantId";
     public static final String DELETE_ALL_BY_RESTAURANT_ID = "Menu.deleteAllByRestaurantId";
 
-    @Column(name = "restaurant_id", nullable = false)
-    @NotNull
+    @Column(name = "restaurant_id")
     private Integer restaurantId;
 
     @Column(name = "dish", nullable = false)

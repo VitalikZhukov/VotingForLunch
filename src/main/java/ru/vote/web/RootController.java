@@ -5,10 +5,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class RootController {
     private static final Logger log = LoggerFactory.getLogger(RootController.class);
+    private int restaurantId;
 
     @GetMapping("/")
     public String root() {
@@ -30,7 +32,11 @@ public class RootController {
     }
 
     @GetMapping("/menus")
-    public String getMenus() {
+    public String getMenus(@RequestParam Integer restaurantId) {
+        if (restaurantId == null) {
+            throw new NullPointerException("The restaurant's ID must be not null");
+        }
+        setRestaurantId(restaurantId);
         log.info("root menus");
         return "menus";
     }
@@ -39,5 +45,13 @@ public class RootController {
     public String login() {
         log.info("login");
         return "login";
+    }
+
+    public int getRestaurantId() {
+        return restaurantId;
+    }
+
+    public void setRestaurantId(int restaurantId) {
+        this.restaurantId = restaurantId;
     }
 }

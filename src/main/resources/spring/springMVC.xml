@@ -10,7 +10,8 @@
 
     <bean class="ru.vote.web.json.JacksonObjectMapper" id="objectMapper" factory-method="getMapper"/>
 
-    <bean class="ru.vote.to.UserRestIdTo"/>
+    <bean class="ru.vote.to.UserRestIdTo" />
+    <bean class="ru.vote.util.TimeControl"/>
 
     <mvc:default-servlet-handler/>
 

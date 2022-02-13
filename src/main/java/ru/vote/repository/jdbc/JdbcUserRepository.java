@@ -97,6 +97,12 @@ public class JdbcUserRepository implements UserRepository {
         return users;
     }
 
+    @Override
+    @Transactional
+    public boolean setRestaurantId(int userId, int restaurantId) {
+        return jdbcTemplate.update("UPDATE users SET restaurant_id=? WHERE id=?", restaurantId, userId) != 0;
+    }
+
     private void insertRoles(User user) {
         Set<Role> roles = user.getRoles();
         if (!CollectionUtils.isEmpty(roles)) {

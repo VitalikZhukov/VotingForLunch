@@ -42,4 +42,9 @@ public class DataJpaUserRepository implements UserRepository {
     public List<User> getAll() {
         return crudRepository.findAll(SORT_LOGIN_EMAIL);
     }
+
+    @Override
+    public boolean setRestaurantId(int userId, int restaurantId) {
+        return crudRepository.setRestaurantId(userId, restaurantId) != 0;
+    }
 }

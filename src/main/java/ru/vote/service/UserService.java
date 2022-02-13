@@ -64,6 +64,11 @@ public class UserService implements UserDetailsService {
         prepareAndSave(UserUtil.updateFromTo(user, userTo));
     }
 
+    @Transactional
+    public void setRestaurantId(int userId, int restaurantId) {
+        checkNotFoundWithId(repository.setRestaurantId(userId, restaurantId), userId);
+    }
+
     @CacheEvict(value = "usersCache", allEntries = true)
     public void delete(int id) {
         checkNotFoundWithId(repository.delete(id), id);

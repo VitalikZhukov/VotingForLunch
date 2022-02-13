@@ -1,9 +1,11 @@
 package ru.vote.web.restaurant;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.vote.model.Restaurant;
+import ru.vote.to.UserRestIdTo;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -11,6 +13,9 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/profile/restaurants", produces = MediaType.APPLICATION_JSON_VALUE)
 public class RestaurantUIController extends AbstractRestaurantController{
+
+    @Autowired
+    private UserRestIdTo userRestIdTo;
 
     @PostMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -42,11 +47,16 @@ public class RestaurantUIController extends AbstractRestaurantController{
         super.delete(id);
     }
 
-    @Override
     @PostMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void incrementVoteCounter(@PathVariable int id) {
-        super.incrementVoteCounter(id);
+    public void incrementVoteCounter(@PathVariable String id) {
+        String[] data = id.split("!");
+        int restaurantId = Integer.parseInt(data[0]);
+        int userId = Integer.parseInt(data[1]);
+        userRestIdTo.setRestaurantId(userId, restaurantId);
+        super.incrementVoteCounter(restaurantId);
     }
+
+
 
 }

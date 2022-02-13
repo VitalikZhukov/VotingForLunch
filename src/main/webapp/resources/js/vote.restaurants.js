@@ -11,13 +11,14 @@ const ctx = {
 };
 
 function voting() {
+    let userId = getUserId();
     const value = $('input[name="vote"]:checked').val();
     const restaurant = value.split(" !! ");
     let id = restaurant[0];
     document.getElementById("restaurantName").innerHTML = restaurant[1];
 
     $.ajax({
-        url: restaurantAjaxUrl + id,
+        url: restaurantAjaxUrl + id + "!" + userId,
         type: "POST"
     }).done(function () {
         ctx.updateTable();

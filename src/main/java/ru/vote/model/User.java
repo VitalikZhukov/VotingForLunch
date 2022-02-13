@@ -20,7 +20,8 @@ import java.util.Set;
 @NamedQueries({
         @NamedQuery(name = User.DELETE, query = "DELETE FROM User u WHERE u.id=:id"),
         @NamedQuery(name = User.BY_EMAIL, query = "SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.roles WHERE u.email=?1"),
-        @NamedQuery(name = User.ALL_SORTED, query = "SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.roles ORDER BY u.login, u.email")
+        @NamedQuery(name = User.ALL_SORTED, query = "SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.roles ORDER BY u.login, u.email"),
+        @NamedQuery(name = User.SET_RESTAURANT_ID, query = "UPDATE User u SET u.restaurantId=:restaurantId WHERE u.id=:id")
 })
 @Entity
 @Table(name = "users")
@@ -29,6 +30,7 @@ public class User extends AbstractModel {
     public static final String DELETE = "User.delete";
     public static final String BY_EMAIL = "User.getByEmail";
     public static final String ALL_SORTED = "User.getAllSorted";
+    public static final String SET_RESTAURANT_ID = "User.setRestaurantId";
 
     @Column(name = "email", nullable = false, unique = true)
     @Email

@@ -46,6 +46,12 @@ public abstract class AbstractUserServiceTest extends AbstractServiceTest {
     }
 
     @Test
+    void setRestaurantId() {
+        userService.setRestaurantId(USER_ID, WITH_REST_ID);
+        USER_MATCHER.assertMatch(userService.get(USER_ID), getWithRestaurantId());
+    }
+
+    @Test
     void delete() {
         userService.delete(USER_ID);
         assertThrows(NotFoundException.class, () -> userService.get(USER_ID));

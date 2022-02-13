@@ -14,7 +14,7 @@ CREATE TABLE users
     email            VARCHAR                           NOT NULL,
     registered       TIMESTAMP(0)        DEFAULT now() NOT NULL,
     enabled          BOOL                DEFAULT TRUE  NOT NULL,
-    restaurant_id    INTEGER
+    restaurant_id    INTEGER             DEFAULT NULL
 );
 CREATE UNIQUE INDEX email_index ON users (email);
 

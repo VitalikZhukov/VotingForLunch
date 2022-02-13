@@ -1,6 +1,9 @@
 package ru.vote.model;
 
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -22,6 +25,8 @@ public class Menu extends AbstractModel {
     public static final String DELETE_ALL_BY_RESTAURANT_ID = "Menu.deleteAllByRestaurantId";
 
     @Column(name = "restaurant_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @NotNull
     private Integer restaurantId;
 
     @Column(name = "dish", nullable = false)

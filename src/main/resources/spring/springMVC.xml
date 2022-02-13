@@ -10,6 +10,8 @@
 
     <bean class="ru.vote.web.json.JacksonObjectMapper" id="objectMapper" factory-method="getMapper"/>
 
+    <bean class="ru.vote.to.UserRestIdTo"/>
+
     <mvc:default-servlet-handler/>
 
     <security:global-method-security secured-annotations="enabled" pre-post-annotations="enabled"/>

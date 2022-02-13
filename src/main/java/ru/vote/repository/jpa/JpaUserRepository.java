@@ -54,4 +54,12 @@ public class JpaUserRepository implements UserRepository {
     public List<User> getAll() {
         return manager.createNamedQuery(User.ALL_SORTED, User.class).getResultList();
     }
+
+    @Override
+    public boolean setRestaurantId(int userId, int restaurantId) {
+        return manager.createNamedQuery(User.SET_RESTAURANT_ID)
+                .setParameter("id", userId)
+                .setParameter("restaurantId", restaurantId)
+                .executeUpdate() != 0;
+    }
 }

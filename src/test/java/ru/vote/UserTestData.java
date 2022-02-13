@@ -14,6 +14,7 @@ public class UserTestData {
     public static final int USER_ID = START_SEQ;
     public static final int ADMIN_ID = START_SEQ + 1;
     public static final int NOT_FOUND = 10;
+    public static final int WITH_REST_ID = 10002;
 
     public static final User user = new User(USER_ID, "User", "1@tut.by", "Password1", null, Role.USER);
     public static final User admin = new User(ADMIN_ID, "Admin", "admin@tut.by", "Password", null, Role.ADMIN, Role.USER);
@@ -31,6 +32,12 @@ public class UserTestData {
         updated.setRestaurantId(60);
         updated.setRoles(Collections.singletonList(Role.ADMIN));
         return updated;
+    }
+
+    public static User getWithRestaurantId() {
+        User withRestId = new User(user);
+        withRestId.setRestaurantId(WITH_REST_ID);
+        return withRestId;
     }
 
     public static String jsonWithPassword(User user, String passw) {

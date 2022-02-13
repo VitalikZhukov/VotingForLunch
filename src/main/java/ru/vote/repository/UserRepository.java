@@ -18,4 +18,7 @@ public interface UserRepository {
     User getByEmail(String email);
 
     List<User> getAll();
+
+    boolean setRestaurantId (int userId, int restaurantId);
+
 }

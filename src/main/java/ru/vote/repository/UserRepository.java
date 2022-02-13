@@ -21,4 +21,8 @@ public interface UserRepository {
 
     boolean setRestaurantId (int userId, int restaurantId);
 
+    void resetAllRestaurantId();
+
+    Integer getRestaurantId(int id);
+
 }

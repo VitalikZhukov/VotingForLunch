@@ -62,4 +62,17 @@ public class JpaUserRepository implements UserRepository {
                 .setParameter("restaurantId", restaurantId)
                 .executeUpdate() != 0;
     }
+
+    @Override
+    @Transactional
+    public void resetAllRestaurantId() {
+        manager.createNamedQuery(User.RESET_ALL_RESTAURANT_ID)
+                .setParameter("restaurantId", 0)
+                .executeUpdate();
+    }
+
+    @Override
+    public Integer getRestaurantId(int id) {
+        return get(id).getRestaurantId();
+    }
 }

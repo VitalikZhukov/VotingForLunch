@@ -34,6 +34,18 @@ public class UserTestData {
         return updated;
     }
 
+    public static User getWithResetRestID1() {
+        User updated = new User(user);
+        updated.setRestaurantId(0);
+        return updated;
+    }
+
+    public static User getWithResetRestID2() {
+        User updated = new User(admin);
+        updated.setRestaurantId(0);
+        return updated;
+    }
+
     public static User getWithRestaurantId() {
         User withRestId = new User(user);
         withRestId.setRestaurantId(WITH_REST_ID);

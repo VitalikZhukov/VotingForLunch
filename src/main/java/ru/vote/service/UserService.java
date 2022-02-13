@@ -65,6 +65,15 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
+    public void resetAllRestaurantId() {
+        repository.resetAllRestaurantId();
+    }
+
+    public Integer getRestaurantId(int id) {
+        return repository.getRestaurantId(id);
+    }
+
+    @Transactional
     public void setRestaurantId(int userId, int restaurantId) {
         checkNotFoundWithId(repository.setRestaurantId(userId, restaurantId), userId);
     }

@@ -47,4 +47,14 @@ public class DataJpaUserRepository implements UserRepository {
     public boolean setRestaurantId(int userId, int restaurantId) {
         return crudRepository.setRestaurantId(userId, restaurantId) != 0;
     }
+
+    @Override
+    public void resetAllRestaurantId() {
+        crudRepository.resetAllRestaurantId();
+    }
+
+    @Override
+    public Integer getRestaurantId(int id) {
+        return get(id).getRestaurantId();
+    }
 }

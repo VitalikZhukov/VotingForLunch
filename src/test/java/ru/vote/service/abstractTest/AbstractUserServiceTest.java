@@ -46,6 +46,19 @@ public abstract class AbstractUserServiceTest extends AbstractServiceTest {
     }
 
     @Test
+    void resetAllRestaurantId() {
+        userService.resetAllRestaurantId();
+        USER_MATCHER.assertMatch(userService.getAll(), getWithResetRestID2(), getWithResetRestID1());
+    }
+
+    @Test
+    void getRestaurantId() {
+        userService.setRestaurantId(USER_ID, WITH_REST_ID);
+        Integer restaurantId = userService.getRestaurantId(USER_ID);
+        assertEquals(restaurantId, WITH_REST_ID);
+    }
+
+    @Test
     void setRestaurantId() {
         userService.setRestaurantId(USER_ID, WITH_REST_ID);
         USER_MATCHER.assertMatch(userService.get(USER_ID), getWithRestaurantId());

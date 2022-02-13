@@ -58,6 +58,12 @@ public abstract class AbstractRestaurantServiceTest extends AbstractServiceTest 
     }
 
     @Test
+    void resetAllRestaurantId() {
+        restaurantService.resetAllRestaurantId();
+        RESTAURANT_MATCHER.assertMatch(restaurantService.getAll(), getWithResetVote1(), getWithResetVote2());
+    }
+
+    @Test
     void delete() {
         restaurantService.delete(RESTAURANT_ID);
         assertThrows(NotFoundException.class, () -> restaurantService.get(RESTAURANT_ID));

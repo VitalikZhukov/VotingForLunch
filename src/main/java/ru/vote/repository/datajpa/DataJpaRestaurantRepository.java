@@ -48,4 +48,9 @@ public class DataJpaRestaurantRepository implements RestaurantRepository {
     public int getVoteCounter(int id) {
         return crudRepository.getVoteCounter(id);
     }
+
+    @Override
+    public void resetAllRestaurantId() {
+        crudRepository.resetAllRestaurantId();
+    }
 }

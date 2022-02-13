@@ -21,4 +21,9 @@ public interface CrudRestaurantRepository extends JpaRepository<Restaurant, Inte
 
     @Query("SELECT r.voteCounter FROM Restaurant r WHERE r.id=:id")
     int getVoteCounter(@Param("id") int id);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE Restaurant r SET r.voteCounter=0")
+    void resetAllRestaurantId();
 }

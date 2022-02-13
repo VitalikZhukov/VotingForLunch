@@ -3,6 +3,7 @@ package ru.vote.service;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.vote.model.Restaurant;
 import ru.vote.repository.RestaurantRepository;
 
@@ -51,5 +52,9 @@ public class RestaurantService {
 
     public int getVoteCounter(int id) {
         return checkNotFoundWithId(repository.getVoteCounter(id), id);
+    }
+
+    public void resetAllRestaurantId() {
+        repository.resetAllRestaurantId();
     }
 }

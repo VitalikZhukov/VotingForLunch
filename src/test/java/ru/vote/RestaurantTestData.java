@@ -25,4 +25,18 @@ public class RestaurantTestData {
         updated.setVoteCounter(1000);
         return updated;
     }
+
+    public static Restaurant getWithResetVote1 () {
+        Restaurant updated = new Restaurant(restaurant1);
+        updated.setId(RESTAURANT_ID);
+        updated.setVoteCounter(0);
+        return updated;
+    }
+
+    public static Restaurant getWithResetVote2 () {
+        Restaurant updated = new Restaurant(restaurant2);
+        updated.setId(RESTAURANT_ID + 1);
+        updated.setVoteCounter(0);
+        return updated;
+    }
 }

@@ -19,4 +19,6 @@ public interface RestaurantRepository {
     boolean incrementVoteCounter(int id);
 
     int getVoteCounter(int id);
+
+    void resetAllRestaurantId();
 }

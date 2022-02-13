@@ -90,4 +90,10 @@ public class JdbcRestaurantRepository implements RestaurantRepository {
     public int getVoteCounter(int id) {
         return get(id).getVoteCounter();
     }
+
+    @Override
+    @Transactional
+    public void resetAllRestaurantId() {
+        jdbcTemplate.update("UPDATE restaurants SET vote_counter=0");
+    }
 }

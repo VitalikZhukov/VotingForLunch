@@ -54,7 +54,7 @@ public class RestaurantService {
         return checkNotFoundWithId(repository.getVoteCounter(id), id);
     }
 
-    public void resetAllRestaurantId() {
-        repository.resetAllRestaurantId();
+    public void resetAllVoteCounter() {
+        repository.resetAllVoteCounter();
     }
 }

@@ -93,7 +93,7 @@ public class JdbcRestaurantRepository implements RestaurantRepository {
 
     @Override
     @Transactional
-    public void resetAllRestaurantId() {
+    public void resetAllVoteCounter() {
         jdbcTemplate.update("UPDATE restaurants SET vote_counter=0");
     }
 }

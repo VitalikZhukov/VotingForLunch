@@ -58,8 +58,8 @@ public abstract class AbstractRestaurantServiceTest extends AbstractServiceTest 
     }
 
     @Test
-    void resetAllRestaurantId() {
-        restaurantService.resetAllRestaurantId();
+    void resetAllVoteCounter() {
+        restaurantService.resetAllVoteCounter();
         RESTAURANT_MATCHER.assertMatch(restaurantService.getAll(), getWithResetVote1(), getWithResetVote2());
     }
 

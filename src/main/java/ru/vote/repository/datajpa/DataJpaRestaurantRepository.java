@@ -50,7 +50,7 @@ public class DataJpaRestaurantRepository implements RestaurantRepository {
     }
 
     @Override
-    public void resetAllRestaurantId() {
-        crudRepository.resetAllRestaurantId();
+    public void resetAllVoteCounter() {
+        crudRepository.resetAllVoteCounter();
     }
 }

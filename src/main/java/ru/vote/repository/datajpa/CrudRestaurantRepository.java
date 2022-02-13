@@ -25,5 +25,5 @@ public interface CrudRestaurantRepository extends JpaRepository<Restaurant, Inte
     @Transactional
     @Modifying
     @Query("UPDATE Restaurant r SET r.voteCounter=0")
-    void resetAllRestaurantId();
+    void resetAllVoteCounter();
 }

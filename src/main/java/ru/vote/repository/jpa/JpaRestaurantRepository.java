@@ -64,7 +64,7 @@ public class JpaRestaurantRepository implements RestaurantRepository {
 
     @Override
     @Transactional
-    public void resetAllRestaurantId() {
+    public void resetAllVoteCounter() {
         manager.createNamedQuery(Restaurant.RESET_ALL_VOTE_COUNTER)
                 .setParameter("counter", 0)
                 .executeUpdate();

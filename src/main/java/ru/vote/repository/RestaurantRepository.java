@@ -20,5 +20,5 @@ public interface RestaurantRepository {
 
     int getVoteCounter(int id);
 
-    void resetAllRestaurantId();
+    void resetAllVoteCounter();
 }

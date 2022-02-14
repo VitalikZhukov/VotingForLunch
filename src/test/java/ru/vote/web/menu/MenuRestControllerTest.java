@@ -7,8 +7,8 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import ru.vote.model.Menu;
 import ru.vote.service.MenuService;
-import ru.vote.util.exeption.ErrorType;
-import ru.vote.util.exeption.NotFoundException;
+import ru.vote.util.exception.ErrorType;
+import ru.vote.util.exception.NotFoundException;
 import ru.vote.web.AbstractControllerTest;
 import ru.vote.web.json.JsonUtil;
 

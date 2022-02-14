@@ -3,6 +3,7 @@ package ru.vote.util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import ru.vote.service.RestaurantService;
 import ru.vote.service.UserService;
 
 import javax.annotation.PostConstruct;
@@ -20,6 +21,9 @@ public class TimeControl {
 
     @Autowired
     public UserService userService;
+
+    @Autowired
+    public RestaurantService restaurantService;
 
     private static final int TARGET_HOURS = 14;
     private static final int TARGET_MIN = 0;
@@ -46,7 +50,8 @@ public class TimeControl {
             //start
             try {
                 isBusy = true;
-                userService.setRestaurantId(10000, 0);
+                userService.resetAllRestaurantId();
+                restaurantService.resetAllVoteCounter();
                 //finish
             } catch (Exception e) {
                 log.info("class TimeControl, method doTaskWork, exception:" + e);

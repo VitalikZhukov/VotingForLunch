@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ru.vote.AuthorizedUser;
 import ru.vote.util.SecurityUtil;
 import ru.vote.util.ValidationUtil;
-import ru.vote.util.exeption.ErrorType;
+import ru.vote.util.exception.ErrorType;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;

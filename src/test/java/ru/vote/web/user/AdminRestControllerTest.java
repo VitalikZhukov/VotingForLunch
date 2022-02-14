@@ -9,8 +9,8 @@ import ru.vote.UserTestData;
 import ru.vote.model.Role;
 import ru.vote.model.User;
 import ru.vote.service.UserService;
-import ru.vote.util.exeption.ErrorType;
-import ru.vote.util.exeption.NotFoundException;
+import ru.vote.util.exception.ErrorType;
+import ru.vote.util.exception.NotFoundException;
 import ru.vote.web.AbstractControllerTest;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;

@@ -4,9 +4,9 @@ import org.slf4j.Logger;
 import org.springframework.core.NestedExceptionUtils;
 import org.springframework.lang.NonNull;
 import ru.vote.HasId;
-import ru.vote.util.exeption.ErrorType;
-import ru.vote.util.exeption.IllegalRequestDataException;
-import ru.vote.util.exeption.NotFoundException;
+import ru.vote.util.exception.ErrorType;
+import ru.vote.util.exception.IllegalRequestDataException;
+import ru.vote.util.exception.NotFoundException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.*;

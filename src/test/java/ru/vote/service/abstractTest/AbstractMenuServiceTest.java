@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import ru.vote.model.Menu;
 import ru.vote.service.MenuService;
-import ru.vote.util.exeption.NotFoundException;
+import ru.vote.util.exception.NotFoundException;
 
 import javax.validation.ConstraintViolationException;
 import java.util.List;

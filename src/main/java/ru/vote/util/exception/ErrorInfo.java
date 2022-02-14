@@ -1,4 +1,4 @@
-package ru.vote.util.exeption;
+package ru.vote.util.exception;
 
 public class ErrorInfo {
     private final String url;

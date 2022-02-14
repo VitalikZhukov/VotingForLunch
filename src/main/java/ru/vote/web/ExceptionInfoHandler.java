@@ -15,16 +15,16 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import ru.vote.util.ValidationUtil;
-import ru.vote.util.exeption.ErrorInfo;
-import ru.vote.util.exeption.ErrorType;
-import ru.vote.util.exeption.IllegalRequestDataException;
-import ru.vote.util.exeption.NotFoundException;
+import ru.vote.util.exception.ErrorInfo;
+import ru.vote.util.exception.ErrorType;
+import ru.vote.util.exception.IllegalRequestDataException;
+import ru.vote.util.exception.NotFoundException;
 
 import javax.servlet.http.HttpServletRequest;
 
 import java.util.Map;
 
-import static ru.vote.util.exeption.ErrorType.*;
+import static ru.vote.util.exception.ErrorType.*;
 
 @RestControllerAdvice(annotations = RestController.class)
 @Order(Ordered.HIGHEST_PRECEDENCE + 5)

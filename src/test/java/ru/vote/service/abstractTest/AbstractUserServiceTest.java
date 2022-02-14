@@ -7,7 +7,7 @@ import org.springframework.cache.CacheManager;
 import ru.vote.model.Role;
 import ru.vote.model.User;
 import ru.vote.service.UserService;
-import ru.vote.util.exeption.NotFoundException;
+import ru.vote.util.exception.NotFoundException;
 
 import javax.validation.ConstraintViolationException;
 import java.util.List;

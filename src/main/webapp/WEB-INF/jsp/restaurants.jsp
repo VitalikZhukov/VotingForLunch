@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <jsp:include page="fragments/headTag.jsp"/>
@@ -15,10 +16,25 @@
         <br>
         <h4><spring:message code="restaurant.choose"/> <span style="white-space: nowrap" id="restaurantName"></span></h4>
         <br>
-        <button class="btn btn-primary" onclick="add()">
-            <span class="fa fa-plus"></span>
-            <spring:message code="common.add"/>
-        </button>
+
+        <script type="text/javascript">
+            function setEditAccessRestaurant() {
+                return false;
+            }
+        </script>
+
+        <sec:authorize access="hasRole('ADMIN')">
+            <button class="btn btn-primary" onclick="add()">
+                <span class="fa fa-plus"></span>
+                <spring:message code="common.add"/>
+            </button>
+            <script type="text/javascript">
+                function setEditAccessRestaurant() {
+                    return true;
+                }
+            </script>
+        </sec:authorize>
+
         <br>
 
         <table class="table table-bordered" id="datatable">
@@ -31,19 +47,8 @@
                 <th></th>
             </tr>
             </thead>
-
-<%--            <c:forEach var="restaurant" items="${requestScope.restaurants}">
-                <jsp:useBean id="restaurant" type="ru.vote.model.Restaurant"/>
-                <tr>
-                    <td><label><input type="radio" name="vote" value="${restaurant.id}"/></label></td>
-                    <td><a href="menus?restaurantId=${restaurant.id}" >${restaurant.name}</a></td>
-                    <td>${restaurant.voteCounter}</td>
-                    <td><a><span class="fa fa-pencil"></span></a></td>
-                    <td><a onclick="deleteRow(${restaurant.id})"><span class="fa fa-remove"></span></a></td>
-                </tr>
-            </c:forEach>--%>
-
         </table>
+
         <br>
         <button class="btn btn-primary" onclick="voting()">
             <spring:message code="restaurant.vote"/>

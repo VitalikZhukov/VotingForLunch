@@ -25,12 +25,14 @@ $(function () {
                 {
                     "render": renderEditBtn,
                     "defaultContent": "",
-                    "orderable": false
+                    "orderable": false,
+                    "visible": setEditAccessUser()
                 },
                 {
                     "render": renderDeleteBtn,
                     "defaultContent": "",
-                    "orderable": false
+                    "orderable": false,
+                    "visible": setEditAccessUser()
                 }
             ],
             "order": [

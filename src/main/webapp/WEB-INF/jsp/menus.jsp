@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <jsp:include page="fragments/headTag.jsp"/>
@@ -13,10 +14,25 @@
     <div class="container">
         <h3 class="text-center"><spring:message code="menu.title"/></h3>
         <br>
-        <button class="btn btn-primary" onclick="add()">
-            <span class="fa fa-plus"></span>
-            <spring:message code="common.add"/>
-        </button>
+
+        <script type="text/javascript">
+            function setEditAccessUser() {
+                return false;
+            }
+        </script>
+
+        <sec:authorize access="hasRole('ADMIN')">
+            <button class="btn btn-primary" onclick="add()">
+                <span class="fa fa-plus"></span>
+                <spring:message code="common.add"/>
+            </button>
+            <script type="text/javascript">
+                function setEditAccessUser() {
+                    return true;
+                }
+            </script>
+        </sec:authorize>
+
         <br>
         <table class="table table-bordered" id="datatable">
             <thead>

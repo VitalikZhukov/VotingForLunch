@@ -50,12 +50,14 @@ $(function () {
                 {
                     "render": renderEditBtn,
                     "defaultContent": "",
-                    "orderable": false
+                    "orderable": false,
+                    "visible": setEditAccessRestaurant()
                 },
                 {
                     "render": renderDeleteBtn,
                     "defaultContent": "",
-                    "orderable": false
+                    "orderable": false,
+                    "visible": setEditAccessRestaurant()
                 }
             ],
             "order": [

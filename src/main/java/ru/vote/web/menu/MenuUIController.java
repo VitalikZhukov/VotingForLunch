@@ -6,10 +6,12 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.vote.model.Menu;
 import ru.vote.web.RootController;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 import java.util.List;
 
+@ApiIgnore
 @RestController
 @RequestMapping(value = "/profile/menus", produces = MediaType.APPLICATION_JSON_VALUE)
 public class MenuUIController extends AbstractMenuController{

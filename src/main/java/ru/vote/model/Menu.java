@@ -26,7 +26,6 @@ public class Menu extends AbstractModel {
 
     @Column(name = "restaurant_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @NotNull
     private Integer restaurantId;
 
     @Column(name = "dish", nullable = false)

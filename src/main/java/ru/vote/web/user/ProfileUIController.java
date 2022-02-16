@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
 import ru.vote.to.UserTo;
 import ru.vote.util.SecurityUtil;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 
 import static ru.vote.web.ExceptionInfoHandler.EXCEPTION_DUPLICATE_EMAIL;
 
+@ApiIgnore
 @Controller
 @RequestMapping("/profile")
 public class ProfileUIController extends AbstractUserController {

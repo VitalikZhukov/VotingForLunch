@@ -5,9 +5,6 @@ All REST interface covered with JUnit tests by Spring MVC Test и Spring Securit
 You can vote once a day. At 14-00, the number of votes for the restaurant is automatically reset and it becomes possible to vote again.
 
 
-App on heroku: http://my-lunch.herokuapp.com/login
-
-
 Technology stack:
 - automated build and version control: Maven
 - servlet: Apache Tomcat
